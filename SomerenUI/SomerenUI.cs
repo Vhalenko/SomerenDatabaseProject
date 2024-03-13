@@ -11,28 +11,24 @@ namespace SomerenUI
         public SomerenUI()
         {
             InitializeComponent();
+            ShowDashboardPanel();
         }
 
         private void ShowDashboardPanel()
         {
-            // hide all other panels
             pnlStudents.Hide();
 
-            // show dashboard
             pnlDashboard.Show();
         }
 
         private void ShowStudentsPanel()
         {
-            // hide all other panels
             pnlDashboard.Hide();
 
-            // show students
             pnlStudents.Show();
 
             try
             {
-                // get and display all students
                 List<Student> students = GetStudents();
                 DisplayStudents(students);
             }
@@ -45,22 +41,25 @@ namespace SomerenUI
         private List<Student> GetStudents()
         {
             StudentService studentService = new StudentService();
-            List<Student> students = studentService.GetStudents();
-            return students;
+            return studentService.GetStudents();
         }
 
         private void DisplayStudents(List<Student> students)
         {
-            // clear the listview before filling it
-            listViewStudents.Clear();
+            listViewStudents.Items.Clear();
 
             foreach (Student student in students)
             {
-                ListViewItem li = new ListViewItem(student.Name);
-                li.Tag = student;   // link student object to listview item
-                listViewStudents.Items.Add(li);
+                ListViewItem item = new();
+                item.SubItems.Add(student.StudentNumber.ToString());
+                item.SubItems.Add(student.FullName.ToString());
+                item.SubItems.Add(student.ClassName.ToString());
+                item.SubItems.Add(student.TelephoneNumber.ToString());
+                item.SubItems.Add(student.RoomNumber.ToString());
+                listViewStudents.Items.Add(item);
             }
         }
+
         private void ShowRoomsPanel()
         {
             pnlDashboard.Hide();
@@ -100,6 +99,7 @@ namespace SomerenUI
                 listViewRooms.Items.Add(item);
             }
         }
+
         private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowRoomsPanel();
@@ -117,6 +117,7 @@ namespace SomerenUI
 
         private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            panelRooms.Hide();
             ShowStudentsPanel();
         }
     }

@@ -43,6 +43,7 @@
             panelRooms = new System.Windows.Forms.Panel();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             listViewRooms = new System.Windows.Forms.ListView();
+            columnHeader1 = new System.Windows.Forms.ColumnHeader();
             room_number = new System.Windows.Forms.ColumnHeader();
             building = new System.Windows.Forms.ColumnHeader();
             room_type = new System.Windows.Forms.ColumnHeader();
@@ -51,8 +52,13 @@
             lblRooms = new System.Windows.Forms.Label();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             listViewStudents = new System.Windows.Forms.ListView();
+            columnZero = new System.Windows.Forms.ColumnHeader();
+            StudentNumberColumn = new System.Windows.Forms.ColumnHeader();
+            NameColumn = new System.Windows.Forms.ColumnHeader();
+            ClassColumn = new System.Windows.Forms.ColumnHeader();
+            TelephoneNumberColumn = new System.Windows.Forms.ColumnHeader();
+            RoomNumberColumn = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
-            columnHeader1 = new System.Windows.Forms.ColumnHeader();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -154,7 +160,7 @@
             panelRooms.Controls.Add(pictureBox2);
             panelRooms.Controls.Add(listViewRooms);
             panelRooms.Controls.Add(lblRooms);
-            panelRooms.Location = new System.Drawing.Point(3, 0);
+            panelRooms.Location = new System.Drawing.Point(1, 0);
             panelRooms.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panelRooms.Name = "panelRooms";
             panelRooms.Size = new System.Drawing.Size(1072, 621);
@@ -180,6 +186,11 @@
             listViewRooms.TabIndex = 1;
             listViewRooms.UseCompatibleStateImageBehavior = false;
             listViewRooms.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "";
+            columnHeader1.Width = 0;
             // 
             // room_number
             // 
@@ -233,12 +244,49 @@
             // 
             // listViewStudents
             // 
+            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnZero, StudentNumberColumn, NameColumn, ClassColumn, TelephoneNumberColumn, RoomNumberColumn });
             listViewStudents.Location = new System.Drawing.Point(18, 56);
             listViewStudents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewStudents.Name = "listViewStudents";
             listViewStudents.Size = new System.Drawing.Size(875, 408);
             listViewStudents.TabIndex = 1;
             listViewStudents.UseCompatibleStateImageBehavior = false;
+            listViewStudents.View = System.Windows.Forms.View.Details;
+            // 
+            // columnZero
+            // 
+            columnZero.Text = "";
+            columnZero.Width = 0;
+            // 
+            // StudentNumberColumn
+            // 
+            StudentNumberColumn.Text = "Student Number";
+            StudentNumberColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            StudentNumberColumn.Width = 180;
+            // 
+            // NameColumn
+            // 
+            NameColumn.Text = "Student Name";
+            NameColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            NameColumn.Width = 220;
+            // 
+            // ClassColumn
+            // 
+            ClassColumn.Text = "Class";
+            ClassColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            ClassColumn.Width = 120;
+            // 
+            // TelephoneNumberColumn
+            // 
+            TelephoneNumberColumn.Text = "Telephone Number";
+            TelephoneNumberColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            TelephoneNumberColumn.Width = 220;
+            // 
+            // RoomNumberColumn
+            // 
+            RoomNumberColumn.Text = "Room Number";
+            RoomNumberColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            RoomNumberColumn.Width = 130;
             // 
             // label1
             // 
@@ -249,11 +297,6 @@
             label1.Size = new System.Drawing.Size(134, 41);
             label1.TabIndex = 0;
             label1.Text = "Students";
-            // 
-            // columnHeader1
-            // 
-            columnHeader1.Text = "";
-            columnHeader1.Width = 0;
             // 
             // SomerenUI
             // 
@@ -307,5 +350,11 @@
         private System.Windows.Forms.ColumnHeader beds_amount;
         private System.Windows.Forms.ColumnHeader floor;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnZero;
+        private System.Windows.Forms.ColumnHeader StudentNumberColumn;
+        private System.Windows.Forms.ColumnHeader NameColumn;
+        private System.Windows.Forms.ColumnHeader ClassColumn;
+        private System.Windows.Forms.ColumnHeader TelephoneNumberColumn;
+        private System.Windows.Forms.ColumnHeader RoomNumberColumn;
     }
 }

@@ -7,41 +7,39 @@ namespace SomerenDAL
 {
     public abstract class BaseDao
     {
-        private SqlDataAdapter adapter;
-        private SqlConnection conn;
+        protected SqlDataAdapter adapter;
+        protected SqlConnection dbConnection;
 
         public BaseDao()
         {
-                conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SomerenDatabase"].ConnectionString);
-                adapter = new SqlDataAdapter();
+            dbConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["SomerenDatabase"].ConnectionString);
+            adapter = new SqlDataAdapter();
         }
 
         protected SqlConnection OpenConnection()
         {
             try
             {
-                if (conn.State == ConnectionState.Closed || conn.State == ConnectionState.Broken)
+                if (dbConnection.State == ConnectionState.Closed || dbConnection.State == ConnectionState.Broken)
                 {
-                    conn.Open();
+                    dbConnection.Open();
                 }
             }
             catch (Exception e)
             {
-                //Print.ErrorLog(e);
                 throw;
             }
-            return conn;
+            return dbConnection;
         }
 
-        private void CloseConnection()
+        protected void CloseConnection()
         {
-            conn.Close();
+            dbConnection.Close();
         }
 
-        /* For Insert/Update/Delete Queries with transaction */
         protected void ExecuteEditTranQuery(string query, SqlParameter[] sqlParameters, SqlTransaction sqlTransaction)
         {
-            SqlCommand command = new SqlCommand(query, conn, sqlTransaction);
+            SqlCommand command = new SqlCommand(query, dbConnection, sqlTransaction);
 
             try
             {
@@ -51,7 +49,6 @@ namespace SomerenDAL
             }
             catch (Exception e)
             {
-                //Print.ErrorLog(e);
                 throw;
             }
             finally
@@ -60,7 +57,6 @@ namespace SomerenDAL
             }
         }
 
-        /* For Insert/Update/Delete Queries */
         protected void ExecuteEditQuery(string query, SqlParameter[] sqlParameters)
         {
             SqlCommand command = new SqlCommand();
@@ -75,7 +71,6 @@ namespace SomerenDAL
             }
             catch (SqlException e)
             {
-                // Print.ErrorLog(e);
                 throw;
             }
             finally
@@ -84,7 +79,6 @@ namespace SomerenDAL
             }
         }
 
-        /* For Select Queries */
         protected DataTable ExecuteSelectQuery(string query, params SqlParameter[] sqlParameters)
         {
             SqlCommand command = new SqlCommand();
@@ -103,7 +97,6 @@ namespace SomerenDAL
             }
             catch (SqlException e)
             {
-                // Print.ErrorLog(e);
                 throw;
             }
             finally

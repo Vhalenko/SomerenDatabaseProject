@@ -51,7 +51,7 @@ namespace SomerenUI
             foreach (Student student in students)
             {
                 ListViewItem item = new();
-                item.SubItems.Add(student.StudentNumber.ToString());
+                item.SubItems.Add(student.PersonNumber.ToString());
                 item.SubItems.Add(student.FullName.ToString());
                 item.SubItems.Add(student.ClassName.ToString());
                 item.SubItems.Add(student.TelephoneNumber.ToString());

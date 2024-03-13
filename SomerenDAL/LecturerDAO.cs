@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace SomerenDAL
 {
-    internal class LecturerDAO : BaseDao
+    public class LecturerDAO : BaseDao
     {
         public List<Lecturer> GetAllLecturers()
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SomerenService
 {
-    internal class LecturerService
+    public class LecturerService
     {
         private LecturerDAO lecturerDAO;
 

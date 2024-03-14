@@ -16,18 +16,13 @@ namespace SomerenUI
 
         private void ShowDashboardPanel()
         {
-            pnlStudents.Hide();
-            pnlLecturers.Hide();
-            panelRooms.Hide();
-            pnlActivities.Hide();
-
+            HideAll();
             pnlDashboard.Show();
         }
 
         private void ShowStudentsPanel()
         {
-            pnlDashboard.Hide();
-
+            HideAll();
             pnlStudents.Show();
 
             try
@@ -57,10 +52,25 @@ namespace SomerenUI
             }
         }
 
-        private void ShowActivitiesPanel()
+        private void ShowRoomsPanel()
         {
             pnlDashboard.Hide();
+            panelRooms.Show();
 
+            try
+            {
+                List<Room> rooms = GetRooms();
+                DisplayRooms(rooms);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the rooms: " + e.Message);
+            }
+        }
+
+        private void ShowActivitiesPanel()
+        {
+            HideAll();
             pnlActivities.Show();
 
             try
@@ -93,26 +103,11 @@ namespace SomerenUI
             return activities;
         }
 
-        private void DisplayActivities(List<Activity> activities)
+        private List<Room> GetRooms()
         {
-            listViewActivities.Clear();
-
-            listViewActivities.Columns.Add("Id", 50);
-            listViewActivities.Columns.Add("Name", 300);
-            listViewActivities.Columns.Add("Start Time", 300);
-            listViewActivities.Columns.Add("End Time", 300);
-
-
-            foreach (Activity activity in activities)
-            {
-                ListViewItem li = new ListViewItem(activity.Id.ToString());
-
-                li.SubItems.Add(activity.Name);
-                li.SubItems.Add(activity.StartDayTime);
-                li.SubItems.Add(activity.EndDayTime);
-
-                listViewActivities.Items.Add(li);
-            }
+            RoomService roomService = new RoomService();
+            List<Room> rooms = roomService.GetRooms();
+            return rooms;
         }
 
         private void DisplayStudents(List<Student> students)
@@ -140,34 +135,11 @@ namespace SomerenUI
                 ListViewItem item = new();
                 item.SubItems.Add(lecturer.PersonNumber.ToString());
                 item.SubItems.Add(lecturer.FullName.ToString());
-                item.SubItems.Add(lecturer.Age.ToString());
+                item.SubItems.Add(lecturer.Age.ToString("dd-MM-yyyy"));
                 item.SubItems.Add(lecturer.TelephoneNumber.ToString());
                 item.SubItems.Add(lecturer.RoomNumber.ToString());
                 listViewLecturers.Items.Add(item);
             }
-        }
-
-        private void ShowRoomsPanel()
-        {
-            pnlDashboard.Hide();
-            panelRooms.Show();
-
-            try
-            {
-                List<Room> rooms = GetRooms();
-                DisplayRooms(rooms);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the rooms: " + e.Message);
-            }
-        }
-
-        private List<Room> GetRooms()
-        {
-            RoomService roomService = new RoomService();
-            List<Room> rooms = roomService.GetRooms();
-            return rooms;
         }
 
         private void DisplayRooms(List<Room> rooms)
@@ -184,6 +156,22 @@ namespace SomerenUI
                 item.SubItems.Add(room.Floor.ToString());
 
                 listViewRooms.Items.Add(item);
+            }
+        }
+
+        private void DisplayActivities(List<Activity> activities)
+        {
+            listViewActivities.Items.Clear();
+
+            foreach (Activity activity in activities)
+            {
+                ListViewItem li = new ListViewItem();
+                li.SubItems.Add(activity.Id.ToString());
+                li.SubItems.Add(activity.Name);
+                li.SubItems.Add(activity.StartDayTime);
+                li.SubItems.Add(activity.EndDayTime);
+
+                listViewActivities.Items.Add(li);
             }
         }
 
@@ -215,17 +203,19 @@ namespace SomerenUI
             ShowLecturersPanel();
         }
 
+        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HideAll();
+            ShowActivitiesPanel();
+        }
+
         private void HideAll()
         {
             pnlDashboard.Hide();
             pnlLecturers.Hide();
             pnlStudents.Hide();
+            pnlActivities.Hide();
             panelRooms.Hide();
-        }
-
-        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowActivitiesPanel();
         }
     }
 }

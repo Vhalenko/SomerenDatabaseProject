@@ -19,6 +19,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlLecturers.Hide();
             panelRooms.Hide();
+            pnlActivities.Hide();
 
             pnlDashboard.Show();
         }
@@ -56,6 +57,23 @@ namespace SomerenUI
             }
         }
 
+        private void ShowActivitiesPanel()
+        {
+            pnlDashboard.Hide();
+
+            pnlActivities.Show();
+
+            try
+            {
+                List<Activity> activities = GetActivities();
+                DisplayActivities(activities);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + e.Message);
+            }
+        }
+
         private List<Student> GetStudents()
         {
             StudentService studentService = new();
@@ -66,6 +84,35 @@ namespace SomerenUI
         {
             LecturerService lecturerService = new();
             return lecturerService.GetLecturers();
+        }
+
+        private List<Activity> GetActivities()
+        {
+            ActivityService activityService = new ActivityService();
+            List<Activity> activities = activityService.GetActivities();
+            return activities;
+        }
+
+        private void DisplayActivities(List<Activity> activities)
+        {
+            listViewActivities.Clear();
+
+            listViewActivities.Columns.Add("Id", 50);
+            listViewActivities.Columns.Add("Name", 300);
+            listViewActivities.Columns.Add("Start Time", 300);
+            listViewActivities.Columns.Add("End Time", 300);
+
+
+            foreach (Activity activity in activities)
+            {
+                ListViewItem li = new ListViewItem(activity.Id.ToString());
+
+                li.SubItems.Add(activity.Name);
+                li.SubItems.Add(activity.StartDayTime);
+                li.SubItems.Add(activity.EndDayTime);
+
+                listViewActivities.Items.Add(li);
+            }
         }
 
         private void DisplayStudents(List<Student> students)
@@ -174,6 +221,11 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlStudents.Hide();
             panelRooms.Hide();
+        }
+
+        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowActivitiesPanel();
         }
     }
 }

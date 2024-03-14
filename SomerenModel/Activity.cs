@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SomerenModel
+﻿namespace SomerenModel
 {
-    internal class Activity
+    public class Activity
     {
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string StartDayTime { get; private set; }
+        public string EndDayTime { get; private set; }
+
+        public Activity(int id, string name, string startDayTime, string endDayTime)
+        {
+            Id = id;
+            Name = name;
+            StartDayTime = startDayTime;
+            EndDayTime = endDayTime;
+        }
     }
 }

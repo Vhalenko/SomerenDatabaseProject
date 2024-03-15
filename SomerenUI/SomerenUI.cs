@@ -100,6 +100,22 @@ namespace SomerenUI
             }
         }
 
+        private void ShowOrderPanel()
+        {
+            HideAll();
+            pnlOrder.Show();
+
+            try
+            {
+                DisplayDrinksForOrder(GetDrinks());
+                DisplayStudentsForOrder(GetStudents());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
+            }
+        }
+
         private List<Student> GetStudents()
         {
             StudentService studentService = new();
@@ -143,6 +159,16 @@ namespace SomerenUI
                 item.SubItems.Add(student.TelephoneNumber.ToString());
                 item.SubItems.Add(student.RoomNumber.ToString());
                 listViewStudents.Items.Add(item);
+            }
+        }
+
+        private void DisplayStudentsForOrder(List<Student> students)
+        {
+            listBoxStudentsNames.Items.Clear();
+
+            foreach (Student student in students)
+            {
+                listBoxStudentsNames.Items.Add(student.FullName);
             }
         }
 
@@ -194,6 +220,7 @@ namespace SomerenUI
                 listViewActivities.Items.Add(li);
             }
         }
+
         private void DisplayDrinks(List<Drink> drinks)
         {
             listViewDrinks.Items.Clear();
@@ -208,6 +235,16 @@ namespace SomerenUI
                 li.SubItems.Add(drink.Vat.ToString());
 
                 listViewDrinks.Items.Add(li);
+            }
+        }
+
+        private void DisplayDrinksForOrder(List<Drink> drinks)
+        {
+            listBoxDrinks.Items.Clear();
+
+            foreach (Drink drink in drinks)
+            {
+                listBoxDrinks.Items.Add($"{drink.Name}/{drink.Price}/{drink.Stock}/{drink.Alcohol}");
             }
         }
 
@@ -250,7 +287,7 @@ namespace SomerenUI
 
         private void orderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ShowOrderPanel();
         }
 
         private void HideAll()

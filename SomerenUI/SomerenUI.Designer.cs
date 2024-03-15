@@ -93,6 +93,12 @@
             stock = new System.Windows.Forms.ColumnHeader();
             vat = new System.Windows.Forms.ColumnHeader();
             label4 = new System.Windows.Forms.Label();
+            pnlOrder = new System.Windows.Forms.Panel();
+            listBoxDrinks = new System.Windows.Forms.ListBox();
+            listBoxStudentsNames = new System.Windows.Forms.ListBox();
+            buttonOrder = new System.Windows.Forms.Button();
+            pictureBox6 = new System.Windows.Forms.PictureBox();
+            label6 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -105,6 +111,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlDrinks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            pnlOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -184,19 +192,20 @@
             // orderToolStripMenuItem
             // 
             orderToolStripMenuItem.Name = "orderToolStripMenuItem";
-            orderToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            orderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             orderToolStripMenuItem.Text = "Order";
+            orderToolStripMenuItem.Click += orderToolStripMenuItem_Click;
             // 
             // vATInformationToolStripMenuItem
             // 
             vATInformationToolStripMenuItem.Name = "vATInformationToolStripMenuItem";
-            vATInformationToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            vATInformationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             vATInformationToolStripMenuItem.Text = "VAT Information";
             // 
             // revenueReportToolStripMenuItem
             // 
             revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
-            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             revenueReportToolStripMenuItem.Text = "Revenue Report";
             // 
             // pnlLecturers
@@ -595,6 +604,66 @@
             label4.TabIndex = 0;
             label4.Text = "Drinks";
             // 
+            // pnlOrder
+            // 
+            pnlOrder.Controls.Add(listBoxDrinks);
+            pnlOrder.Controls.Add(listBoxStudentsNames);
+            pnlOrder.Controls.Add(buttonOrder);
+            pnlOrder.Controls.Add(pictureBox6);
+            pnlOrder.Controls.Add(label6);
+            pnlOrder.Location = new System.Drawing.Point(15, 35);
+            pnlOrder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlOrder.Name = "pnlOrder";
+            pnlOrder.Size = new System.Drawing.Size(1072, 621);
+            pnlOrder.TabIndex = 16;
+            // 
+            // listBoxDrinks
+            // 
+            listBoxDrinks.FormattingEnabled = true;
+            listBoxDrinks.ItemHeight = 20;
+            listBoxDrinks.Location = new System.Drawing.Point(375, 74);
+            listBoxDrinks.Name = "listBoxDrinks";
+            listBoxDrinks.Size = new System.Drawing.Size(446, 424);
+            listBoxDrinks.TabIndex = 5;
+            // 
+            // listBoxStudentsNames
+            // 
+            listBoxStudentsNames.FormattingEnabled = true;
+            listBoxStudentsNames.ItemHeight = 20;
+            listBoxStudentsNames.Location = new System.Drawing.Point(17, 74);
+            listBoxStudentsNames.Name = "listBoxStudentsNames";
+            listBoxStudentsNames.Size = new System.Drawing.Size(262, 424);
+            listBoxStudentsNames.TabIndex = 4;
+            // 
+            // buttonOrder
+            // 
+            buttonOrder.Location = new System.Drawing.Point(866, 514);
+            buttonOrder.Name = "buttonOrder";
+            buttonOrder.Size = new System.Drawing.Size(167, 84);
+            buttonOrder.TabIndex = 3;
+            buttonOrder.Text = "Place Order";
+            buttonOrder.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Image = (System.Drawing.Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new System.Drawing.Point(920, 0);
+            pictureBox6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new System.Drawing.Size(149, 164);
+            pictureBox6.TabIndex = 2;
+            pictureBox6.TabStop = false;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(15, 9);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(95, 41);
+            label6.TabIndex = 0;
+            label6.Text = "Order";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -606,6 +675,7 @@
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
             Controls.Add(pnlDrinks);
+            Controls.Add(pnlOrder);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -630,6 +700,9 @@
             pnlDrinks.ResumeLayout(false);
             pnlDrinks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            pnlOrder.ResumeLayout(false);
+            pnlOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -702,5 +775,11 @@
         private System.Windows.Forms.ColumnHeader stock;
         private System.Windows.Forms.ColumnHeader vat;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pnlOrder;
+        private System.Windows.Forms.ListBox listBoxDrinks;
+        private System.Windows.Forms.ListBox listBoxStudentsNames;
+        private System.Windows.Forms.Button buttonOrder;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -78,6 +78,11 @@
             TelephoneNumberColumn = new System.Windows.Forms.ColumnHeader();
             RoomNumberColumn = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
+            drinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            financialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            vATInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            revenueReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -93,7 +98,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, financialsToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -469,6 +474,37 @@
             label1.TabIndex = 0;
             label1.Text = "Students";
             // 
+            // drinksToolStripMenuItem
+            // 
+            drinksToolStripMenuItem.Name = "drinksToolStripMenuItem";
+            drinksToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            drinksToolStripMenuItem.Text = "Drinks";
+            // 
+            // financialsToolStripMenuItem
+            // 
+            financialsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { orderToolStripMenuItem, vATInformationToolStripMenuItem, revenueReportToolStripMenuItem });
+            financialsToolStripMenuItem.Name = "financialsToolStripMenuItem";
+            financialsToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            financialsToolStripMenuItem.Text = "Financials";
+            // 
+            // orderToolStripMenuItem
+            // 
+            orderToolStripMenuItem.Name = "orderToolStripMenuItem";
+            orderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            orderToolStripMenuItem.Text = "Order";
+            // 
+            // vATInformationToolStripMenuItem
+            // 
+            vATInformationToolStripMenuItem.Name = "vATInformationToolStripMenuItem";
+            vATInformationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            vATInformationToolStripMenuItem.Text = "VAT Information";
+            // 
+            // revenueReportToolStripMenuItem
+            // 
+            revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
+            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            revenueReportToolStripMenuItem.Text = "Revenue Report";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -557,5 +593,10 @@
         private System.Windows.Forms.ColumnHeader TelephoneNumberColumn;
         private System.Windows.Forms.ColumnHeader RoomNumberColumn;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem drinksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem financialsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vATInformationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem revenueReportToolStripMenuItem;
     }
 }

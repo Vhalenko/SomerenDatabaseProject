@@ -37,6 +37,11 @@
             lecturersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             activitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             roomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            drinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            financialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            vATInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            revenueReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             pnlLecturers = new System.Windows.Forms.Panel();
             pictureBox3 = new System.Windows.Forms.PictureBox();
             listViewLecturers = new System.Windows.Forms.ListView();
@@ -78,11 +83,16 @@
             TelephoneNumberColumn = new System.Windows.Forms.ColumnHeader();
             RoomNumberColumn = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
-            drinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            financialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            vATInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            revenueReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            pnlDrinks = new System.Windows.Forms.Panel();
+            pictureBox5 = new System.Windows.Forms.PictureBox();
+            listViewDrinks = new System.Windows.Forms.ListView();
+            columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            drink_id = new System.Windows.Forms.ColumnHeader();
+            name = new System.Windows.Forms.ColumnHeader();
+            price = new System.Windows.Forms.ColumnHeader();
+            stock = new System.Windows.Forms.ColumnHeader();
+            vat = new System.Windows.Forms.ColumnHeader();
+            label4 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -93,6 +103,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             pnlStudents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pnlDrinks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -154,6 +166,38 @@
             roomsToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             roomsToolStripMenuItem.Text = "Rooms";
             roomsToolStripMenuItem.Click += roomsToolStripMenuItem_Click;
+            // 
+            // drinksToolStripMenuItem
+            // 
+            drinksToolStripMenuItem.Name = "drinksToolStripMenuItem";
+            drinksToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            drinksToolStripMenuItem.Text = "Drinks";
+            drinksToolStripMenuItem.Click += drinksToolStripMenuItem_Click;
+            // 
+            // financialsToolStripMenuItem
+            // 
+            financialsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { orderToolStripMenuItem, vATInformationToolStripMenuItem, revenueReportToolStripMenuItem });
+            financialsToolStripMenuItem.Name = "financialsToolStripMenuItem";
+            financialsToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            financialsToolStripMenuItem.Text = "Financials";
+            // 
+            // orderToolStripMenuItem
+            // 
+            orderToolStripMenuItem.Name = "orderToolStripMenuItem";
+            orderToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            orderToolStripMenuItem.Text = "Order";
+            // 
+            // vATInformationToolStripMenuItem
+            // 
+            vATInformationToolStripMenuItem.Name = "vATInformationToolStripMenuItem";
+            vATInformationToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            vATInformationToolStripMenuItem.Text = "VAT Information";
+            // 
+            // revenueReportToolStripMenuItem
+            // 
+            revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
+            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            revenueReportToolStripMenuItem.Text = "Revenue Report";
             // 
             // pnlLecturers
             // 
@@ -474,36 +518,82 @@
             label1.TabIndex = 0;
             label1.Text = "Students";
             // 
-            // drinksToolStripMenuItem
+            // pnlDrinks
             // 
-            drinksToolStripMenuItem.Name = "drinksToolStripMenuItem";
-            drinksToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
-            drinksToolStripMenuItem.Text = "Drinks";
+            pnlDrinks.Controls.Add(pictureBox5);
+            pnlDrinks.Controls.Add(listViewDrinks);
+            pnlDrinks.Controls.Add(label4);
+            pnlDrinks.Location = new System.Drawing.Point(12, 34);
+            pnlDrinks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlDrinks.Name = "pnlDrinks";
+            pnlDrinks.Size = new System.Drawing.Size(1072, 621);
+            pnlDrinks.TabIndex = 13;
             // 
-            // financialsToolStripMenuItem
+            // pictureBox5
             // 
-            financialsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { orderToolStripMenuItem, vATInformationToolStripMenuItem, revenueReportToolStripMenuItem });
-            financialsToolStripMenuItem.Name = "financialsToolStripMenuItem";
-            financialsToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
-            financialsToolStripMenuItem.Text = "Financials";
+            pictureBox5.Image = (System.Drawing.Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new System.Drawing.Point(920, 0);
+            pictureBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new System.Drawing.Size(149, 164);
+            pictureBox5.TabIndex = 2;
+            pictureBox5.TabStop = false;
             // 
-            // orderToolStripMenuItem
+            // listViewDrinks
             // 
-            orderToolStripMenuItem.Name = "orderToolStripMenuItem";
-            orderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            orderToolStripMenuItem.Text = "Order";
+            listViewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader3, drink_id, name, price, stock, vat });
+            listViewDrinks.Location = new System.Drawing.Point(18, 56);
+            listViewDrinks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewDrinks.Name = "listViewDrinks";
+            listViewDrinks.Size = new System.Drawing.Size(875, 408);
+            listViewDrinks.TabIndex = 1;
+            listViewDrinks.UseCompatibleStateImageBehavior = false;
+            listViewDrinks.View = System.Windows.Forms.View.Details;
             // 
-            // vATInformationToolStripMenuItem
+            // columnHeader3
             // 
-            vATInformationToolStripMenuItem.Name = "vATInformationToolStripMenuItem";
-            vATInformationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            vATInformationToolStripMenuItem.Text = "VAT Information";
+            columnHeader3.Text = "";
+            columnHeader3.Width = 0;
             // 
-            // revenueReportToolStripMenuItem
+            // drink_id
             // 
-            revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
-            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            revenueReportToolStripMenuItem.Text = "Revenue Report";
+            drink_id.Text = "Drink Id";
+            drink_id.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            drink_id.Width = 160;
+            // 
+            // name
+            // 
+            name.Text = "Name";
+            name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            name.Width = 160;
+            // 
+            // price
+            // 
+            price.Text = "Price";
+            price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            price.Width = 240;
+            // 
+            // stock
+            // 
+            stock.Text = "Stock";
+            stock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            stock.Width = 155;
+            // 
+            // vat
+            // 
+            vat.Text = "VAT";
+            vat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            vat.Width = 155;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label4.Location = new System.Drawing.Point(15, 9);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(101, 41);
+            label4.TabIndex = 0;
+            label4.Text = "Drinks";
             // 
             // SomerenUI
             // 
@@ -515,6 +605,7 @@
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
+            Controls.Add(pnlDrinks);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -536,6 +627,9 @@
             pnlStudents.ResumeLayout(false);
             pnlStudents.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            pnlDrinks.ResumeLayout(false);
+            pnlDrinks.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -598,5 +692,15 @@
         private System.Windows.Forms.ToolStripMenuItem orderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vATInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revenueReportToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlDrinks;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.ListView listViewDrinks;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader drink_id;
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader price;
+        private System.Windows.Forms.ColumnHeader stock;
+        private System.Windows.Forms.ColumnHeader vat;
+        private System.Windows.Forms.Label label4;
     }
 }

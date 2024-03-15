@@ -1,10 +1,6 @@
 ﻿using SomerenDAL;
 using SomerenModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SomerenService
 {
@@ -19,8 +15,7 @@ namespace SomerenService
 
         public List<Drink> GetDrinks()
         {
-            List<Drink> drinks = drinkdb.GetAllDrinks();
-            return drinks;
+            return drinkdb.GetAllDrinks();
         }
     }
 }

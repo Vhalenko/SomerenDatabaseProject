@@ -54,7 +54,7 @@ namespace SomerenUI
 
         private void ShowRoomsPanel()
         {
-            pnlDashboard.Hide();
+            HideAll();
             panelRooms.Show();
 
             try
@@ -86,6 +86,7 @@ namespace SomerenUI
 
         private void ShowDrinksPanel()
         {
+            HideAll();
             pnlDrinks.Show();
 
             try
@@ -93,7 +94,7 @@ namespace SomerenUI
                 List<Drink> drink = GetDrinks();
                 DisplayDrinks(drink);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
             }
@@ -212,7 +213,6 @@ namespace SomerenUI
 
         private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowRoomsPanel();
         }
 
@@ -228,26 +228,29 @@ namespace SomerenUI
 
         private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowStudentsPanel();
         }
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowLecturersPanel();
         }
 
         private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowActivitiesPanel();
         }
 
         private void drinksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowDrinksPanel();
+        }
+
+
+
+        private void orderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void HideAll()
@@ -258,8 +261,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             panelRooms.Hide();
             pnlDrinks.Hide();
+            pnlOrder.Hide();
         }
-
-
     }
 }

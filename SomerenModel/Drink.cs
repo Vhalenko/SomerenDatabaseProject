@@ -7,6 +7,7 @@
         public decimal Price { get; private set; }
         public string Stock {  get; private set; }
         public int Vat {  get; private set; }
+        public string Alcohol { get => (Vat == 21) ? "alcoholic" : "non-alcoholic"; }
 
         public Drink(int id, string name, decimal price, string stock, int vat)
         {

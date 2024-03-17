@@ -8,6 +8,9 @@ namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
+        List<Student> students = new();
+        List<Drink> drinks = new();
+
         public SomerenUI()
         {
             InitializeComponent();
@@ -54,7 +57,7 @@ namespace SomerenUI
 
         private void ShowRoomsPanel()
         {
-            pnlDashboard.Hide();
+            HideAll();
             panelRooms.Show();
 
             try
@@ -86,6 +89,7 @@ namespace SomerenUI
 
         private void ShowDrinksPanel()
         {
+            HideAll();
             pnlDrinks.Show();
 
             try
@@ -93,7 +97,25 @@ namespace SomerenUI
                 List<Drink> drink = GetDrinks();
                 DisplayDrinks(drink);
             }
-            catch(Exception e)
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
+            }
+        }
+
+        private void ShowOrderPanel()
+        {
+            HideAll();
+            pnlOrder.Show();
+
+            try
+            {
+                students = GetStudents();
+                drinks = GetDrinks();
+                DisplayDrinksForOrder(drinks);
+                DisplayStudentsForOrder(students);
+            }
+            catch (Exception e)
             {
                 MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
             }
@@ -145,6 +167,16 @@ namespace SomerenUI
             }
         }
 
+        private void DisplayStudentsForOrder(List<Student> students)
+        {
+            listBoxStudentsNames.Items.Clear();
+
+            foreach (Student student in students)
+            {
+                listBoxStudentsNames.Items.Add(student);
+            }
+        }
+
         private void DisplayLecturers(List<Lecturer> lecturers)
         {
             listViewLecturers.Items.Clear();
@@ -193,6 +225,7 @@ namespace SomerenUI
                 listViewActivities.Items.Add(li);
             }
         }
+
         private void DisplayDrinks(List<Drink> drinks)
         {
             listViewDrinks.Items.Clear();
@@ -210,9 +243,18 @@ namespace SomerenUI
             }
         }
 
+        private void DisplayDrinksForOrder(List<Drink> drinks)
+        {
+            listBoxDrinks.Items.Clear();
+
+            foreach (Drink drink in drinks)
+            {
+                listBoxDrinks.Items.Add($"{drink.Name}/{drink.Price}/{drink.Stock}/{drink.Alcohol}");
+            }
+        }
+
         private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowRoomsPanel();
         }
 
@@ -228,26 +270,34 @@ namespace SomerenUI
 
         private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowStudentsPanel();
         }
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowLecturersPanel();
         }
 
         private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowActivitiesPanel();
         }
 
         private void drinksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideAll();
             ShowDrinksPanel();
+        }
+
+
+
+        private void orderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowOrderPanel();
+        }
+
+        private void buttonOrder_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void HideAll()
@@ -258,8 +308,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             panelRooms.Hide();
             pnlDrinks.Hide();
+            pnlOrder.Hide();
         }
-
-
     }
 }

@@ -94,6 +94,8 @@
             vat = new System.Windows.Forms.ColumnHeader();
             label4 = new System.Windows.Forms.Label();
             pnlOrder = new System.Windows.Forms.Panel();
+            label7 = new System.Windows.Forms.Label();
+            quantityOfDrinks = new System.Windows.Forms.NumericUpDown();
             listBoxDrinks = new System.Windows.Forms.ListBox();
             listBoxStudentsNames = new System.Windows.Forms.ListBox();
             buttonOrder = new System.Windows.Forms.Button();
@@ -112,6 +114,7 @@
             pnlDrinks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             pnlOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
@@ -192,20 +195,20 @@
             // orderToolStripMenuItem
             // 
             orderToolStripMenuItem.Name = "orderToolStripMenuItem";
-            orderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            orderToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             orderToolStripMenuItem.Text = "Order";
             orderToolStripMenuItem.Click += orderToolStripMenuItem_Click;
             // 
             // vATInformationToolStripMenuItem
             // 
             vATInformationToolStripMenuItem.Name = "vATInformationToolStripMenuItem";
-            vATInformationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            vATInformationToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             vATInformationToolStripMenuItem.Text = "VAT Information";
             // 
             // revenueReportToolStripMenuItem
             // 
             revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
-            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             revenueReportToolStripMenuItem.Text = "Revenue Report";
             // 
             // pnlLecturers
@@ -606,6 +609,8 @@
             // 
             // pnlOrder
             // 
+            pnlOrder.Controls.Add(label7);
+            pnlOrder.Controls.Add(quantityOfDrinks);
             pnlOrder.Controls.Add(listBoxDrinks);
             pnlOrder.Controls.Add(listBoxStudentsNames);
             pnlOrder.Controls.Add(buttonOrder);
@@ -616,6 +621,24 @@
             pnlOrder.Name = "pnlOrder";
             pnlOrder.Size = new System.Drawing.Size(1072, 621);
             pnlOrder.TabIndex = 16;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(622, 514);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(199, 20);
+            label7.TabIndex = 7;
+            label7.Text = "Choose the number of drinks";
+            // 
+            // quantityOfDrinks
+            // 
+            quantityOfDrinks.Location = new System.Drawing.Point(709, 544);
+            quantityOfDrinks.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            quantityOfDrinks.Name = "quantityOfDrinks";
+            quantityOfDrinks.Size = new System.Drawing.Size(112, 27);
+            quantityOfDrinks.TabIndex = 6;
+            quantityOfDrinks.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // listBoxDrinks
             // 
@@ -703,6 +726,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             pnlOrder.ResumeLayout(false);
             pnlOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -782,5 +806,7 @@
         private System.Windows.Forms.Button buttonOrder;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown quantityOfDrinks;
     }
 }

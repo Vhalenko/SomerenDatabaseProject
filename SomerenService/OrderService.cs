@@ -16,7 +16,7 @@ namespace SomerenService
             orderDAO = new OrderDAO();
         }
 
-        public Student CreateOrder(Student student, Drink drink, int quantity, DateTime dateOfOrder)
+        public void CreateOrder(Student student, Drink drink, int quantity, DateTime dateOfOrder)
         {
             orderDAO.CreateOrder(student, drink, quantity, dateOfOrder);
         }

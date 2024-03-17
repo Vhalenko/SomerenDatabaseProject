@@ -22,7 +22,7 @@ namespace SomerenDAL
                 int id = (int)dataReader["drink_id"];
                 string name = (string)dataReader["name"];
                 decimal price = (decimal)dataReader["price"];
-                string stock = (string)dataReader["stock"];
+                int stock = (int)dataReader["stock"];
                 int vat = (int)dataReader["vat"];
 
                 Drink drink = new(id, name, price, stock, vat);

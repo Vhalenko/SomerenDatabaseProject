@@ -3,6 +3,7 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using System.Data.SqlTypes;
 
 namespace SomerenUI
 {
@@ -236,7 +237,7 @@ namespace SomerenUI
                 li.SubItems.Add(drink.Id.ToString());
                 li.SubItems.Add(drink.Name);
                 li.SubItems.Add(drink.Price.ToString());
-                li.SubItems.Add(drink.Stock);
+                li.SubItems.Add(drink.Stock.ToString());
                 li.SubItems.Add(drink.Vat.ToString());
 
                 listViewDrinks.Items.Add(li);
@@ -249,7 +250,7 @@ namespace SomerenUI
 
             foreach (Drink drink in drinks)
             {
-                listBoxDrinks.Items.Add($"{drink.Name}/{drink.Price}/{drink.Stock}/{drink.Alcohol}");
+                listBoxDrinks.Items.Add(drink);
             }
         }
 
@@ -288,8 +289,6 @@ namespace SomerenUI
             ShowDrinksPanel();
         }
 
-
-
         private void orderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowOrderPanel();
@@ -297,7 +296,42 @@ namespace SomerenUI
 
         private void buttonOrder_Click(object sender, EventArgs e)
         {
+            try
+            {
+                FillOrder();
+                MessageBox.Show("Order is successfully placed!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        private void FillOrder()
+        {
+            if (listBoxStudentsNames.SelectedIndex == -1)
+            {
+                throw new Exception("Select a student.");
+            }
+            else if (listBoxDrinks.SelectedIndex == -1)
+            {
+                throw new Exception("Select a drink.");
+            }
+            else
+            {
+                Student choosedStudent = (Student)listBoxStudentsNames.SelectedItem;
+                Drink choosedDrink = (Drink)listBoxDrinks.SelectedItem;
+                int quantity = (int)quantityOfDrinks.Value;
+                DateTime dateOfOrder = DateTime.Now;
+
+                if (choosedDrink.Stock < quantity)
+                {
+                    throw new Exception($"Only {choosedDrink.Stock} is in stock.");
+                }
+
+                OrderService orderService = new();
+                orderService.CreateOrder(choosedStudent, choosedDrink, quantity, dateOfOrder);
+            }
         }
 
         private void HideAll()

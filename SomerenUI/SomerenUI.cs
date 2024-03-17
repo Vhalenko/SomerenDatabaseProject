@@ -8,6 +8,9 @@ namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
+        List<Student> students = new();
+        List<Drink> drinks = new();
+
         public SomerenUI()
         {
             InitializeComponent();
@@ -107,8 +110,10 @@ namespace SomerenUI
 
             try
             {
-                DisplayDrinksForOrder(GetDrinks());
-                DisplayStudentsForOrder(GetStudents());
+                students = GetStudents();
+                drinks = GetDrinks();
+                DisplayDrinksForOrder(drinks);
+                DisplayStudentsForOrder(students);
             }
             catch (Exception e)
             {
@@ -168,7 +173,7 @@ namespace SomerenUI
 
             foreach (Student student in students)
             {
-                listBoxStudentsNames.Items.Add(student.FullName);
+                listBoxStudentsNames.Items.Add(student);
             }
         }
 
@@ -288,6 +293,11 @@ namespace SomerenUI
         private void orderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowOrderPanel();
+        }
+
+        private void buttonOrder_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void HideAll()

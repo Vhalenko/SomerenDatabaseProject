@@ -9,5 +9,10 @@
         {
             ClassName = className;
         }
+
+        public override string ToString()
+        {
+            return $"{FullName}";
+        }
     }
 }

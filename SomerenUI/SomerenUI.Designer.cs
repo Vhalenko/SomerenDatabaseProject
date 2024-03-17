@@ -643,6 +643,7 @@
             buttonOrder.TabIndex = 3;
             buttonOrder.Text = "Place Order";
             buttonOrder.UseVisualStyleBackColor = true;
+            buttonOrder.Click += buttonOrder_Click;
             // 
             // pictureBox6
             // 

@@ -18,11 +18,25 @@ namespace SomerenUI
             ShowDashboardPanel();
         }
 
+        /*Dashboard panel*/
+
         private void ShowDashboardPanel()
         {
             HideAll();
             pnlDashboard.Show();
         }
+
+        private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
+        {
+            ShowDashboardPanel();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        /*Students panel*/
 
         private void ShowStudentsPanel()
         {
@@ -40,116 +54,10 @@ namespace SomerenUI
             }
         }
 
-        private void ShowLecturersPanel()
-        {
-            HideAll();
-            pnlLecturers.Show();
-
-            try
-            {
-                List<Lecturer> lecturers = GetLecturers();
-                DisplayLecturers(lecturers);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
-            }
-        }
-
-        private void ShowRoomsPanel()
-        {
-            HideAll();
-            panelRooms.Show();
-
-            try
-            {
-                List<Room> rooms = GetRooms();
-                DisplayRooms(rooms);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the rooms: " + e.Message);
-            }
-        }
-
-        private void ShowActivitiesPanel()
-        {
-            HideAll();
-            pnlActivities.Show();
-
-            try
-            {
-                List<Activity> activities = GetActivities();
-                DisplayActivities(activities);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the activities: " + e.Message);
-            }
-        }
-
-        private void ShowDrinksPanel()
-        {
-            HideAll();
-            pnlDrinks.Show();
-
-            try
-            {
-                List<Drink> drink = GetDrinks();
-                DisplayDrinks(drink);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
-            }
-        }
-
-        private void ShowOrderPanel()
-        {
-            HideAll();
-            pnlOrder.Show();
-
-            try
-            {
-                students = GetStudents();
-                drinks = GetDrinks();
-                DisplayDrinksForOrder(drinks);
-                DisplayStudentsForOrder(students);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
-            }
-        }
-
         private List<Student> GetStudents()
         {
             StudentService studentService = new();
             return studentService.GetStudents();
-        }
-
-        private List<Lecturer> GetLecturers()
-        {
-            LecturerService lecturerService = new();
-            return lecturerService.GetLecturers();
-        }
-
-        private List<Activity> GetActivities()
-        {
-            ActivityService activityService = new ActivityService();
-            return activityService.GetActivities();
-        }
-
-        private List<Room> GetRooms()
-        {
-            RoomService roomService = new RoomService();
-            return roomService.GetRooms();
-        }
-
-        private List<Drink> GetDrinks()
-        {
-            DrinkService drinkService = new();
-            return drinkService.GetDrinks();
         }
 
         private void DisplayStudents(List<Student> students)
@@ -168,14 +76,33 @@ namespace SomerenUI
             }
         }
 
-        private void DisplayStudentsForOrder(List<Student> students)
+        private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listBoxStudentsNames.Items.Clear();
+            ShowStudentsPanel();
+        }
 
-            foreach (Student student in students)
+        /*Lecturers panel*/
+
+        private void ShowLecturersPanel()
+        {
+            HideAll();
+            pnlLecturers.Show();
+
+            try
             {
-                listBoxStudentsNames.Items.Add(student);
+                List<Lecturer> lecturers = GetLecturers();
+                DisplayLecturers(lecturers);
             }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
+            }
+        }
+
+        private List<Lecturer> GetLecturers()
+        {
+            LecturerService lecturerService = new();
+            return lecturerService.GetLecturers();
         }
 
         private void DisplayLecturers(List<Lecturer> lecturers)
@@ -192,6 +119,35 @@ namespace SomerenUI
                 item.SubItems.Add(lecturer.RoomNumber.ToString());
                 listViewLecturers.Items.Add(item);
             }
+        }
+
+        private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowLecturersPanel();
+        }
+
+        /*Rooms panel*/
+
+        private void ShowRoomsPanel()
+        {
+            HideAll();
+            panelRooms.Show();
+
+            try
+            {
+                List<Room> rooms = GetRooms();
+                DisplayRooms(rooms);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the rooms: " + e.Message);
+            }
+        }
+
+        private List<Room> GetRooms()
+        {
+            RoomService roomService = new RoomService();
+            return roomService.GetRooms();
         }
 
         private void DisplayRooms(List<Room> rooms)
@@ -211,6 +167,35 @@ namespace SomerenUI
             }
         }
 
+        private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowRoomsPanel();
+        }
+
+        /*Activity panel*/
+
+        private void ShowActivitiesPanel()
+        {
+            HideAll();
+            pnlActivities.Show();
+
+            try
+            {
+                List<Activity> activities = GetActivities();
+                DisplayActivities(activities);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + e.Message);
+            }
+        }
+
+        private List<Activity> GetActivities()
+        {
+            ActivityService activityService = new ActivityService();
+            return activityService.GetActivities();
+        }
+
         private void DisplayActivities(List<Activity> activities)
         {
             listViewActivities.Items.Clear();
@@ -225,6 +210,35 @@ namespace SomerenUI
 
                 listViewActivities.Items.Add(li);
             }
+        }
+
+        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowActivitiesPanel();
+        }
+
+        /*Drink panel*/
+
+        private void ShowDrinksPanel()
+        {
+            HideAll();
+            pnlDrinks.Show();
+
+            try
+            {
+                List<Drink> drink = GetDrinks();
+                DisplayDrinks(drink);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
+            }
+        }
+
+        private List<Drink> GetDrinks()
+        {
+            DrinkService drinkService = new();
+            return drinkService.GetDrinks();
         }
 
         private void DisplayDrinks(List<Drink> drinks)
@@ -244,6 +258,41 @@ namespace SomerenUI
             }
         }
 
+        private void drinksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDrinksPanel();
+        }
+
+        /*Order panel*/
+
+        private void ShowOrderPanel()
+        {
+            HideAll();
+            pnlOrder.Show();
+
+            try
+            {
+                students = GetStudents();
+                drinks = GetDrinks();
+                DisplayDrinksForOrder(drinks);
+                DisplayStudentsForOrder(students);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
+            }
+        }
+
+        private void DisplayStudentsForOrder(List<Student> students)
+        {
+            listBoxStudentsNames.Items.Clear();
+
+            foreach (Student student in students)
+            {
+                listBoxStudentsNames.Items.Add(student);
+            }
+        }
+
         private void DisplayDrinksForOrder(List<Drink> drinks)
         {
             listBoxDrinks.Items.Clear();
@@ -252,41 +301,6 @@ namespace SomerenUI
             {
                 listBoxDrinks.Items.Add(drink);
             }
-        }
-
-        private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowRoomsPanel();
-        }
-
-        private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
-        {
-            ShowDashboardPanel();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowStudentsPanel();
-        }
-
-        private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowLecturersPanel();
-        }
-
-        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowActivitiesPanel();
-        }
-
-        private void drinksToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowDrinksPanel();
         }
 
         private void orderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -333,6 +347,8 @@ namespace SomerenUI
                 orderService.CreateOrder(choosedStudent, choosedDrink, quantity, dateOfOrder);
             }
         }
+
+        /*Else*/
 
         private void HideAll()
         {

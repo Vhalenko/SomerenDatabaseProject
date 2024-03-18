@@ -107,6 +107,21 @@
             buttonOrder = new System.Windows.Forms.Button();
             pictureBox6 = new System.Windows.Forms.PictureBox();
             label6 = new System.Windows.Forms.Label();
+            pnlRevenue = new System.Windows.Forms.Panel();
+            listViewDrinksSold = new System.Windows.Forms.ListView();
+            columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            columnDrinkName = new System.Windows.Forms.ColumnHeader();
+            columnDrinkPrice = new System.Windows.Forms.ColumnHeader();
+            columnDrinkQuantity = new System.Windows.Forms.ColumnHeader();
+            NumOfCustomersLabel = new System.Windows.Forms.Label();
+            Turnoverlabel = new System.Windows.Forms.Label();
+            TotalSalesLabel = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
+            dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
+            pictureBox7 = new System.Windows.Forms.PictureBox();
+            label11 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -122,6 +137,8 @@
             pnlOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            pnlRevenue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -216,6 +233,7 @@
             revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
             revenueReportToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             revenueReportToolStripMenuItem.Text = "Revenue Report";
+            revenueReportToolStripMenuItem.Click += revenueReportToolStripMenuItem_Click;
             // 
             // pnlLecturers
             // 
@@ -757,18 +775,154 @@
             label6.TabIndex = 0;
             label6.Text = "Order";
             // 
+            // pnlRevenue
+            // 
+            pnlRevenue.Controls.Add(listViewDrinksSold);
+            pnlRevenue.Controls.Add(NumOfCustomersLabel);
+            pnlRevenue.Controls.Add(Turnoverlabel);
+            pnlRevenue.Controls.Add(TotalSalesLabel);
+            pnlRevenue.Controls.Add(label9);
+            pnlRevenue.Controls.Add(label2);
+            pnlRevenue.Controls.Add(dateTimePickerEnd);
+            pnlRevenue.Controls.Add(dateTimePickerStart);
+            pnlRevenue.Controls.Add(pictureBox7);
+            pnlRevenue.Controls.Add(label11);
+            pnlRevenue.Location = new System.Drawing.Point(13, 35);
+            pnlRevenue.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlRevenue.Name = "pnlRevenue";
+            pnlRevenue.Size = new System.Drawing.Size(1072, 621);
+            pnlRevenue.TabIndex = 17;
+            // 
+            // listViewDrinksSold
+            // 
+            listViewDrinksSold.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader4, columnDrinkName, columnDrinkPrice, columnDrinkQuantity });
+            listViewDrinksSold.Location = new System.Drawing.Point(20, 216);
+            listViewDrinksSold.Name = "listViewDrinksSold";
+            listViewDrinksSold.Size = new System.Drawing.Size(557, 338);
+            listViewDrinksSold.TabIndex = 10;
+            listViewDrinksSold.UseCompatibleStateImageBehavior = false;
+            listViewDrinksSold.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Width = 0;
+            // 
+            // columnDrinkName
+            // 
+            columnDrinkName.Text = "Drink Name";
+            columnDrinkName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            columnDrinkName.Width = 185;
+            // 
+            // columnDrinkPrice
+            // 
+            columnDrinkPrice.Text = "Price";
+            columnDrinkPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            columnDrinkPrice.Width = 185;
+            // 
+            // columnDrinkQuantity
+            // 
+            columnDrinkQuantity.Text = "Quantity";
+            columnDrinkQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            columnDrinkQuantity.Width = 183;
+            // 
+            // NumOfCustomersLabel
+            // 
+            NumOfCustomersLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            NumOfCustomersLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            NumOfCustomersLabel.Location = new System.Drawing.Point(624, 501);
+            NumOfCustomersLabel.Name = "NumOfCustomersLabel";
+            NumOfCustomersLabel.Size = new System.Drawing.Size(338, 53);
+            NumOfCustomersLabel.TabIndex = 9;
+            // 
+            // Turnoverlabel
+            // 
+            Turnoverlabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            Turnoverlabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Turnoverlabel.Location = new System.Drawing.Point(624, 358);
+            Turnoverlabel.Name = "Turnoverlabel";
+            Turnoverlabel.Size = new System.Drawing.Size(338, 53);
+            Turnoverlabel.TabIndex = 8;
+            // 
+            // TotalSalesLabel
+            // 
+            TotalSalesLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            TotalSalesLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            TotalSalesLabel.Location = new System.Drawing.Point(624, 216);
+            TotalSalesLabel.Name = "TotalSalesLabel";
+            TotalSalesLabel.Size = new System.Drawing.Size(338, 53);
+            TotalSalesLabel.TabIndex = 7;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(327, 74);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(25, 20);
+            label9.TabIndex = 6;
+            label9.Text = "To";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(20, 74);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(43, 20);
+            label2.TabIndex = 5;
+            label2.Text = "From";
+            // 
+            // dateTimePickerEnd
+            // 
+            dateTimePickerEnd.Location = new System.Drawing.Point(327, 110);
+            dateTimePickerEnd.MaxDate = new System.DateTime(2024, 3, 18, 23, 22, 9, 0);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Size = new System.Drawing.Size(250, 27);
+            dateTimePickerEnd.TabIndex = 4;
+            dateTimePickerEnd.Value = new System.DateTime(2024, 3, 18, 0, 0, 0, 0);
+            dateTimePickerEnd.ValueChanged += dateTimePickerEnd_ValueChanged;
+            // 
+            // dateTimePickerStart
+            // 
+            dateTimePickerStart.Location = new System.Drawing.Point(20, 110);
+            dateTimePickerStart.MaxDate = new System.DateTime(2024, 3, 18, 23, 21, 43, 0);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.Size = new System.Drawing.Size(250, 27);
+            dateTimePickerStart.TabIndex = 3;
+            dateTimePickerStart.Value = new System.DateTime(2024, 3, 18, 0, 0, 0, 0);
+            dateTimePickerStart.ValueChanged += dateTimePickerStart_ValueChanged;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Image = (System.Drawing.Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new System.Drawing.Point(920, 0);
+            pictureBox7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new System.Drawing.Size(149, 164);
+            pictureBox7.TabIndex = 2;
+            pictureBox7.TabStop = false;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label11.Location = new System.Drawing.Point(20, 10);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(228, 41);
+            label11.TabIndex = 0;
+            label11.Text = "Revenue Report";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 659);
-            Controls.Add(pnlOrder);
-            Controls.Add(pnlDrinks);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
+            Controls.Add(pnlDrinks);
+            Controls.Add(pnlOrder);
+            Controls.Add(pnlRevenue);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -797,6 +951,9 @@
             pnlOrder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            pnlRevenue.ResumeLayout(false);
+            pnlRevenue.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -814,7 +971,6 @@
         private System.Windows.Forms.Panel pnlLecturers;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel listVieLecturers;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView listViewLecturers;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label3;
@@ -883,5 +1039,20 @@
         private System.Windows.Forms.Button btnDrinkDelete;
         private System.Windows.Forms.Label PriceOutputLabel;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel pnlRevenue;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
+        private System.Windows.Forms.Label TotalSalesLabel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label NumOfCustomersLabel;
+        private System.Windows.Forms.Label Turnoverlabel;
+        private System.Windows.Forms.ListView listViewDrinksSold;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnDrinkName;
+        private System.Windows.Forms.ColumnHeader columnDrinkPrice;
+        private System.Windows.Forms.ColumnHeader columnDrinkQuantity;
     }
 }

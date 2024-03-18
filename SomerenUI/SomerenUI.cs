@@ -251,7 +251,7 @@ namespace SomerenUI
                 li.SubItems.Add(drink.Id.ToString());
                 li.SubItems.Add(drink.Name);
                 li.SubItems.Add(drink.Price.ToString());
-                li.SubItems.Add(drink.Stock.ToString());
+                li.SubItems.Add(drink.StockToText);
                 li.SubItems.Add(drink.Vat.ToString());
 
                 listViewDrinks.Items.Add(li);
@@ -359,6 +359,12 @@ namespace SomerenUI
             panelRooms.Hide();
             pnlDrinks.Hide();
             pnlOrder.Hide();
+        }
+
+        private void btnDrinkDelete_Click(object sender, EventArgs e)
+        {
+            DrinkService drinkService = new DrinkService();
+            drinkService.RemoveDrink();
         }
     }
 }

@@ -15,6 +15,13 @@ namespace SomerenUI
         public SomerenUI()
         {
             InitializeComponent();
+
+            dateTimePickerStart.MaxDate = DateTime.Today;
+            dateTimePickerEnd.MaxDate = DateTime.Today;
+
+            dateTimePickerEnd.Value = DateTime.Today;
+            dateTimePickerStart.Value = DateTime.Today;
+
             ShowDashboardPanel();
         }
 
@@ -451,9 +458,6 @@ namespace SomerenUI
 
         private bool RightDates()
         {
-            dateTimePickerStart.MaxDate = DateTime.Today;
-            dateTimePickerEnd.MaxDate = DateTime.Today;
-
             if (dateTimePickerEnd.Value < dateTimePickerStart.Value)
             {
                 return false;

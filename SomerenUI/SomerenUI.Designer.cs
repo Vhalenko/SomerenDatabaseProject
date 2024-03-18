@@ -107,6 +107,16 @@
             buttonOrder = new System.Windows.Forms.Button();
             pictureBox6 = new System.Windows.Forms.PictureBox();
             label6 = new System.Windows.Forms.Label();
+            panel1 = new System.Windows.Forms.Panel();
+            pictureBox7 = new System.Windows.Forms.PictureBox();
+            label11 = new System.Windows.Forms.Label();
+            dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
+            dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
+            label2 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            TotalSalesLabel = new System.Windows.Forms.Label();
+            Turnoverlabel = new System.Windows.Forms.Label();
+            NumOfCustomersLabel = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -122,6 +132,8 @@
             pnlOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -757,18 +769,115 @@
             label6.TabIndex = 0;
             label6.Text = "Order";
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(NumOfCustomersLabel);
+            panel1.Controls.Add(Turnoverlabel);
+            panel1.Controls.Add(TotalSalesLabel);
+            panel1.Controls.Add(label9);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(dateTimePickerEnd);
+            panel1.Controls.Add(dateTimePickerStart);
+            panel1.Controls.Add(pictureBox7);
+            panel1.Controls.Add(label11);
+            panel1.Location = new System.Drawing.Point(13, 35);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1072, 621);
+            panel1.TabIndex = 17;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Image = (System.Drawing.Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new System.Drawing.Point(920, 0);
+            pictureBox7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new System.Drawing.Size(149, 164);
+            pictureBox7.TabIndex = 2;
+            pictureBox7.TabStop = false;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label11.Location = new System.Drawing.Point(15, 9);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(228, 41);
+            label11.TabIndex = 0;
+            label11.Text = "Revenue Report";
+            // 
+            // dateTimePickerStart
+            // 
+            dateTimePickerStart.Location = new System.Drawing.Point(20, 110);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.Size = new System.Drawing.Size(250, 27);
+            dateTimePickerStart.TabIndex = 3;
+            // 
+            // dateTimePickerEnd
+            // 
+            dateTimePickerEnd.Location = new System.Drawing.Point(327, 110);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Size = new System.Drawing.Size(250, 27);
+            dateTimePickerEnd.TabIndex = 4;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(20, 65);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(43, 20);
+            label2.TabIndex = 5;
+            label2.Text = "From";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(327, 65);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(25, 20);
+            label9.TabIndex = 6;
+            label9.Text = "To";
+            // 
+            // TotalSalesLabel
+            // 
+            TotalSalesLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            TotalSalesLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            TotalSalesLabel.Location = new System.Drawing.Point(20, 208);
+            TotalSalesLabel.Name = "TotalSalesLabel";
+            TotalSalesLabel.Size = new System.Drawing.Size(557, 53);
+            TotalSalesLabel.TabIndex = 7;
+            // 
+            // Turnoverlabel
+            // 
+            Turnoverlabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            Turnoverlabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Turnoverlabel.Location = new System.Drawing.Point(20, 306);
+            Turnoverlabel.Name = "Turnoverlabel";
+            Turnoverlabel.Size = new System.Drawing.Size(557, 53);
+            Turnoverlabel.TabIndex = 8;
+            // 
+            // NumOfCustomersLabel
+            // 
+            NumOfCustomersLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            NumOfCustomersLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            NumOfCustomersLabel.Location = new System.Drawing.Point(20, 410);
+            NumOfCustomersLabel.Name = "NumOfCustomersLabel";
+            NumOfCustomersLabel.Size = new System.Drawing.Size(557, 53);
+            NumOfCustomersLabel.TabIndex = 9;
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 659);
-            Controls.Add(pnlOrder);
-            Controls.Add(pnlDrinks);
+            Controls.Add(panel1);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
+            Controls.Add(pnlDrinks);
+            Controls.Add(pnlOrder);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -797,6 +906,9 @@
             pnlOrder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -814,7 +926,6 @@
         private System.Windows.Forms.Panel pnlLecturers;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel listVieLecturers;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView listViewLecturers;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label3;
@@ -883,5 +994,15 @@
         private System.Windows.Forms.Button btnDrinkDelete;
         private System.Windows.Forms.Label PriceOutputLabel;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
+        private System.Windows.Forms.Label TotalSalesLabel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label NumOfCustomersLabel;
+        private System.Windows.Forms.Label Turnoverlabel;
     }
 }

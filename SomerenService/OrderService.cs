@@ -20,5 +20,10 @@ namespace SomerenService
         {
             orderDAO.CreateOrder(student, drink, quantity, dateOfOrder);
         }
+
+        public List<Order> GetOrders()
+        {
+            return orderDAO.GetAll();
+        }
     }
 }

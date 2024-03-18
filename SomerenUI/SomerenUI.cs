@@ -3,7 +3,6 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
-using System.Data.SqlTypes;
 
 namespace SomerenUI
 {
@@ -11,6 +10,7 @@ namespace SomerenUI
     {
         List<Student> students = new();
         List<Drink> drinks = new();
+        List<Order> orders = new();
 
         public SomerenUI()
         {
@@ -378,6 +378,163 @@ namespace SomerenUI
             }
         }
 
+        /*Revenue panel*/
+
+        private void ShowRevenuePanel()
+        {
+            HideAll();
+            pnlRevenue.Show();
+
+            try
+            {
+                orders = GetOrders();
+                DisplayAllFields();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the drink: " + e.Message);
+            }
+        }
+
+        private List<Order> GetOrders()
+        {
+            OrderService orderService = new();
+            return orderService.GetOrders();
+        }
+
+        private void revenueReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowRevenuePanel();
+        }
+
+        private void dateTimePickerStart_ValueChanged(object sender, EventArgs e)
+        {
+            ClearAllLitsts();
+
+            try
+            {
+                if (RightDates())
+                {
+                    DisplayAllFields();
+                }
+                else
+                {
+                    throw new Exception("Choose the right date!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
+        {
+            ClearAllLitsts();
+
+            try
+            {
+                if (RightDates())
+                {
+                    DisplayAllFields();
+                }
+                else
+                {
+                    throw new Exception("Choose the right date!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private bool RightDates()
+        {
+            dateTimePickerStart.MaxDate = DateTime.Today;
+            dateTimePickerEnd.MaxDate = DateTime.Today;
+
+            if (dateTimePickerEnd.Value < dateTimePickerStart.Value)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void DisplaySeparateSales()
+        {
+            listViewDrinksSold.Items.Clear();
+
+            foreach (var order in orders)
+            {
+                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
+                {
+                    ListViewItem item = new();
+                    item.SubItems.Add(order.Drink.Name);
+                    item.SubItems.Add(order.Drink.Price.ToString());
+                    item.SubItems.Add(order.Quantity.ToString());
+
+                    listViewDrinksSold.Items.Add(item);
+                }
+            }
+        }
+
+        private void ClearAllLitsts()
+        {
+            listViewDrinksSold.Items.Clear();
+            TotalSalesLabel.Text = string.Empty;
+            Turnoverlabel.Text = string.Empty;
+            NumOfCustomersLabel.Text = string.Empty;
+        }
+
+        private void DisplayTotalSales()
+        {
+            int totalSoldDrinks = 0;
+
+            foreach (var order in orders)
+            {
+                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
+                    totalSoldDrinks += order.Quantity;
+            }
+
+            TotalSalesLabel.Text = $"{totalSoldDrinks} Drinks sold";
+        }
+
+        private void DisplayTurnover()
+        {
+            decimal totalRevenue = 0m;
+
+            foreach (var order in orders)
+            {
+                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
+                    totalRevenue += order.Drink.Price * order.Quantity;
+            }
+
+            Turnoverlabel.Text = $"{totalRevenue}€ Earned";
+        }
+
+        private void DisplayNumberOfCustomers()
+        {
+            int totalNumberOfCustomers = 0;
+
+            foreach (var order in orders)
+            {
+                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
+                    totalNumberOfCustomers++;
+            }
+
+            NumOfCustomersLabel.Text = $"{totalNumberOfCustomers} Customers";
+        }
+
+        private void DisplayAllFields()
+        {
+            DisplaySeparateSales();
+            DisplayTotalSales();
+            DisplayTurnover();
+            DisplayNumberOfCustomers();
+        }
+
         /*Else*/
 
         private void HideAll()
@@ -389,6 +546,7 @@ namespace SomerenUI
             panelRooms.Hide();
             pnlDrinks.Hide();
             pnlOrder.Hide();
+            pnlRevenue.Hide();
         }
     }
 }

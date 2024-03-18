@@ -263,6 +263,12 @@ namespace SomerenUI
             ShowDrinksPanel();
         }
 
+        private void btnDrinkDelete_Click(object sender, EventArgs e)
+        {
+            /*            DrinkService drinkService = new DrinkService();
+                        drinkService.RemoveDrink();*/
+        }
+
         /*Order panel*/
 
         private void ShowOrderPanel()
@@ -348,6 +354,30 @@ namespace SomerenUI
             }
         }
 
+        private void listBoxStudentsNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
+        }
+
+        private void listBoxDrinks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
+        }
+
+        private void quantityOfDrinks_ValueChanged(object sender, EventArgs e)
+        {
+            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
+        }
+
+        private void DisplayPrice(Drink drink)
+        {
+            if (listBoxStudentsNames.SelectedIndex != -1 && listBoxDrinks.SelectedIndex != -1)
+            {
+                decimal price = drink.Price * quantityOfDrinks.Value;
+                PriceOutputLabel.Text = $"{price}";
+            }
+        }
+
         /*Else*/
 
         private void HideAll()
@@ -359,12 +389,6 @@ namespace SomerenUI
             panelRooms.Hide();
             pnlDrinks.Hide();
             pnlOrder.Hide();
-        }
-
-        private void btnDrinkDelete_Click(object sender, EventArgs e)
-        {
-            DrinkService drinkService = new DrinkService();
-            drinkService.RemoveDrink();
         }
     }
 }

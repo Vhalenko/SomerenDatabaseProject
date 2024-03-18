@@ -98,6 +98,8 @@
             vat = new System.Windows.Forms.ColumnHeader();
             label4 = new System.Windows.Forms.Label();
             pnlOrder = new System.Windows.Forms.Panel();
+            PriceOutputLabel = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             quantityOfDrinks = new System.Windows.Forms.NumericUpDown();
             listBoxDrinks = new System.Windows.Forms.ListBox();
@@ -105,7 +107,6 @@
             buttonOrder = new System.Windows.Forms.Button();
             pictureBox6 = new System.Windows.Forms.PictureBox();
             label6 = new System.Windows.Forms.Label();
-            fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -121,7 +122,6 @@
             pnlOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -656,6 +656,8 @@
             // 
             // pnlOrder
             // 
+            pnlOrder.Controls.Add(PriceOutputLabel);
+            pnlOrder.Controls.Add(label8);
             pnlOrder.Controls.Add(label7);
             pnlOrder.Controls.Add(quantityOfDrinks);
             pnlOrder.Controls.Add(listBoxDrinks);
@@ -668,6 +670,23 @@
             pnlOrder.Name = "pnlOrder";
             pnlOrder.Size = new System.Drawing.Size(1072, 621);
             pnlOrder.TabIndex = 16;
+            // 
+            // PriceOutputLabel
+            // 
+            PriceOutputLabel.AutoSize = true;
+            PriceOutputLabel.Location = new System.Drawing.Point(960, 469);
+            PriceOutputLabel.Name = "PriceOutputLabel";
+            PriceOutputLabel.Size = new System.Drawing.Size(0, 20);
+            PriceOutputLabel.TabIndex = 9;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(896, 437);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(114, 20);
+            label8.TabIndex = 8;
+            label8.Text = "Price to be paid";
             // 
             // label7
             // 
@@ -686,6 +705,7 @@
             quantityOfDrinks.Size = new System.Drawing.Size(112, 27);
             quantityOfDrinks.TabIndex = 6;
             quantityOfDrinks.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            quantityOfDrinks.ValueChanged += quantityOfDrinks_ValueChanged;
             // 
             // listBoxDrinks
             // 
@@ -695,6 +715,7 @@
             listBoxDrinks.Name = "listBoxDrinks";
             listBoxDrinks.Size = new System.Drawing.Size(446, 424);
             listBoxDrinks.TabIndex = 5;
+            listBoxDrinks.SelectedIndexChanged += listBoxDrinks_SelectedIndexChanged;
             // 
             // listBoxStudentsNames
             // 
@@ -704,6 +725,7 @@
             listBoxStudentsNames.Name = "listBoxStudentsNames";
             listBoxStudentsNames.Size = new System.Drawing.Size(262, 424);
             listBoxStudentsNames.TabIndex = 4;
+            listBoxStudentsNames.SelectedIndexChanged += listBoxStudentsNames_SelectedIndexChanged;
             // 
             // buttonOrder
             // 
@@ -735,23 +757,18 @@
             label6.TabIndex = 0;
             label6.Text = "Order";
             // 
-            // fileSystemWatcher1
-            // 
-            fileSystemWatcher1.EnableRaisingEvents = true;
-            fileSystemWatcher1.SynchronizingObject = this;
-            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 659);
+            Controls.Add(pnlOrder);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
-            Controls.Add(pnlOrder);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -780,7 +797,6 @@
             pnlOrder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -865,6 +881,7 @@
         private System.Windows.Forms.Button btnUpdateDrink;
         private System.Windows.Forms.Button btnDrinkAdd;
         private System.Windows.Forms.Button btnDrinkDelete;
-        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Label PriceOutputLabel;
+        private System.Windows.Forms.Label label8;
     }
 }

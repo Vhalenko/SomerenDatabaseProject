@@ -84,6 +84,10 @@
             RoomNumberColumn = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
             pnlDrinks = new System.Windows.Forms.Panel();
+            btnUpdateStock = new System.Windows.Forms.Button();
+            btnUpdateDrink = new System.Windows.Forms.Button();
+            btnDrinkAdd = new System.Windows.Forms.Button();
+            btnDrinkDelete = new System.Windows.Forms.Button();
             pictureBox5 = new System.Windows.Forms.PictureBox();
             listViewDrinks = new System.Windows.Forms.ListView();
             columnHeader3 = new System.Windows.Forms.ColumnHeader();
@@ -101,6 +105,7 @@
             buttonOrder = new System.Windows.Forms.Button();
             pictureBox6 = new System.Windows.Forms.PictureBox();
             label6 = new System.Windows.Forms.Label();
+            fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -116,6 +121,7 @@
             pnlOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -532,6 +538,10 @@
             // 
             // pnlDrinks
             // 
+            pnlDrinks.Controls.Add(btnUpdateStock);
+            pnlDrinks.Controls.Add(btnUpdateDrink);
+            pnlDrinks.Controls.Add(btnDrinkAdd);
+            pnlDrinks.Controls.Add(btnDrinkDelete);
             pnlDrinks.Controls.Add(pictureBox5);
             pnlDrinks.Controls.Add(listViewDrinks);
             pnlDrinks.Controls.Add(label4);
@@ -540,6 +550,43 @@
             pnlDrinks.Name = "pnlDrinks";
             pnlDrinks.Size = new System.Drawing.Size(1072, 621);
             pnlDrinks.TabIndex = 13;
+            // 
+            // btnUpdateStock
+            // 
+            btnUpdateStock.Location = new System.Drawing.Point(920, 531);
+            btnUpdateStock.Name = "btnUpdateStock";
+            btnUpdateStock.Size = new System.Drawing.Size(134, 52);
+            btnUpdateStock.TabIndex = 6;
+            btnUpdateStock.Text = "Update stock";
+            btnUpdateStock.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateDrink
+            // 
+            btnUpdateDrink.Location = new System.Drawing.Point(920, 438);
+            btnUpdateDrink.Name = "btnUpdateDrink";
+            btnUpdateDrink.Size = new System.Drawing.Size(134, 52);
+            btnUpdateDrink.TabIndex = 5;
+            btnUpdateDrink.Text = "Update drink";
+            btnUpdateDrink.UseVisualStyleBackColor = true;
+            // 
+            // btnDrinkAdd
+            // 
+            btnDrinkAdd.Location = new System.Drawing.Point(920, 344);
+            btnDrinkAdd.Name = "btnDrinkAdd";
+            btnDrinkAdd.Size = new System.Drawing.Size(134, 52);
+            btnDrinkAdd.TabIndex = 4;
+            btnDrinkAdd.Text = "Add a drink";
+            btnDrinkAdd.UseVisualStyleBackColor = true;
+            // 
+            // btnDrinkDelete
+            // 
+            btnDrinkDelete.Location = new System.Drawing.Point(920, 246);
+            btnDrinkDelete.Name = "btnDrinkDelete";
+            btnDrinkDelete.Size = new System.Drawing.Size(134, 52);
+            btnDrinkDelete.TabIndex = 3;
+            btnDrinkDelete.Text = "Delete a drink";
+            btnDrinkDelete.UseVisualStyleBackColor = true;
+            btnDrinkDelete.Click += btnDrinkDelete_Click;
             // 
             // pictureBox5
             // 
@@ -688,17 +735,22 @@
             label6.TabIndex = 0;
             label6.Text = "Order";
             // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 659);
+            Controls.Add(pnlDrinks);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
-            Controls.Add(pnlDrinks);
             Controls.Add(pnlOrder);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -728,6 +780,7 @@
             pnlOrder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)quantityOfDrinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -808,5 +861,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown quantityOfDrinks;
+        private System.Windows.Forms.Button btnUpdateStock;
+        private System.Windows.Forms.Button btnUpdateDrink;
+        private System.Windows.Forms.Button btnDrinkAdd;
+        private System.Windows.Forms.Button btnDrinkDelete;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }

@@ -17,5 +17,13 @@ namespace SomerenService
         {
             return drinkdb.GetAll();
         }
+        public void AddDrink(int id, string name, decimal price, int stock, int vat)
+        {
+            drinkdb.AddDrink(id, name, price, stock, vat);
+        }
+        public void RemoveDrink(int id)
+        {
+            drinkdb.DeleteDrink(id);
+        }
     }
 }

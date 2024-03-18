@@ -6,7 +6,7 @@
         public string Name { get; private set; }
         public decimal Price { get; private set; }
         public int Stock { get; private set; }
-        public string StockToText {  get; private set; }
+        public string StockToText { get => Stock == 0 ? "stock empty" : Stock < 50 ? "stock nearly depleted" : "stock sufficient"; }
         public int Vat {  get; private set; }
         public string Alcohol { get => (Vat == 21) ? "alcoholic" : "non-alcoholic"; }
 

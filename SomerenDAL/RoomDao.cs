@@ -1,38 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using SomerenModel;
 
 namespace SomerenDAL
 {
-    public class RoomDao : BaseDao
+    public class RoomDao : BaseDao<Room>
     {
-        public List<Room> GetAllRooms()
+        public RoomDao() : base()
         {
-            string query = "SELECT * FROM room";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            query = "SELECT * FROM room";
         }
-        public List<Room> ReadTables(DataTable dataTable)
+
+        private protected override Room WriteItem(DataRow reader)
         {
-            List<Room> rooms = new List<Room>();
+            int roomNumber = (int)reader["room_number"];
+            string building = (string)reader["building"];
+            int floor = (int)reader["floor"];
+            int bedsAmount = (int)reader["beds_amount"];
+            string roomType = (string)reader["room_type"];
 
-            foreach (DataRow dataReader in dataTable.Rows)
-            {
-                int roomNumber = (int)dataReader["room_number"];
-                string building = (string)dataReader["building"];
-                int floor = (int)dataReader["floor"];
-                int bedsAmount = (int)dataReader["beds_amount"];
-                string roomType = (string)dataReader["room_type"];
-
-                Room room = new(roomNumber, building, floor, bedsAmount, roomType);
-                rooms.Add(room);
-            }
-            return rooms;
+            return new Room(roomNumber, building, floor, bedsAmount, roomType);
         }
     }
 }

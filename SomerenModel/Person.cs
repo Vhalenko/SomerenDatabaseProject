@@ -1,6 +1,6 @@
 ﻿namespace SomerenModel
 {
-    public class Person
+    public abstract class Person
     {
         public int PersonNumber { get; private set; }
         public string FullName { get => $"{FirstName} {LastName}"; }

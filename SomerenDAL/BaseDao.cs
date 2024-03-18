@@ -2,19 +2,42 @@
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Collections.Generic;
 
 namespace SomerenDAL
 {
-    public abstract class BaseDao
+    public abstract class BaseDao<T>
     {
         protected SqlDataAdapter adapter;
         protected SqlConnection dbConnection;
+        protected string query;
 
         public BaseDao()
         {
             dbConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["SomerenDatabase"].ConnectionString);
             adapter = new SqlDataAdapter();
         }
+
+        public List<T> GetAll()
+        {
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        private List<T> ReadTables(DataTable dataTable)
+        {
+            List<T> items = new();
+
+            foreach (DataRow reader in dataTable.Rows)
+            {
+                T item = WriteItem(reader);
+                items.Add(item);
+            }
+
+            return items;
+        }
+
+        private protected abstract T WriteItem(DataRow reader);
 
         protected SqlConnection OpenConnection()
         {

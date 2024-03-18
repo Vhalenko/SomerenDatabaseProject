@@ -1,37 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using SomerenModel;
+using System.Data;
 
 namespace SomerenDAL
 {
-    public class ActivityDao : BaseDao
+    public class ActivityDao : BaseDao<Activity>
     {
-        public List<SomerenModel.Activity> GetAllActivities()
+        public ActivityDao() : base()
         {
-            OpenConnection();
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM activity", dbConnection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            List<SomerenModel.Activity> activities = new List<SomerenModel.Activity>();
-
-            while (reader.Read()) 
-            {
-                SomerenModel.Activity activity = ReadActivity(reader);
-                activities.Add(activity);
-            }
-            reader.Close();
-            CloseConnection();
-
-            return activities;
+            query = "SELECT * FROM activity";
         }
 
-        private SomerenModel.Activity ReadActivity(SqlDataReader reader)
+        private protected override Activity WriteItem(DataRow reader)
         {
             int id = (int)reader["activity_id"];
             string name = (string)reader["name"];
             string startDayTime = (string)reader["start_day_time"];
             string endDayTime = (string)reader["end_day_time"];
-            
-            return new SomerenModel.Activity(id, name, startDayTime, endDayTime);
+
+            return new Activity(id, name, startDayTime, endDayTime);
         }
     }
 }

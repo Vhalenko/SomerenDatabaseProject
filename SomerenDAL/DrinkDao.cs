@@ -1,34 +1,24 @@
 ﻿using SomerenModel;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
 
 namespace SomerenDAL
 {
-    public class DrinkDao : BaseDao
+    public class DrinkDao : BaseDao<Drink>
     {
-        public List<Drink> GetAllDrinks()
+        public DrinkDao() : base()
         {
-            string query = "SELECT * FROM drink";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            query = "SELECT * FROM drink";
         }
-        public List<Drink> ReadTables(DataTable dataTable)
+
+        private protected override Drink WriteItem(DataRow reader)
         {
-            List<Drink> drinks = new List<Drink>();
+            int id = (int)reader["drink_id"];
+            string name = (string)reader["name"];
+            decimal price = (decimal)reader["price"];
+            int stock = (int)reader["stock"];
+            int vat = (int)reader["vat"];
 
-            foreach (DataRow dataReader in dataTable.Rows)
-            {
-                int id = (int)dataReader["drink_id"];
-                string name = (string)dataReader["name"];
-                decimal price = (decimal)dataReader["price"];
-                int stock = (int)dataReader["stock"];
-                int vat = (int)dataReader["vat"];
-
-                Drink drink = new(id, name, price, stock, vat);
-                drinks.Add(drink);
-            }
-            return drinks;
+            return new Drink(id, name, price, stock, vat);
         }
     }
 }

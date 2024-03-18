@@ -1,28 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data;
 using SomerenModel;
 
 namespace SomerenDAL
 {
-    public class StudentDao : BaseDao
+    public class StudentDao : BaseDao<Student>
     {
-        public List<Student> GetAllStudents()
+        public StudentDao() : base() 
         {
-            OpenConnection();
-            SqlCommand query = new("SELECT * FROM student", dbConnection);
-            SqlDataReader reader = query.ExecuteReader();
-            List<Student> students = new();
-
-            while (reader.Read())
-            {
-                students.Add(ReadStudents(reader));
-            }
-
-            CloseConnection();
-            return students;
+            query = "SELECT * FROM student";
         }
 
-        private Student ReadStudents(SqlDataReader reader)
+        private protected override Student WriteItem(DataRow reader)
         {
             int studentNumber = (int)reader["student_number"];
             string firstName = (string)reader["first_name"];

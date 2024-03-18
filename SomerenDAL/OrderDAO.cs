@@ -1,13 +1,41 @@
 ﻿using SomerenModel;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace SomerenDAL
 {
-    public class OrderDAO : BaseDao
+    public class OrderDAO : BaseDao<Order>
     {
+        public OrderDAO() : base()
+        {
+            query = "SELECT purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
+        }
+
+        private protected override Order WriteItem(DataRow reader)
+        {
+            int quantity = (int)reader["quantity"];
+            DateTime orderDate = (DateTime)reader["order_date"];
+
+            int studentNumber = (int)reader["student_number"];
+            string firstName = (string)reader["first_name"];
+            string lastName = (string)reader["last_name"];
+            string className = (string)reader["class"];
+            string telephoneNumber = (string)reader["telephone_number"];
+            int roomNumber = (int)reader["room_number"];
+            Student student = new(studentNumber, firstName, lastName, className, telephoneNumber, roomNumber);
+
+            int drinkId = (int)reader["drink_id"];
+            string drinkName = (string)reader["name"];
+            decimal price = (decimal)reader["price"];
+            int stock = (int)reader["stock"];
+            int vat = (int)reader["vat"];
+
+            Drink drink = new(drinkId, drinkName, price, stock, vat);
+
+            return new Order(student, drink, quantity, orderDate);
+        }
+
         public void CreateOrder(Student student, Drink drink, int quantity, DateTime dateOfOrder)
         {
             AddOrder(student, drink, quantity, dateOfOrder);

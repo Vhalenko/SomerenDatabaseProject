@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using SomerenModel;
 
 namespace SomerenDAL
@@ -7,7 +8,7 @@ namespace SomerenDAL
     {
         public StudentDao() : base() 
         {
-            query = "SELECT * FROM student";
+            query = "SELECT student_number, first_name, last_name, class, telephone_number, room_number FROM student";
         }
 
         private protected override Student WriteItem(DataRow reader)

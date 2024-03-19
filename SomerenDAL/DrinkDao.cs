@@ -10,7 +10,7 @@ namespace SomerenDAL
     {
         public DrinkDao() : base()
         {
-            query = "SELECT * FROM drink";
+            query = "SELECT drink_id, name, price, stock, vat FROM drink";
         }
 
         private protected override Drink WriteItem(DataRow reader)

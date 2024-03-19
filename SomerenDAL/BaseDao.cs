@@ -11,6 +11,7 @@ namespace SomerenDAL
         protected SqlDataAdapter adapter;
         protected SqlConnection dbConnection;
         protected string query;
+        protected string tableName;
 
         public BaseDao()
         {

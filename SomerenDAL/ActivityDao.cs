@@ -7,7 +7,7 @@ namespace SomerenDAL
     {
         public ActivityDao() : base()
         {
-            query = "SELECT * FROM activity";
+            query = "SELECT activity_id, name, start_day_time, end_day_time FROM activity";
         }
 
         private protected override Activity WriteItem(DataRow reader)

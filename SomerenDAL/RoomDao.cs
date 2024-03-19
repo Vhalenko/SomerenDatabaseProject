@@ -7,7 +7,7 @@ namespace SomerenDAL
     {
         public RoomDao() : base()
         {
-            query = "SELECT * FROM room";
+            query = "SELECT room_number, building, floor, beds_amount, room_type FROM room";
         }
 
         private protected override Room WriteItem(DataRow reader)

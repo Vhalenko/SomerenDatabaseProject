@@ -17,23 +17,29 @@ namespace SomerenDAL
             int quantity = (int)reader["quantity"];
             DateTime orderDate = (DateTime)reader["order_date"];
 
+            return new Order(WriteStudent(reader), WriteDrink(reader), quantity, orderDate);
+        }
+
+        private Student WriteStudent(DataRow reader)
+        {
             int studentNumber = (int)reader["student_number"];
             string firstName = (string)reader["first_name"];
             string lastName = (string)reader["last_name"];
             string className = (string)reader["class"];
             string telephoneNumber = (string)reader["telephone_number"];
             int roomNumber = (int)reader["room_number"];
-            Student student = new(studentNumber, firstName, lastName, className, telephoneNumber, roomNumber);
+            return new Student(studentNumber, firstName, lastName, className, telephoneNumber, roomNumber);
+        }
 
+        private Drink WriteDrink(DataRow reader)
+        {
             int drinkId = (int)reader["drink_id"];
             string drinkName = (string)reader["name"];
             decimal price = (decimal)reader["price"];
             int stock = (int)reader["stock"];
             int vat = (int)reader["vat"];
 
-            Drink drink = new(drinkId, drinkName, price, stock, vat);
-
-            return new Order(student, drink, quantity, orderDate);
+            return new Drink(drinkId, drinkName, price, stock, vat);
         }
 
         public void CreateOrder(Student student, Drink drink, int quantity, DateTime dateOfOrder)
@@ -48,10 +54,10 @@ namespace SomerenDAL
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@studentNumber", SqlDbType.Int) {Value = student.PersonNumber},
-                new SqlParameter("@drinkId", SqlDbType.Int) {Value = drink.Id},
-                new SqlParameter("@quantity", SqlDbType.Int) {Value = quantity},
-                new SqlParameter("@orderDate", SqlDbType.Date) {Value = dateOfOrder}
+                new("@studentNumber", SqlDbType.Int) {Value = student.PersonNumber},
+                new("@drinkId", SqlDbType.Int) {Value = drink.Id},
+                new("@quantity", SqlDbType.Int) {Value = quantity},
+                new("@orderDate", SqlDbType.Date) {Value = dateOfOrder}
             };
 
             ExecuteEditQuery(query, parameters);
@@ -64,8 +70,8 @@ namespace SomerenDAL
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@quantity", SqlDbType.Int) {Value = quantity},
-                new SqlParameter("@drinkId", SqlDbType.Int) {Value = drink.Id}
+                new("@quantity", SqlDbType.Int) {Value = quantity},
+                new("@drinkId", SqlDbType.Int) {Value = drink.Id}
             };
 
             ExecuteEditQuery(query, parameters);

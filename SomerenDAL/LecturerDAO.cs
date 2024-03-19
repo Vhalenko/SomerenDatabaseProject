@@ -8,7 +8,7 @@ namespace SomerenDAL
     {
         public LecturerDAO() : base()
         {
-            query = "SELECT * FROM lecturer";
+            query = "SELECT lecturer_number, first_name, last_name, age, telephone_number, room_number FROM lecturer";
         }
 
         private protected override Lecturer WriteItem(DataRow reader)

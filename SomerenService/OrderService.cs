@@ -22,5 +22,10 @@ namespace SomerenService
         {
             return orderDAO.GetAll();
         }
+
+        public int CountAmountOfClients(DateTime startDate, DateTime endDate)
+        {
+            return orderDAO.CountAmountOfClients(startDate, endDate);
+        }
     }
 }

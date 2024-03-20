@@ -25,5 +25,9 @@ namespace SomerenService
         {
             drinkdb.DeleteDrink(id);
         }
+        public void UpdateDrink(int id, string name, decimal price, int stock, int vat)
+        {
+            drinkdb.UpdateDrink(id, name, price, stock, vat);
+        }
     }
 }

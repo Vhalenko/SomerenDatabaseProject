@@ -7,20 +7,20 @@ namespace SomerenDAL
 {
     public class OrderDAO : BaseDao<Order>
     {
-        public OrderDAO() : base()
-        {
-            query = "SELECT purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
-        }
-
-        private protected override Order WriteItem(DataRow reader)
+        private protected override Order Convert(DataRow reader)
         {
             int quantity = (int)reader["quantity"];
             DateTime orderDate = (DateTime)reader["order_date"];
 
-            return new Order(WriteStudent(reader), WriteDrink(reader), quantity, orderDate);
+            return new Order(ConvertStudent(reader), ConvertDrink(reader), quantity, orderDate);
         }
 
-        private Student WriteStudent(DataRow reader)
+        private protected override string GetAllQuery()
+        {
+            return "SELECT purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
+        }
+
+        private Student ConvertStudent(DataRow reader)
         {
             int studentNumber = (int)reader["student_number"];
             string firstName = (string)reader["first_name"];
@@ -31,7 +31,7 @@ namespace SomerenDAL
             return new Student(studentNumber, firstName, lastName, className, telephoneNumber, roomNumber);
         }
 
-        private Drink WriteDrink(DataRow reader)
+        private Drink ConvertDrink(DataRow reader)
         {
             int drinkId = (int)reader["drink_id"];
             string drinkName = (string)reader["name"];

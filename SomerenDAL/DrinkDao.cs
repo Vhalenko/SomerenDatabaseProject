@@ -1,19 +1,12 @@
 ﻿using SomerenModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace SomerenDAL
 {
     public class DrinkDao : BaseDao<Drink>
     {
-        public DrinkDao() : base()
-        {
-            query = "SELECT drink_id, name, price, stock, vat FROM drink";
-        }
-
-        private protected override Drink WriteItem(DataRow reader)
+        private protected override Drink Convert(DataRow reader)
         {
             int id = (int)reader["drink_id"];
             string name = (string)reader["name"];
@@ -22,6 +15,11 @@ namespace SomerenDAL
             int vat = (int)reader["vat"];
 
             return new Drink(id, name, price, stock, vat);
+        }
+
+        private protected override string GetAllQuery()
+        {
+            return "SELECT drink_id, name, price, stock, vat FROM drink";
         }
 
         public void AddDrink(int id, string name, decimal price, int stock, int vat)

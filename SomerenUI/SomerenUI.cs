@@ -532,15 +532,10 @@ namespace SomerenUI
 
         private void DisplayNumberOfCustomers()
         {
-            int totalNumberOfCustomers = 0;
+            OrderService orderService = new();
+            int studentCount = orderService.CountAmountOfClients(dateTimePickerStart.Value, dateTimePickerEnd.Value);
 
-            foreach (var order in orders)
-            {
-                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
-                    totalNumberOfCustomers++;
-            }
-
-            NumOfCustomersLabel.Text = $"{totalNumberOfCustomers} Customers";
+            NumOfCustomersLabel.Text = $"{studentCount} Customers";
         }
 
         private void DisplayAllFields()

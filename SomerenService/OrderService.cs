@@ -8,6 +8,7 @@ namespace SomerenService
     public class OrderService
     {
         OrderDAO orderDAO;
+
         public OrderService()
         {
             orderDAO = new OrderDAO();
@@ -29,8 +30,9 @@ namespace SomerenService
         }
 
         public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate)
-        { 
+        {
             return orderDAO.Drinks9Percent(startQuarterDate, endQuarterDate);
+        }
 
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)
         {

@@ -129,7 +129,6 @@
             Controls.Add(btnUpdate);
             Name = "UpdateDrink";
             Text = "UpdateDrink";
-            Load += UpdateDrink_Load;
             ResumeLayout(false);
             PerformLayout();
         }

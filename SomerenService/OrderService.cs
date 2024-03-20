@@ -22,5 +22,15 @@ namespace SomerenService
         {
             return orderDAO.GetAll();
         }
+
+        public List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        { 
+            return orderDAO.Drinks21Percent(startQuarterDate, endQuarterDate);
+        }
+
+        public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        { 
+            return orderDAO.Drinks9Percent(startQuarterDate, endQuarterDate);
+        }
     }
 }

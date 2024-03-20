@@ -552,10 +552,5 @@ namespace SomerenUI
             pnlOrder.Hide();
             pnlRevenue.Hide();
         }
-
-        private void vATInformationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

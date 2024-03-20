@@ -122,6 +122,19 @@
             dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             pictureBox7 = new System.Windows.Forms.PictureBox();
             label11 = new System.Windows.Forms.Label();
+            pnlVAT = new System.Windows.Forms.Panel();
+            CulculateButton = new System.Windows.Forms.Button();
+            radioQ4B = new System.Windows.Forms.RadioButton();
+            radioQ3B = new System.Windows.Forms.RadioButton();
+            radioQ2B = new System.Windows.Forms.RadioButton();
+            radioQ1B = new System.Windows.Forms.RadioButton();
+            textBox1 = new System.Windows.Forms.TextBox();
+            VatTotalLabel = new System.Windows.Forms.Label();
+            Vat21Label = new System.Windows.Forms.Label();
+            Vat9Label = new System.Windows.Forms.Label();
+            label15 = new System.Windows.Forms.Label();
+            pictureBox8 = new System.Windows.Forms.PictureBox();
+            label16 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -139,6 +152,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             pnlRevenue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            pnlVAT.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -910,6 +925,145 @@
             label11.TabIndex = 0;
             label11.Text = "Revenue Report";
             // 
+            // pnlVAT
+            // 
+            pnlVAT.Controls.Add(CulculateButton);
+            pnlVAT.Controls.Add(radioQ4B);
+            pnlVAT.Controls.Add(radioQ3B);
+            pnlVAT.Controls.Add(radioQ2B);
+            pnlVAT.Controls.Add(radioQ1B);
+            pnlVAT.Controls.Add(textBox1);
+            pnlVAT.Controls.Add(VatTotalLabel);
+            pnlVAT.Controls.Add(Vat21Label);
+            pnlVAT.Controls.Add(Vat9Label);
+            pnlVAT.Controls.Add(label15);
+            pnlVAT.Controls.Add(pictureBox8);
+            pnlVAT.Controls.Add(label16);
+            pnlVAT.Location = new System.Drawing.Point(13, 35);
+            pnlVAT.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlVAT.Name = "pnlVAT";
+            pnlVAT.Size = new System.Drawing.Size(1072, 621);
+            pnlVAT.TabIndex = 18;
+            // 
+            // CulculateButton
+            // 
+            CulculateButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CulculateButton.Location = new System.Drawing.Point(52, 504);
+            CulculateButton.Name = "CulculateButton";
+            CulculateButton.Size = new System.Drawing.Size(184, 53);
+            CulculateButton.TabIndex = 15;
+            CulculateButton.Text = "Calculate";
+            CulculateButton.UseVisualStyleBackColor = true;
+            // 
+            // radioQ4B
+            // 
+            radioQ4B.AutoSize = true;
+            radioQ4B.Location = new System.Drawing.Point(187, 449);
+            radioQ4B.Name = "radioQ4B";
+            radioQ4B.Size = new System.Drawing.Size(49, 24);
+            radioQ4B.TabIndex = 14;
+            radioQ4B.TabStop = true;
+            radioQ4B.Text = "Q4";
+            radioQ4B.UseVisualStyleBackColor = true;
+            // 
+            // radioQ3B
+            // 
+            radioQ3B.AutoSize = true;
+            radioQ3B.Location = new System.Drawing.Point(52, 449);
+            radioQ3B.Name = "radioQ3B";
+            radioQ3B.Size = new System.Drawing.Size(49, 24);
+            radioQ3B.TabIndex = 13;
+            radioQ3B.TabStop = true;
+            radioQ3B.Text = "Q3";
+            radioQ3B.UseVisualStyleBackColor = true;
+            // 
+            // radioQ2B
+            // 
+            radioQ2B.AutoSize = true;
+            radioQ2B.Location = new System.Drawing.Point(187, 358);
+            radioQ2B.Name = "radioQ2B";
+            radioQ2B.Size = new System.Drawing.Size(49, 24);
+            radioQ2B.TabIndex = 12;
+            radioQ2B.TabStop = true;
+            radioQ2B.Text = "Q2";
+            radioQ2B.UseVisualStyleBackColor = true;
+            // 
+            // radioQ1B
+            // 
+            radioQ1B.AutoSize = true;
+            radioQ1B.Location = new System.Drawing.Point(52, 358);
+            radioQ1B.Name = "radioQ1B";
+            radioQ1B.Size = new System.Drawing.Size(49, 24);
+            radioQ1B.TabIndex = 11;
+            radioQ1B.TabStop = true;
+            radioQ1B.Text = "Q1";
+            radioQ1B.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            textBox1.Location = new System.Drawing.Point(52, 286);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(184, 39);
+            textBox1.TabIndex = 10;
+            // 
+            // VatTotalLabel
+            // 
+            VatTotalLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            VatTotalLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            VatTotalLabel.Location = new System.Drawing.Point(557, 504);
+            VatTotalLabel.Name = "VatTotalLabel";
+            VatTotalLabel.Size = new System.Drawing.Size(338, 53);
+            VatTotalLabel.TabIndex = 9;
+            // 
+            // Vat21Label
+            // 
+            Vat21Label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            Vat21Label.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Vat21Label.Location = new System.Drawing.Point(557, 358);
+            Vat21Label.Name = "Vat21Label";
+            Vat21Label.Size = new System.Drawing.Size(338, 53);
+            Vat21Label.TabIndex = 8;
+            // 
+            // Vat9Label
+            // 
+            Vat9Label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            Vat9Label.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Vat9Label.Location = new System.Drawing.Point(557, 211);
+            Vat9Label.Name = "Vat9Label";
+            Vat9Label.Size = new System.Drawing.Size(338, 53);
+            Vat9Label.TabIndex = 7;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label15.Location = new System.Drawing.Point(43, 211);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(58, 32);
+            label15.TabIndex = 5;
+            label15.Text = "Year";
+            // 
+            // pictureBox8
+            // 
+            pictureBox8.Image = (System.Drawing.Image)resources.GetObject("pictureBox8.Image");
+            pictureBox8.Location = new System.Drawing.Point(920, 0);
+            pictureBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new System.Drawing.Size(149, 164);
+            pictureBox8.TabIndex = 2;
+            pictureBox8.TabStop = false;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label16.Location = new System.Drawing.Point(52, 52);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(68, 41);
+            label16.TabIndex = 0;
+            label16.Text = "VAT";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -923,6 +1077,7 @@
             Controls.Add(pnlDrinks);
             Controls.Add(pnlOrder);
             Controls.Add(pnlRevenue);
+            Controls.Add(pnlVAT);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -954,6 +1109,9 @@
             pnlRevenue.ResumeLayout(false);
             pnlRevenue.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            pnlVAT.ResumeLayout(false);
+            pnlVAT.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1054,5 +1212,18 @@
         private System.Windows.Forms.ColumnHeader columnDrinkName;
         private System.Windows.Forms.ColumnHeader columnDrinkPrice;
         private System.Windows.Forms.ColumnHeader columnDrinkQuantity;
+        private System.Windows.Forms.Panel pnlVAT;
+        private System.Windows.Forms.Label VatTotalLabel;
+        private System.Windows.Forms.Label Vat21Label;
+        private System.Windows.Forms.Label Vat9Label;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.RadioButton radioQ4B;
+        private System.Windows.Forms.RadioButton radioQ3B;
+        private System.Windows.Forms.RadioButton radioQ2B;
+        private System.Windows.Forms.RadioButton radioQ1B;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button CulculateButton;
     }
 }

@@ -535,15 +535,10 @@ namespace SomerenUI
 
         private void DisplayNumberOfCustomers()
         {
-            int totalNumberOfCustomers = 0;
+            OrderService orderService = new();
+            int studentCount = orderService.CountAmountOfClients(dateTimePickerStart.Value, dateTimePickerEnd.Value);
 
-            foreach (var order in orders)
-            {
-                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
-                    totalNumberOfCustomers++;
-            }
-
-            NumOfCustomersLabel.Text = $"{totalNumberOfCustomers} Customers";
+            NumOfCustomersLabel.Text = $"{studentCount} Customers";
         }
 
         public DateTime CreateDateTime(int year, int quarterNr, bool isStart)
@@ -669,6 +664,20 @@ namespace SomerenUI
         {
             DrinkAddForm drinkAddForm = new DrinkAddForm();
             drinkAddForm.Show();
+        }
+
+        private void btnUpdateDrink_Click(object sender, EventArgs e)
+        {
+            if (listViewDrinks.SelectedItems.Count != 0)
+            {
+                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
+                DrinkUpdateForm drinkUpdateForm = new DrinkUpdateForm(drinkId);
+                drinkUpdateForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Select a drink!");
+            }
         }
     }
 }

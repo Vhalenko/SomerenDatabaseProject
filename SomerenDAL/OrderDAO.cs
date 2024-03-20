@@ -77,6 +77,7 @@ namespace SomerenDAL
 
             ExecuteEditQuery(query, parameters);
         }
+
         public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate)
         {
             SqlDataAdapter adapter = new SqlDataAdapter(GetSQLCommand(startQuarterDate, endQuarterDate, 9));
@@ -124,6 +125,31 @@ namespace SomerenDAL
             cmd.Parameters.AddWithValue("@vat", percentageVAT);
 
             return cmd;
+
+        public int CountAmountOfClients(DateTime startDate, DateTime endDate)
+        {
+            string query = "SELECT COUNT(DISTINCT student_number) AS [count] FROM purchase WHERE order_date BETWEEN @startDate AND @endDate";
+
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new ("@startDate", SqlDbType.Date) {Value = startDate},
+                new ("@endDate", SqlDbType.Date) {Value = endDate}
+            };
+
+            return ReadCountOfCustomers(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        private int ReadCountOfCustomers(DataTable dataTable)
+        {
+            int StudentCount = 0;
+
+            foreach (DataRow dataReader in dataTable.Rows)
+            {
+                StudentCount = (int)dataReader["count"];
+            }
+
+            return StudentCount;
+
         }
     }
 }

@@ -31,6 +31,10 @@ namespace SomerenService
         public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate)
         { 
             return orderDAO.Drinks9Percent(startQuarterDate, endQuarterDate);
+
+        public int CountAmountOfClients(DateTime startDate, DateTime endDate)
+        {
+            return orderDAO.CountAmountOfClients(startDate, endDate);
         }
     }
 }

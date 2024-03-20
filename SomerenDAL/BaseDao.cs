@@ -19,11 +19,11 @@ namespace SomerenDAL
 
         public List<T> GetAll()
         {
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            SqlParameter[] sqlParameters = Array.Empty<SqlParameter>();
             return ReadTables(ExecuteSelectQuery(GetAllQuery(), sqlParameters));
         }
 
-        private List<T> ReadTables(DataTable dataTable)
+        protected List<T> ReadTables(DataTable dataTable)
         {
             List<T> items = new();
 

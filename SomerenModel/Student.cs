@@ -1,12 +1,18 @@
-﻿using System;
-
-namespace SomerenModel
+﻿namespace SomerenModel
 {
-    public class Student
+    public class Student : Person
     {
-        public int Id { get; set; }     // database id
-        public string Name { get; set; }
-        public int Number { get; set; } // StudentNumber, e.g. 474791
-        public DateTime BirthDate { get; set; }
+        public string ClassName { get; private set; }
+
+        public Student(int studentNumber, string firstName, string lastName, string className, string telephoneNumber, int roomNumber)
+            : base(studentNumber, firstName, lastName, telephoneNumber, roomNumber)
+        {
+            ClassName = className;
+        }
+
+        public override string ToString()
+        {
+            return $"{FullName}";
+        }
     }
 }

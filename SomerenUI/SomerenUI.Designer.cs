@@ -122,6 +122,8 @@
             pictureBox7 = new System.Windows.Forms.PictureBox();
             label11 = new System.Windows.Forms.Label();
             pnlVAT = new System.Windows.Forms.Panel();
+            label12 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
             CulculateButton = new System.Windows.Forms.Button();
             radioQ4B = new System.Windows.Forms.RadioButton();
             radioQ3B = new System.Windows.Forms.RadioButton();
@@ -241,6 +243,7 @@
             vATInformationToolStripMenuItem.Name = "vATInformationToolStripMenuItem";
             vATInformationToolStripMenuItem.Size = new System.Drawing.Size(319, 44);
             vATInformationToolStripMenuItem.Text = "VAT Information";
+            vATInformationToolStripMenuItem.Click += vATInformationToolStripMenuItem_Click;
             // 
             // revenueReportToolStripMenuItem
             // 
@@ -945,6 +948,8 @@
             // 
             // pnlVAT
             // 
+            pnlVAT.Controls.Add(label12);
+            pnlVAT.Controls.Add(label10);
             pnlVAT.Controls.Add(CulculateButton);
             pnlVAT.Controls.Add(radioQ4B);
             pnlVAT.Controls.Add(radioQ3B);
@@ -962,6 +967,24 @@
             pnlVAT.Name = "pnlVAT";
             pnlVAT.Size = new System.Drawing.Size(1742, 994);
             pnlVAT.TabIndex = 18;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(586, 724);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(91, 32);
+            label12.TabIndex = 17;
+            label12.Text = "label12";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(586, 573);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(91, 32);
+            label10.TabIndex = 16;
+            label10.Text = "label10";
             // 
             // CulculateButton
             // 
@@ -985,6 +1008,7 @@
             radioQ4B.TabStop = true;
             radioQ4B.Text = "Q4";
             radioQ4B.UseVisualStyleBackColor = true;
+            radioQ4B.CheckedChanged += radioQ4B_CheckedChanged;
             // 
             // radioQ3B
             // 
@@ -997,6 +1021,7 @@
             radioQ3B.TabStop = true;
             radioQ3B.Text = "Q3";
             radioQ3B.UseVisualStyleBackColor = true;
+            radioQ3B.CheckedChanged += radioQ3B_CheckedChanged;
             // 
             // radioQ2B
             // 
@@ -1009,6 +1034,7 @@
             radioQ2B.TabStop = true;
             radioQ2B.Text = "Q2";
             radioQ2B.UseVisualStyleBackColor = true;
+            radioQ2B.CheckedChanged += radioQ2B_CheckedChanged;
             // 
             // radioQ1B
             // 
@@ -1021,6 +1047,7 @@
             radioQ1B.TabStop = true;
             radioQ1B.Text = "Q1";
             radioQ1B.UseVisualStyleBackColor = true;
+            radioQ1B.CheckedChanged += radioQ1B_CheckedChanged_1;
             // 
             // textBox1
             // 
@@ -1098,6 +1125,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1786, 1054);
+            Controls.Add(pnlVAT);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
@@ -1106,7 +1134,6 @@
             Controls.Add(panelRooms);
             Controls.Add(pnlOrder);
             Controls.Add(pnlRevenue);
-            Controls.Add(pnlVAT);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -1253,5 +1280,7 @@
         private System.Windows.Forms.RadioButton radioQ1B;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button CulculateButton;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label10;
     }
 }

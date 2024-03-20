@@ -8,6 +8,9 @@ namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
+        const double VAT_9percent = 0.09;
+        const double VAT_21percent = 0.21;
+
         List<Student> students = new();
         List<Drink> drinks = new();
         List<Order> orders = new();
@@ -538,6 +541,102 @@ namespace SomerenUI
             NumOfCustomersLabel.Text = $"{studentCount} Customers";
         }
 
+        public DateTime CreateDateTime(int year, int quarterNr, bool isStart)
+        {
+            DateTime startDateTime = new DateTime(year, ((quarterNr - 1) * 3) + 1, 1);
+            DateTime endDateTime = new DateTime(startDateTime.Year, startDateTime.Month + 3, 1);
+            endDateTime = endDateTime.AddDays(-1);
+            return isStart ? startDateTime : endDateTime;
+        }
+
+        public decimal Count9DrinkPrice(DateTime startDateTime, DateTime endDateTime)
+        {
+            OrderService orderService = new OrderService();
+            List<Order> orders9VAT = orderService.Drinks9Percent(startDateTime, endDateTime);
+            decimal totalPrice9Percent = 0;
+            foreach (var order in orders9VAT)
+            {
+                totalPrice9Percent += order.Quantity * order.Drink.Price * (decimal)VAT_9percent;
+            }
+            return totalPrice9Percent;
+        }
+
+        public decimal Count21DrinkPrice(DateTime startDateTime, DateTime endDateTime)
+        {
+            OrderService orderService = new OrderService();
+            List<Order> orders21VAT = orderService.Drinks21Percent(startDateTime, endDateTime);
+            decimal totalPrice21Percent = 0;
+            foreach (var order in orders21VAT)
+            {
+                totalPrice21Percent += order.Quantity * order.Drink.Price * (decimal)VAT_21percent;
+            }
+            return totalPrice21Percent;
+        }
+
+        public decimal CountTotalPrice(DateTime startDateTime, DateTime endDateTime)
+        {
+            return Count21DrinkPrice( startDateTime,  endDateTime) + Count9DrinkPrice( startDateTime, endDateTime);
+        }
+
+
+        private void vATInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowVATPanel();
+        }
+
+        private void ShowVATPanel()
+        {
+            HideAll();
+            pnlVAT.Show();
+        }
+
+        private void radioQ1B_CheckedChanged_1(object sender, EventArgs e)
+        {
+            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: false);
+            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: true);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
+        private void radioQ2B_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: false);
+            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: true);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
+        private void radioQ3B_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: false);
+            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: true);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
+        private void radioQ4B_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime startDateTime = new DateTime(int.Parse(textBox1.Text), 10, 1);
+            DateTime endDateTime = new DateTime(int.Parse(textBox1.Text), 12, 31);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
+        public void ShowVAT(DateTime startDateTime, DateTime endDateTime)
+        {
+            Vat9Label.Text = Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00");
+            Vat21Label.Text = Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00");
+
+            decimal totalVAT = CountTotalPrice(startDateTime, endDateTime);
+            VatTotalLabel.Text = totalVAT.ToString("0.00");
+        }
+
+        public void ShowChoosedQuarter(DateTime startDateTime, DateTime endDateTime)
+        {
+            label10.Text = startDateTime.ToString("yyyy-MM-dd");
+            label12.Text = endDateTime.ToString("yyyy-MM-dd");
+        }
+
         private void DisplayAllFields()
         {
             DisplaySeparateSales();
@@ -558,6 +657,7 @@ namespace SomerenUI
             pnlDrinks.Hide();
             pnlOrder.Hide();
             pnlRevenue.Hide();
+            pnlVAT.Hide();
         }
 
         private void btnDrinkAdd_Click(object sender, EventArgs e)

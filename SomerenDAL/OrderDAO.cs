@@ -1,5 +1,6 @@
 ﻿using SomerenModel;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -77,6 +78,54 @@ namespace SomerenDAL
             ExecuteEditQuery(query, parameters);
         }
 
+        public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        {
+            SqlDataAdapter adapter = new SqlDataAdapter(GetSQLCommand(startQuarterDate, endQuarterDate, 9));
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            List<Order> orders = new List<Order>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Order order = Convert(row);
+                orders.Add(order);
+            }
+
+            return orders;
+        }
+
+        public List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        {
+            SqlDataAdapter adapter = new SqlDataAdapter(GetSQLCommand(startQuarterDate, endQuarterDate, 21));
+
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            List<Order> orders = new List<Order>();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Order order = Convert(row);
+                orders.Add(order);
+            }
+
+            return orders;
+        }
+
+        public SqlCommand GetSQLCommand(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVAT)
+        {
+            string query = @"SELECT p.drink_id, d.name AS drink_name, p.quantity, p.order_date 
+             FROM purchase p 
+             JOIN drink d ON p.drink_id = d.drink_id 
+             WHERE p.order_date BETWEEN @startdatequarter AND @enddatequarter
+             AND d.vat = @vat";
+
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            cmd.Parameters.AddWithValue("@startdatequarter", startQuarterDate.ToString("yyyy-MM-dd"));
+            cmd.Parameters.AddWithValue("@enddatequarter", endQuarterDate.ToString("yyyy-MM-dd"));
+            cmd.Parameters.AddWithValue("@vat", percentageVAT);
+
+            return cmd;
+
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)
         {
             string query = "SELECT COUNT(DISTINCT student_number) AS [count] FROM purchase WHERE order_date BETWEEN @startDate AND @endDate";
@@ -100,6 +149,7 @@ namespace SomerenDAL
             }
 
             return StudentCount;
+
         }
     }
 }

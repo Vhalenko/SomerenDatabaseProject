@@ -5,12 +5,7 @@ namespace SomerenDAL
 {
     public class ActivityDao : BaseDao<Activity>
     {
-        public ActivityDao() : base()
-        {
-            query = "SELECT activity_id, name, start_day_time, end_day_time FROM activity";
-        }
-
-        private protected override Activity WriteItem(DataRow reader)
+        private protected override Activity Convert(DataRow reader)
         {
             int id = (int)reader["activity_id"];
             string name = (string)reader["name"];
@@ -18,6 +13,11 @@ namespace SomerenDAL
             string endDayTime = (string)reader["end_day_time"];
 
             return new Activity(id, name, startDayTime, endDayTime);
+        }
+
+        private protected override string GetAllQuery()
+        {
+            return "SELECT activity_id, name, start_day_time, end_day_time FROM activity";
         }
     }
 }

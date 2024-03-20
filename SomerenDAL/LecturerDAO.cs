@@ -6,12 +6,7 @@ namespace SomerenDAL
 {
     public class LecturerDAO : BaseDao<Lecturer>
     {
-        public LecturerDAO() : base()
-        {
-            query = "SELECT lecturer_number, first_name, last_name, age, telephone_number, room_number FROM lecturer";
-        }
-
-        private protected override Lecturer WriteItem(DataRow reader)
+        private protected override Lecturer Convert(DataRow reader)
         {
             int lecturerNumber = (int)reader["lecturer_number"];
             string firstName = (string)reader["first_name"];
@@ -21,6 +16,11 @@ namespace SomerenDAL
             int roomNumber = (int)reader["room_number"];
 
             return new Lecturer(lecturerNumber, firstName, lastName, age, telephoneNumber, roomNumber);
+        }
+
+        private protected override string GetAllQuery()
+        {
+            return "SELECT lecturer_number, first_name, last_name, age, telephone_number, room_number FROM lecturer";
         }
     }
 }

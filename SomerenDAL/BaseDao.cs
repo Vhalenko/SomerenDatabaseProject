@@ -10,8 +10,6 @@ namespace SomerenDAL
     {
         protected SqlDataAdapter adapter;
         protected SqlConnection dbConnection;
-        protected string query;
-        protected string tableName;
 
         public BaseDao()
         {
@@ -22,7 +20,7 @@ namespace SomerenDAL
         public List<T> GetAll()
         {
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTables(ExecuteSelectQuery(GetAllQuery(), sqlParameters));
         }
 
         private List<T> ReadTables(DataTable dataTable)
@@ -31,14 +29,16 @@ namespace SomerenDAL
 
             foreach (DataRow reader in dataTable.Rows)
             {
-                T item = WriteItem(reader);
+                T item = Convert(reader);
                 items.Add(item);
             }
 
             return items;
         }
 
-        private protected abstract T WriteItem(DataRow reader);
+        private protected abstract T Convert(DataRow reader);
+
+        private protected abstract string GetAllQuery();
 
         protected SqlConnection OpenConnection()
         {

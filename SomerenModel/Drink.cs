@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return $"{Name}/{Price}/{Stock}/{Alcohol}";
+            return $"{Name}    |    {Price}    |    {Stock}    |    {Alcohol}";
         }
     }
 }

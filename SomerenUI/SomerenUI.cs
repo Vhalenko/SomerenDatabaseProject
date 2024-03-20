@@ -272,8 +272,20 @@ namespace SomerenUI
 
         private void btnDrinkDelete_Click(object sender, EventArgs e)
         {
-            /*            DrinkService drinkService = new DrinkService();
-                        drinkService.RemoveDrink();*/
+
+            if (listViewDrinks.SelectedItems.Count != 0)
+            {
+                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
+
+                DrinkService drinkService = new();
+                drinkService.RemoveDrink(drinkId);
+
+                MessageBox.Show("Drink deleted!");
+            }
+            else
+            {
+                MessageBox.Show("Select a drink!");
+            }
         }
 
         /*Order panel*/
@@ -551,6 +563,12 @@ namespace SomerenUI
             pnlDrinks.Hide();
             pnlOrder.Hide();
             pnlRevenue.Hide();
+        }
+
+        private void btnDrinkAdd_Click(object sender, EventArgs e)
+        {
+            DrinkAddForm drinkAddForm = new DrinkAddForm();
+            drinkAddForm.Show();
         }
     }
 }

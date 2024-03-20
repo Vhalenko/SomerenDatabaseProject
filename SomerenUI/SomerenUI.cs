@@ -11,10 +11,6 @@ namespace SomerenUI
         const double VAT_9percent = 0.09;
         const double VAT_21percent = 0.21;
 
-        List<Student> students = new();
-        List<Drink> drinks = new();
-        List<Order> orders = new();
-
         public SomerenUI()
         {
             InitializeComponent();
@@ -300,8 +296,8 @@ namespace SomerenUI
 
             try
             {
-                students = GetStudents();
-                drinks = GetDrinks();
+                List<Student> students = GetStudents();
+                List<Drink> drinks = GetDrinks();
                 DisplayDrinksForOrder(drinks);
                 DisplayStudentsForOrder(students);
             }
@@ -409,8 +405,8 @@ namespace SomerenUI
 
             try
             {
-                orders = GetOrders();
-                DisplayAllFields();
+                List<Order> orders = GetOrders();
+                DisplayAllFields(orders);
             }
             catch (Exception e)
             {
@@ -437,7 +433,8 @@ namespace SomerenUI
             {
                 if (RightDates())
                 {
-                    DisplayAllFields();
+                    List<Order> orders = GetOrders();
+                    DisplayAllFields(orders);
                 }
                 else
                 {
@@ -458,7 +455,8 @@ namespace SomerenUI
             {
                 if (RightDates())
                 {
-                    DisplayAllFields();
+                    List<Order> orders = GetOrders();
+                    DisplayAllFields(orders);
                 }
                 else
                 {
@@ -481,7 +479,7 @@ namespace SomerenUI
             return true;
         }
 
-        private void DisplaySeparateSales()
+        private void DisplaySeparateSales(List<Order> orders)
         {
             listViewDrinksSold.Items.Clear();
 
@@ -507,7 +505,7 @@ namespace SomerenUI
             NumOfCustomersLabel.Text = string.Empty;
         }
 
-        private void DisplayTotalSales()
+        private void DisplayTotalSales(List<Order> orders)
         {
             int totalSoldDrinks = 0;
 
@@ -520,7 +518,7 @@ namespace SomerenUI
             TotalSalesLabel.Text = $"{totalSoldDrinks} Drinks sold";
         }
 
-        private void DisplayTurnover()
+        private void DisplayTurnover(List<Order> orders)
         {
             decimal totalRevenue = 0m;
 
@@ -575,13 +573,7 @@ namespace SomerenUI
 
         public decimal CountTotalPrice(DateTime startDateTime, DateTime endDateTime)
         {
-            return Count21DrinkPrice( startDateTime,  endDateTime) + Count9DrinkPrice( startDateTime, endDateTime);
-        }
-
-
-        private void vATInformationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowVATPanel();
+            return Count21DrinkPrice(startDateTime, endDateTime) + Count9DrinkPrice(startDateTime, endDateTime);
         }
 
         private void ShowVATPanel()
@@ -637,11 +629,11 @@ namespace SomerenUI
             label12.Text = endDateTime.ToString("yyyy-MM-dd");
         }
 
-        private void DisplayAllFields()
+        private void DisplayAllFields(List<Order> orders)
         {
-            DisplaySeparateSales();
-            DisplayTotalSales();
-            DisplayTurnover();
+            DisplaySeparateSales(orders);
+            DisplayTotalSales(orders);
+            DisplayTurnover(orders);
             DisplayNumberOfCustomers();
         }
 
@@ -678,6 +670,11 @@ namespace SomerenUI
             {
                 MessageBox.Show("Select a drink!");
             }
+        }
+
+        private void VATInformationToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            ShowVATPanel();
         }
     }
 }

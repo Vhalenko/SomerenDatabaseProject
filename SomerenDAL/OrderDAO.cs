@@ -125,6 +125,7 @@ namespace SomerenDAL
             cmd.Parameters.AddWithValue("@vat", percentageVAT);
 
             return cmd;
+        }
 
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)
         {
@@ -149,7 +150,6 @@ namespace SomerenDAL
             }
 
             return StudentCount;
-
         }
     }
 }

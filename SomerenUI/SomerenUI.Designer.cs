@@ -84,7 +84,6 @@
             RoomNumberColumn = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
             pnlDrinks = new System.Windows.Forms.Panel();
-            btnUpdateStock = new System.Windows.Forms.Button();
             btnUpdateDrink = new System.Windows.Forms.Button();
             btnDrinkAdd = new System.Windows.Forms.Button();
             btnDrinkDelete = new System.Windows.Forms.Button();
@@ -576,7 +575,6 @@
             // 
             // pnlDrinks
             // 
-            pnlDrinks.Controls.Add(btnUpdateStock);
             pnlDrinks.Controls.Add(btnUpdateDrink);
             pnlDrinks.Controls.Add(btnDrinkAdd);
             pnlDrinks.Controls.Add(btnDrinkDelete);
@@ -589,16 +587,6 @@
             pnlDrinks.Size = new System.Drawing.Size(1742, 994);
             pnlDrinks.TabIndex = 13;
             // 
-            // btnUpdateStock
-            // 
-            btnUpdateStock.Location = new System.Drawing.Point(1495, 850);
-            btnUpdateStock.Margin = new System.Windows.Forms.Padding(5);
-            btnUpdateStock.Name = "btnUpdateStock";
-            btnUpdateStock.Size = new System.Drawing.Size(218, 83);
-            btnUpdateStock.TabIndex = 6;
-            btnUpdateStock.Text = "Update stock";
-            btnUpdateStock.UseVisualStyleBackColor = true;
-            // 
             // btnUpdateDrink
             // 
             btnUpdateDrink.Location = new System.Drawing.Point(1495, 701);
@@ -608,6 +596,7 @@
             btnUpdateDrink.TabIndex = 5;
             btnUpdateDrink.Text = "Update drink";
             btnUpdateDrink.UseVisualStyleBackColor = true;
+            btnUpdateDrink.Click += btnUpdateDrink_Click;
             // 
             // btnDrinkAdd
             // 
@@ -1231,7 +1220,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown quantityOfDrinks;
-        private System.Windows.Forms.Button btnUpdateStock;
         private System.Windows.Forms.Button btnUpdateDrink;
         private System.Windows.Forms.Button btnDrinkAdd;
         private System.Windows.Forms.Button btnDrinkDelete;

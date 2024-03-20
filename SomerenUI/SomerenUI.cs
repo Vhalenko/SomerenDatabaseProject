@@ -565,5 +565,19 @@ namespace SomerenUI
             DrinkAddForm drinkAddForm = new DrinkAddForm();
             drinkAddForm.Show();
         }
+
+        private void btnUpdateDrink_Click(object sender, EventArgs e)
+        {
+            if (listViewDrinks.SelectedItems.Count != 0)
+            {
+                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
+                DrinkUpdateForm drinkUpdateForm = new DrinkUpdateForm(drinkId);
+                drinkUpdateForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Select a drink!");
+            }
+        }
     }
 }

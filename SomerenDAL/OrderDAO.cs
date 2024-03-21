@@ -8,17 +8,17 @@ namespace SomerenDAL
 {
     public class OrderDAO : BaseDao<Order>
     {
+        private protected override string GetAllQuery()
+        {
+            return "SELECT purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
+        }
+
         private protected override Order Convert(DataRow reader)
         {
             int quantity = (int)reader["quantity"];
             DateTime orderDate = (DateTime)reader["order_date"];
 
             return new Order(ConvertStudent(reader), ConvertDrink(reader), quantity, orderDate);
-        }
-
-        private protected override string GetAllQuery()
-        {
-            return "SELECT purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
         }
 
         private Student ConvertStudent(DataRow reader)
@@ -78,54 +78,31 @@ namespace SomerenDAL
             ExecuteEditQuery(query, parameters);
         }
 
-        public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        public List<Order> GetAllDrinksByPercentage(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(GetSQLCommand(startQuarterDate, endQuarterDate, 9));
-            DataTable dataTable = new DataTable();
-            adapter.Fill(dataTable);
-
-            List<Order> orders = new List<Order>();
-            foreach (DataRow row in dataTable.Rows)
-            {
-                Order order = Convert(row);
-                orders.Add(order);
-            }
-
-            return orders;
+            return ReadTables(ExecuteSelectQuery(QueryForVat(), GetSqlParameters(startQuarterDate, endQuarterDate, percentageVat)));
         }
 
-        public List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        private string QueryForVat()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(GetSQLCommand(startQuarterDate, endQuarterDate, 21));
-
-            DataTable dataTable = new DataTable();
-            adapter.Fill(dataTable);
-            List<Order> orders = new List<Order>();
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                Order order = Convert(row);
-                orders.Add(order);
-            }
-
-            return orders;
+            return "SELECT purchase.quantity, purchase.order_date, drink.*, student.*" +
+                    " FROM purchase" +
+                    " JOIN student ON purchase.student_number = student.student_number" +
+                    " JOIN drink ON purchase.drink_id = drink.drink_id" +
+                    " WHERE purchase.order_date BETWEEN @startdatequarter AND @enddatequarter" +
+                    " AND drink.vat = @vat";
         }
 
-        public SqlCommand GetSQLCommand(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVAT)
+        private SqlParameter[] GetSqlParameters(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         {
-            string query = @"SELECT p.quantity, p.order_date, d.*, student.*
-                    FROM purchase p 
-                    JOIN drink d ON p.drink_id = d.drink_id 
-                    JOIN student ON p.student_number = student.student_number
-                    WHERE p.order_date BETWEEN @startdatequarter AND @enddatequarter
-                    AND d.vat = @vat";
+            SqlParameter[] SqlParameters = new SqlParameter[]
+            {
+                new("@startDateQuarter", SqlDbType.Date) {Value = endQuarterDate},
+                new("@endDateQuarter", SqlDbType.Date) {Value = startQuarterDate},
+                new("@vat", SqlDbType.Int) {Value = percentageVat}
+            };
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
-            cmd.Parameters.AddWithValue("@startdatequarter", endQuarterDate.ToString());
-            cmd.Parameters.AddWithValue("@enddatequarter", startQuarterDate.ToString());
-            cmd.Parameters.AddWithValue("@vat", percentageVAT);
-
-            return cmd;
+            return SqlParameters;
         }
 
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)

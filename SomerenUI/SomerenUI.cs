@@ -287,6 +287,26 @@ namespace SomerenUI
             }
         }
 
+        private void btnDrinkAdd_Click(object sender, EventArgs e)
+        {
+            DrinkAddForm drinkAddForm = new DrinkAddForm();
+            drinkAddForm.Show();
+        }
+
+        private void btnUpdateDrink_Click(object sender, EventArgs e)
+        {
+            if (listViewDrinks.SelectedItems.Count != 0)
+            {
+                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
+                DrinkUpdateForm drinkUpdateForm = new DrinkUpdateForm(drinkId);
+                drinkUpdateForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Select a drink!");
+            }
+        }
+
         /*Order panel*/
 
         private void ShowOrderPanel()
@@ -539,6 +559,74 @@ namespace SomerenUI
             NumOfCustomersLabel.Text = $"{studentCount} Customers";
         }
 
+        private void DisplayAllFields(List<Order> orders)
+        {
+            DisplaySeparateSales(orders);
+            DisplayTotalSales(orders);
+            DisplayTurnover(orders);
+            DisplayNumberOfCustomers();
+        }
+
+        /*VAT panel*/
+
+        private void ShowVATPanel()
+        {
+            HideAll();
+            pnlVAT.Show();
+        }
+
+        private void VATInformationToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            ShowVATPanel();
+        }
+
+        public void ShowVAT(DateTime startDateTime, DateTime endDateTime)
+        {
+            Vat9Label.Text = Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00");
+            Vat21Label.Text = Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00");
+
+            decimal totalVAT = CountTotalPrice(startDateTime, endDateTime);
+            VatTotalLabel.Text = totalVAT.ToString("0.00");
+        }
+
+        public void ShowChoosedQuarter(DateTime startDateTime, DateTime endDateTime)
+        {
+            label10.Text = startDateTime.ToString("yyyy-MM-dd");
+            label12.Text = endDateTime.ToString("yyyy-MM-dd");
+        }
+
+        private void radioQ1B_CheckedChanged_1(object sender, EventArgs e)
+        {
+            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: false);
+            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: true);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
+        private void radioQ2B_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: false);
+            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: true);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
+        private void radioQ3B_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: false);
+            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: true);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
+        private void radioQ4B_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime startDateTime = new DateTime(int.Parse(textBox1.Text), 10, 1);
+            DateTime endDateTime = new DateTime(int.Parse(textBox1.Text), 12, 31);
+            ShowChoosedQuarter(startDateTime, endDateTime);
+            ShowVAT(startDateTime, endDateTime);
+        }
+
         public DateTime CreateDateTime(int year, int quarterNr, bool isStart)
         {
             DateTime startDateTime = new DateTime(year, ((quarterNr - 1) * 3) + 1, 1);
@@ -576,105 +664,17 @@ namespace SomerenUI
             return Count21DrinkPrice(startDateTime, endDateTime) + Count9DrinkPrice(startDateTime, endDateTime);
         }
 
-        private void ShowVATPanel()
-        {
-            HideAll();
-            pnlVAT.Show();
-        }
-
-        private void radioQ1B_CheckedChanged_1(object sender, EventArgs e)
-        {
-            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: false);
-            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: true);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
-        }
-
-        private void radioQ2B_CheckedChanged(object sender, EventArgs e)
-        {
-            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: false);
-            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: true);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
-        }
-
-        private void radioQ3B_CheckedChanged(object sender, EventArgs e)
-        {
-            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: false);
-            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: true);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
-        }
-
-        private void radioQ4B_CheckedChanged(object sender, EventArgs e)
-        {
-            DateTime startDateTime = new DateTime(int.Parse(textBox1.Text), 10, 1);
-            DateTime endDateTime = new DateTime(int.Parse(textBox1.Text), 12, 31);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
-        }
-
-        public void ShowVAT(DateTime startDateTime, DateTime endDateTime)
-        {
-            Vat9Label.Text = Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00");
-            Vat21Label.Text = Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00");
-
-            decimal totalVAT = CountTotalPrice(startDateTime, endDateTime);
-            VatTotalLabel.Text = totalVAT.ToString("0.00");
-        }
-
-        public void ShowChoosedQuarter(DateTime startDateTime, DateTime endDateTime)
-        {
-            label10.Text = startDateTime.ToString("yyyy-MM-dd");
-            label12.Text = endDateTime.ToString("yyyy-MM-dd");
-        }
-
-        private void DisplayAllFields(List<Order> orders)
-        {
-            DisplaySeparateSales(orders);
-            DisplayTotalSales(orders);
-            DisplayTurnover(orders);
-            DisplayNumberOfCustomers();
-        }
-
         /*Else*/
 
         private void HideAll()
         {
-            pnlDashboard.Hide();
-            pnlLecturers.Hide();
-            pnlStudents.Hide();
-            pnlActivities.Hide();
-            panelRooms.Hide();
-            pnlDrinks.Hide();
-            pnlOrder.Hide();
-            pnlRevenue.Hide();
-            pnlVAT.Hide();
-        }
-
-        private void btnDrinkAdd_Click(object sender, EventArgs e)
-        {
-            DrinkAddForm drinkAddForm = new DrinkAddForm();
-            drinkAddForm.Show();
-        }
-
-        private void btnUpdateDrink_Click(object sender, EventArgs e)
-        {
-            if (listViewDrinks.SelectedItems.Count != 0)
+            foreach (Control control in Controls)
             {
-                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
-                DrinkUpdateForm drinkUpdateForm = new DrinkUpdateForm(drinkId);
-                drinkUpdateForm.Show();
+                if (control is Panel)
+                {
+                    control.Hide();
+                }
             }
-            else
-            {
-                MessageBox.Show("Select a drink!");
-            }
-        }
-
-        private void VATInformationToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            ShowVATPanel();
         }
     }
 }

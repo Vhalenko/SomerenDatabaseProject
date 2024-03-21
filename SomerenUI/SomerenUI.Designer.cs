@@ -234,21 +234,21 @@
             // orderToolStripMenuItem
             // 
             orderToolStripMenuItem.Name = "orderToolStripMenuItem";
-            orderToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            orderToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             orderToolStripMenuItem.Text = "Order";
             orderToolStripMenuItem.Click += orderToolStripMenuItem_Click;
             // 
             // VATInformationToolStripMenuItem
             // 
             VATInformationToolStripMenuItem.Name = "VATInformationToolStripMenuItem";
-            VATInformationToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            VATInformationToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             VATInformationToolStripMenuItem.Text = "VAT Information";
             VATInformationToolStripMenuItem.Click += VATInformationToolStripMenuItem_Click_1;
             // 
             // revenueReportToolStripMenuItem
             // 
             revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
-            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             revenueReportToolStripMenuItem.Text = "Revenue Report";
             revenueReportToolStripMenuItem.Click += revenueReportToolStripMenuItem_Click;
             // 
@@ -1090,14 +1090,14 @@
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 659);
-            Controls.Add(pnlVAT);
-            Controls.Add(pnlDrinks);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
+            Controls.Add(pnlDrinks);
             Controls.Add(pnlOrder);
+            Controls.Add(pnlVAT);
             Controls.Add(pnlRevenue);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;

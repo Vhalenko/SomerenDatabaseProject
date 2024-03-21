@@ -113,15 +113,16 @@ namespace SomerenDAL
 
         public SqlCommand GetSQLCommand(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVAT)
         {
-            string query = @"SELECT p.drink_id, d.name AS drink_name, p.quantity, p.order_date 
-             FROM purchase p 
-             JOIN drink d ON p.drink_id = d.drink_id 
-             WHERE p.order_date BETWEEN @startdatequarter AND @enddatequarter
-             AND d.vat = @vat";
+            string query = @"SELECT p.quantity, p.order_date, d.*, student.*
+                    FROM purchase p 
+                    JOIN drink d ON p.drink_id = d.drink_id 
+                    JOIN student ON p.student_number = student.student_number
+                    WHERE p.order_date BETWEEN @startdatequarter AND @enddatequarter
+                    AND d.vat = @vat";
 
             SqlCommand cmd = new SqlCommand(query, dbConnection);
-            cmd.Parameters.AddWithValue("@startdatequarter", startQuarterDate.ToString("yyyy-MM-dd"));
-            cmd.Parameters.AddWithValue("@enddatequarter", endQuarterDate.ToString("yyyy-MM-dd"));
+            cmd.Parameters.AddWithValue("@startdatequarter", endQuarterDate.ToString());
+            cmd.Parameters.AddWithValue("@enddatequarter", startQuarterDate.ToString());
             cmd.Parameters.AddWithValue("@vat", percentageVAT);
 
             return cmd;

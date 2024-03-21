@@ -637,25 +637,29 @@ namespace SomerenUI
 
         public decimal Count9DrinkPrice(DateTime startDateTime, DateTime endDateTime)
         {
-            OrderService orderService = new OrderService();
-            List<Order> orders9VAT = orderService.Drinks9Percent(startDateTime, endDateTime);
+            OrderService orderService = new();
+            List<Order> orders9VAT = orderService.Drinks9Percent(startDateTime, endDateTime, 9);
             decimal totalPrice9Percent = 0;
+
             foreach (var order in orders9VAT)
             {
                 totalPrice9Percent += order.Quantity * order.Drink.Price * (decimal)VAT_9percent;
             }
+
             return totalPrice9Percent;
         }
 
         public decimal Count21DrinkPrice(DateTime startDateTime, DateTime endDateTime)
         {
-            OrderService orderService = new OrderService();
-            List<Order> orders21VAT = orderService.Drinks21Percent(startDateTime, endDateTime);
+            OrderService orderService = new();
+            List<Order> orders21VAT = orderService.Drinks9Percent(startDateTime, endDateTime, 21);
             decimal totalPrice21Percent = 0;
+
             foreach (var order in orders21VAT)
             {
                 totalPrice21Percent += order.Quantity * order.Drink.Price * (decimal)VAT_21percent;
             }
+
             return totalPrice21Percent;
         }
 

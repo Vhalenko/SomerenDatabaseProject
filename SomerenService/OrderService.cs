@@ -24,14 +24,14 @@ namespace SomerenService
             return orderDAO.GetAll();
         }
 
-        public List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        public List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         { 
-            return orderDAO.Drinks21Percent(startQuarterDate, endQuarterDate);
+            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
         }
 
-        public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate)
+        public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         {
-            return orderDAO.Drinks9Percent(startQuarterDate, endQuarterDate);
+            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
         }
 
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)

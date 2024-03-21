@@ -9,10 +9,11 @@ namespace SomerenService
     public class OrderService
     {
         OrderDAO orderDAO;
-        const decimal VAT_9percentCalculation = 0.09m;
-        const decimal VAT_21percentCalculation = 0.21m;
+        private const decimal VAT_9percentCalculation = 0.09m;
+        private const decimal VAT_21percentCalculation = 0.21m;
+        private const int Vat9Percent = 9;
+        private const int Vat21Percent = 21;
         
-
         public OrderService()
         {
             orderDAO = new OrderDAO();
@@ -28,24 +29,71 @@ namespace SomerenService
             return orderDAO.GetAll();
         }
 
-        public List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
-        { 
-            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
-        }
-
-        public List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
-        {
-            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
-        }
+        /*Revenue*/
 
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)
         {
             return orderDAO.CountAmountOfClients(startDate, endDate);
         }
 
-        public decimal Count9DrinkPrice(DateTime startDateTime, DateTime endDateTime)
+        public bool RightDates(DateTime startDate, DateTime endDate)
         {
-            List<Order> orders9VAT = Drinks9Percent(startDateTime, endDateTime, 9);
+            if (endDate < startDate)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void DisplayNumberOfCustomers(DateTime startDate, DateTime endDate, out string numberOfCustomers)
+        {
+            int studentCount = CountAmountOfClients(startDate, endDate);
+
+            numberOfCustomers = $"{studentCount} Customers";
+        }
+
+        public void DisplayTurnover(List<Order> orders, DateTime startDate, DateTime endDate, out string turnover)
+        {
+            decimal totalRevenue = 0m;
+
+            foreach (var order in orders)
+            {
+                if (order.OrderDate >= startDate && order.OrderDate <= endDate)
+                    totalRevenue += order.Drink.Price * order.Quantity;
+            }
+
+            turnover = $"{totalRevenue}€ Earned";
+        }
+
+        public void DisplayTotalSales(List<Order> orders, DateTime startDate, DateTime endDate, out string totalSales)
+        {
+            int totalSoldDrinks = 0;
+
+            foreach (var order in orders)
+            {
+                if (order.OrderDate >= startDate && order.OrderDate <= endDate)
+                    totalSoldDrinks += order.Quantity;
+            }
+
+            totalSales = $"{totalSoldDrinks} Drinks sold";
+        }
+
+        /*VAT*/
+
+        private List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
+        {
+            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
+        }
+
+        private List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
+        {
+            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
+        }
+
+        private decimal Count9DrinkPrice(DateTime startDateTime, DateTime endDateTime)
+        {
+            List<Order> orders9VAT = Drinks9Percent(startDateTime, endDateTime, Vat9Percent);
             decimal totalPrice9Percent = 0m;
 
             foreach (var order in orders9VAT)
@@ -56,9 +104,9 @@ namespace SomerenService
             return totalPrice9Percent;
         }
 
-        public decimal Count21DrinkPrice(DateTime startDateTime, DateTime endDateTime)
+        private decimal Count21DrinkPrice(DateTime startDateTime, DateTime endDateTime)
         {
-            List<Order> orders21VAT = Drinks9Percent(startDateTime, endDateTime, 21);
+            List<Order> orders21VAT = Drinks9Percent(startDateTime, endDateTime, Vat21Percent);
             decimal totalPrice21Percent = 0m;
 
             foreach (var order in orders21VAT)
@@ -69,12 +117,12 @@ namespace SomerenService
             return totalPrice21Percent;
         }
 
-        public decimal CountTotalPrice(DateTime startDateTime, DateTime endDateTime)
+        private decimal CountTotalPrice(DateTime startDateTime, DateTime endDateTime)
         {
             return Count21DrinkPrice(startDateTime, endDateTime) + Count9DrinkPrice(startDateTime, endDateTime);
         }
 
-        public DateTime CreateDateTime(int year, int quarterNr, bool isStart)
+        private DateTime CreateDateTime(int year, int quarterNr, bool isStart)
         {
             DateTime startDateTime = new DateTime(year, ((quarterNr - 1) * 3) + 1, 1);
             DateTime endDateTime = startDateTime.AddMonths(3).AddDays(-1);
@@ -91,7 +139,7 @@ namespace SomerenService
             ShowVAT(startDateTime, endDateTime, out vat9Percent, out vat21Percent, out vatTotal);
         }
 
-        public void ShowVAT(DateTime startDateTime, DateTime endDateTime, out string vat9Percent, out string vat21Percent, out string vatTotal)
+        private static void ShowVAT(DateTime startDateTime, DateTime endDateTime, out string vat9Percent, out string vat21Percent, out string vatTotal)
         {
             OrderService orderService = new();
 

@@ -446,9 +446,11 @@ namespace SomerenUI
         {
             ClearAllLitsts();
 
+            OrderService orderService = new();
+
             try
             {
-                if (RightDates())
+                if (orderService.RightDates(dateTimePickerStart.Value, dateTimePickerEnd.Value))
                 {
                     List<Order> orders = GetOrders();
                     DisplayAllFields(orders);
@@ -468,9 +470,11 @@ namespace SomerenUI
         {
             ClearAllLitsts();
 
+            OrderService orderService = new();
+
             try
             {
-                if (RightDates())
+                if (orderService.RightDates(dateTimePickerStart.Value, dateTimePickerEnd.Value))
                 {
                     List<Order> orders = GetOrders();
                     DisplayAllFields(orders);
@@ -484,16 +488,6 @@ namespace SomerenUI
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private bool RightDates()
-        {
-            if (dateTimePickerEnd.Value < dateTimePickerStart.Value)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         private void DisplaySeparateSales(List<Order> orders)
@@ -522,46 +516,18 @@ namespace SomerenUI
             NumOfCustomersLabel.Text = string.Empty;
         }
 
-        private void DisplayTotalSales(List<Order> orders)
-        {
-            int totalSoldDrinks = 0;
-
-            foreach (var order in orders)
-            {
-                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
-                    totalSoldDrinks += order.Quantity;
-            }
-
-            TotalSalesLabel.Text = $"{totalSoldDrinks} Drinks sold";
-        }
-
-        private void DisplayTurnover(List<Order> orders)
-        {
-            decimal totalRevenue = 0m;
-
-            foreach (var order in orders)
-            {
-                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
-                    totalRevenue += order.Drink.Price * order.Quantity;
-            }
-
-            Turnoverlabel.Text = $"{totalRevenue}€ Earned";
-        }
-
-        private void DisplayNumberOfCustomers()
-        {
-            OrderService orderService = new();
-            int studentCount = orderService.CountAmountOfClients(dateTimePickerStart.Value, dateTimePickerEnd.Value);
-
-            NumOfCustomersLabel.Text = $"{studentCount} Customers";
-        }
-
         private void DisplayAllFields(List<Order> orders)
         {
+            OrderService orderService = new();
+
             DisplaySeparateSales(orders);
-            DisplayTotalSales(orders);
-            DisplayTurnover(orders);
-            DisplayNumberOfCustomers();
+            orderService.DisplayTotalSales(orders, dateTimePickerStart.Value, dateTimePickerEnd.Value, out string totalSales);
+            orderService.DisplayTurnover(orders, dateTimePickerStart.Value, dateTimePickerEnd.Value, out string turnover);
+            orderService.DisplayNumberOfCustomers(dateTimePickerStart.Value, dateTimePickerEnd.Value, out string numberOfCustomers);
+
+            NumOfCustomersLabel.Text = numberOfCustomers;
+            Turnoverlabel.Text = turnover;
+            TotalSalesLabel.Text = totalSales;
         }
 
         /*VAT panel*/

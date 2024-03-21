@@ -353,7 +353,9 @@ namespace SomerenUI
         {
             try
             {
-                FillOrder();
+                OrderService orderService = new();
+
+                orderService.FillOrder(listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, (Student)listBoxStudentsNames.SelectedItem, (Drink)listBoxDrinks.SelectedItem, (int)quantityOfDrinks.Value);
                 MessageBox.Show("Order is successfully placed!");
             }
             catch (Exception ex)
@@ -362,55 +364,28 @@ namespace SomerenUI
             }
         }
 
-        private void FillOrder()
-        {
-            if (listBoxStudentsNames.SelectedIndex == -1)
-            {
-                throw new Exception("Select a student.");
-            }
-            else if (listBoxDrinks.SelectedIndex == -1)
-            {
-                throw new Exception("Select a drink.");
-            }
-            else
-            {
-                Student choosedStudent = (Student)listBoxStudentsNames.SelectedItem;
-                Drink choosedDrink = (Drink)listBoxDrinks.SelectedItem;
-                int quantity = (int)quantityOfDrinks.Value;
-                DateTime dateOfOrder = DateTime.Now;
-
-                if (choosedDrink.Stock < quantity)
-                {
-                    throw new Exception($"Only {choosedDrink.Stock} is in stock.");
-                }
-
-                OrderService orderService = new();
-                orderService.CreateOrder(choosedStudent, choosedDrink, quantity, dateOfOrder);
-            }
-        }
-
         private void listBoxStudentsNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
+            OrderService orderService = new();
+
+            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
+            PriceOutputLabel.Text = totalPrice;
         }
 
         private void listBoxDrinks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
+            OrderService orderService = new();
+
+            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
+            PriceOutputLabel.Text = totalPrice;
         }
 
         private void quantityOfDrinks_ValueChanged(object sender, EventArgs e)
         {
-            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
-        }
+            OrderService orderService = new();
 
-        private void DisplayPrice(Drink drink)
-        {
-            if (listBoxStudentsNames.SelectedIndex != -1 && listBoxDrinks.SelectedIndex != -1)
-            {
-                decimal price = drink.Price * quantityOfDrinks.Value;
-                PriceOutputLabel.Text = $"{price}";
-            }
+            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
+            PriceOutputLabel.Text = totalPrice;
         }
 
         /*Revenue panel*/

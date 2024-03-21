@@ -97,8 +97,8 @@ namespace SomerenDAL
         {
             SqlParameter[] SqlParameters = new SqlParameter[]
             {
-                new("@startDateQuarter", SqlDbType.Date) {Value = endQuarterDate},
-                new("@endDateQuarter", SqlDbType.Date) {Value = startQuarterDate},
+                new("@startDateQuarter", SqlDbType.Date) {Value = startQuarterDate},
+                new("@endDateQuarter", SqlDbType.Date) {Value = endQuarterDate},
                 new("@vat", SqlDbType.Int) {Value = percentageVat}
             };
 

@@ -272,15 +272,31 @@ namespace SomerenUI
 
         private void btnDrinkDelete_Click(object sender, EventArgs e)
         {
-
             if (listViewDrinks.SelectedItems.Count != 0)
             {
-                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
-
                 DrinkService drinkService = new();
-                drinkService.RemoveDrink(drinkId);
+                drinkService.RemoveDrink(int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text));
 
                 MessageBox.Show("Drink deleted!");
+            }
+            else
+            {
+                MessageBox.Show("Select a drink!");
+            }
+        }
+
+        private void btnDrinkAdd_Click(object sender, EventArgs e)
+        {
+            DrinkAddForm drinkAddForm = new DrinkAddForm();
+            drinkAddForm.Show();
+        }
+
+        private void btnUpdateDrink_Click(object sender, EventArgs e)
+        {
+            if (listViewDrinks.SelectedItems.Count != 0)
+            {
+                DrinkUpdateForm drinkUpdateForm = new DrinkUpdateForm(int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text));
+                drinkUpdateForm.Show();
             }
             else
             {
@@ -558,26 +574,6 @@ namespace SomerenUI
             pnlDrinks.Hide();
             pnlOrder.Hide();
             pnlRevenue.Hide();
-        }
-
-        private void btnDrinkAdd_Click(object sender, EventArgs e)
-        {
-            DrinkAddForm drinkAddForm = new DrinkAddForm();
-            drinkAddForm.Show();
-        }
-
-        private void btnUpdateDrink_Click(object sender, EventArgs e)
-        {
-            if (listViewDrinks.SelectedItems.Count != 0)
-            {
-                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
-                DrinkUpdateForm drinkUpdateForm = new DrinkUpdateForm(drinkId);
-                drinkUpdateForm.Show();
-            }
-            else
-            {
-                MessageBox.Show("Select a drink!");
-            }
         }
     }
 }

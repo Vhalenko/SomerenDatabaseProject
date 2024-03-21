@@ -20,29 +20,30 @@ namespace SomerenUI
             InitializeComponent();
         }
 
-        private void UpdateDrink_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            try
+            if (new List<string> { txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text }.Any(x => x == ""))
             {
-                string name = txtName.Text;
-                string.IsNullOrEmpty(txtName.Text);
-                decimal price = decimal.Parse(txtPrice.Text);
-                int stock = int.Parse(txtStock.Text);
-                int vat = int.Parse(txtVat.Text);
-
-                DrinkService drinkService = new DrinkService();
-                drinkService.UpdateDrink(Id, name, price, stock, vat);
-
-                MessageBox.Show("Drink updated!");
+                MessageBox.Show("Enter all values!");
             }
-            catch (Exception exeption)
+            else
             {
-                MessageBox.Show("Something went wrong while adding the drink: " + exeption.Message);
+                try
+                {
+                    string name = txtName.Text;
+                    decimal price = decimal.Parse(txtPrice.Text);
+                    int stock = int.Parse(txtStock.Text);
+                    int vat = int.Parse(txtVat.Text);
+
+                    DrinkService drinkService = new DrinkService();
+                    drinkService.UpdateDrink(Id, name, price, stock, vat);
+
+                    MessageBox.Show("Drink updated!");
+                }
+                catch (Exception exeption)
+                {
+                    MessageBox.Show("Something went wrong while adding the drink: " + exeption.Message);
+                }
             }
         }
     }

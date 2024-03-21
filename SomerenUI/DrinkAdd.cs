@@ -1,5 +1,7 @@
 ﻿using SomerenService;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SomerenUI
@@ -13,21 +15,34 @@ namespace SomerenUI
 
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            try
+            if (new List<string> { txtId.Text, txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text }.Any(x => x == ""))
             {
-                int id = int.Parse(txtId.Text);
-                string name = txtName.Text;
-                decimal price = decimal.Parse(txtPrice.Text);
-                int stock = int.Parse(txtStock.Text);
-                int vat = int.Parse(txtVat.Text);
-                DrinkService drinkService = new DrinkService();
-                drinkService.AddDrink(id, name, price, stock, vat);
-                MessageBox.Show("Drink added!");
+                MessageBox.Show("Enter all values!");
             }
-            catch (Exception exeption)
+            else
             {
-                MessageBox.Show("Something went wrong while adding the drink: " + exeption.Message);
+                try
+                {
+                    int id = int.Parse(txtId.Text);
+                    string name = txtName.Text;
+                    decimal price = decimal.Parse(txtPrice.Text);
+                    int stock = int.Parse(txtStock.Text);
+                    int vat = int.Parse(txtVat.Text);
+
+                    DrinkService drinkService = new DrinkService();
+                    drinkService.AddDrink(id, name, price, stock, vat);
+
+                    MessageBox.Show("Drink added!");
+
+
+                }
+                catch (Exception exeption)
+                {
+                    MessageBox.Show("Something went wrong while adding the drink: " + exeption.Message);
+                }
             }
         }
+
+
     }
 }

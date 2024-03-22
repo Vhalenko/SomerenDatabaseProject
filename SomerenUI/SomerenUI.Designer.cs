@@ -124,7 +124,6 @@
             pnlVAT = new System.Windows.Forms.Panel();
             label12 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
-            CulculateButton = new System.Windows.Forms.Button();
             radioQ4B = new System.Windows.Forms.RadioButton();
             radioQ3B = new System.Windows.Forms.RadioButton();
             radioQ2B = new System.Windows.Forms.RadioButton();
@@ -924,7 +923,6 @@
             // 
             pnlVAT.Controls.Add(label12);
             pnlVAT.Controls.Add(label10);
-            pnlVAT.Controls.Add(CulculateButton);
             pnlVAT.Controls.Add(radioQ4B);
             pnlVAT.Controls.Add(radioQ3B);
             pnlVAT.Controls.Add(radioQ2B);
@@ -948,9 +946,8 @@
             label12.Location = new System.Drawing.Point(361, 452);
             label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(58, 20);
+            label12.Size = new System.Drawing.Size(0, 20);
             label12.TabIndex = 17;
-            label12.Text = "label12";
             // 
             // label10
             // 
@@ -958,19 +955,8 @@
             label10.Location = new System.Drawing.Point(361, 358);
             label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(58, 20);
+            label10.Size = new System.Drawing.Size(0, 20);
             label10.TabIndex = 16;
-            label10.Text = "label10";
-            // 
-            // CulculateButton
-            // 
-            CulculateButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            CulculateButton.Location = new System.Drawing.Point(52, 504);
-            CulculateButton.Name = "CulculateButton";
-            CulculateButton.Size = new System.Drawing.Size(184, 53);
-            CulculateButton.TabIndex = 15;
-            CulculateButton.Text = "Calculate";
-            CulculateButton.UseVisualStyleBackColor = true;
             // 
             // radioQ4B
             // 
@@ -1090,6 +1076,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 659);
+            Controls.Add(pnlVAT);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
@@ -1097,7 +1084,6 @@
             Controls.Add(panelRooms);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlOrder);
-            Controls.Add(pnlVAT);
             Controls.Add(pnlRevenue);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -1244,7 +1230,6 @@
         private System.Windows.Forms.RadioButton radioQ2B;
         private System.Windows.Forms.RadioButton radioQ1B;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button CulculateButton;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
     }

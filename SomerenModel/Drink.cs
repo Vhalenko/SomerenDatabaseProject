@@ -21,10 +21,5 @@ namespace SomerenModel
             Stock = stock;
             Vat = vat;
         }
-
-        public override string ToString()
-        {
-            return $"{Name}    |    {Price}    |    {Stock}    |    {Alcohol}";
-        }
     }
 }

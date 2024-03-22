@@ -12,6 +12,5 @@ namespace SomerenModel
         {
             Age = age;
         }
-
     }
 }

@@ -25,47 +25,30 @@ namespace SomerenService
             orderDAO.CreateOrder(student, drink, quantity, dateOfOrder);
         }
 
-        public void FillOrder(int studentSelectedIndex, int drinkSelectedIndex, Student student, Drink drink, int quantity)
+        public void FillOrder(Student student, Drink drink, int quantity)
         {
-            if (studentSelectedIndex == -1)
-            {
-                throw new Exception("Select a student.");
-            }
-            else if (drinkSelectedIndex == -1)
-            {
-                throw new Exception("Select a drink.");
-            }
-            else
-            {
-                DateTime dateOfOrder = DateTime.Now;
+            DateTime dateOfOrder = DateTime.Now;
 
-                if (drink.Stock < quantity)
-                {
-                    throw new Exception($"Only {drink.Stock} is in stock.");
-                }
-
-                orderDAO.CreateOrder(student, drink, quantity, dateOfOrder);
+            if (drink.Stock < quantity)
+            {
+                throw new Exception($"Only {drink.Stock} is in stock!");
             }
+
+            orderDAO.CreateOrder(student, drink, quantity, dateOfOrder);
         }
+
+        public void DisplayPrice(Drink drink, decimal quantityOfDrinks, out string totalPrice)
+        {
+            decimal price = drink.Price * quantityOfDrinks;
+            totalPrice = $"{price}€";
+        }
+
+        /*Revenue*/
 
         public List<Order> GetOrders()
         {
             return orderDAO.GetAll();
         }
-
-        public void DisplayPrice(Drink drink, int studentSelectedIndex, int drinkSelectedIndex, decimal quantityOfDrinks, out string totalPrice)
-        {
-            decimal price = 0m;
-
-            if (studentSelectedIndex != -1 && drinkSelectedIndex != -1)
-            {
-                price = drink.Price * quantityOfDrinks;
-            }
-
-            totalPrice = $"{price}";
-        }
-
-        /*Revenue*/
 
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)
         {

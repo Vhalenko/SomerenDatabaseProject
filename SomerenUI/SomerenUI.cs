@@ -75,6 +75,8 @@ namespace SomerenUI
                 item.SubItems.Add(student.ClassName.ToString());
                 item.SubItems.Add(student.TelephoneNumber.ToString());
                 item.SubItems.Add(student.RoomNumber.ToString());
+                item.Tag = student;
+
                 listViewStudents.Items.Add(item);
             }
         }
@@ -120,6 +122,8 @@ namespace SomerenUI
                 item.SubItems.Add(lecturer.Age.ToString("dd-MM-yyyy"));
                 item.SubItems.Add(lecturer.TelephoneNumber.ToString());
                 item.SubItems.Add(lecturer.RoomNumber.ToString());
+                item.Tag = lecturer;
+
                 listViewLecturers.Items.Add(item);
             }
         }
@@ -159,12 +163,13 @@ namespace SomerenUI
 
             foreach (Room room in rooms)
             {
-                ListViewItem item = new ListViewItem();
+                ListViewItem item = new();
                 item.SubItems.Add(room.Number.ToString());
                 item.SubItems.Add(room.Building.ToString());
                 item.SubItems.Add(room.Type);
                 item.SubItems.Add(room.Capacity.ToString());
                 item.SubItems.Add(room.Floor.ToString());
+                item.Tag = room;
 
                 listViewRooms.Items.Add(item);
             }
@@ -205,11 +210,12 @@ namespace SomerenUI
 
             foreach (Activity activity in activities)
             {
-                ListViewItem li = new ListViewItem();
+                ListViewItem li = new();
                 li.SubItems.Add(activity.Id.ToString());
                 li.SubItems.Add(activity.Name);
                 li.SubItems.Add(activity.StartDayTime);
                 li.SubItems.Add(activity.EndDayTime);
+                li.Tag = activity;
 
                 listViewActivities.Items.Add(li);
             }
@@ -250,12 +256,13 @@ namespace SomerenUI
 
             foreach (Drink drink in drinks)
             {
-                ListViewItem li = new ListViewItem();
+                ListViewItem li = new();
                 li.SubItems.Add(drink.Id.ToString());
                 li.SubItems.Add(drink.Name);
                 li.SubItems.Add(drink.Price.ToString());
                 li.SubItems.Add(drink.StockToText);
                 li.SubItems.Add(drink.Vat.ToString());
+                li.Tag = drink;
 
                 listViewDrinks.Items.Add(li);
             }
@@ -270,8 +277,9 @@ namespace SomerenUI
         {
             if (listViewDrinks.SelectedItems.Count != 0)
             {
+                ListViewItem selectedDrink = listViewDrinks.SelectedItems[0];
                 DrinkService drinkService = new();
-                drinkService.DeleteDrink(listViewDrinks.SelectedItems[0].SubItems[1].Text);
+                drinkService.DeleteDrink((Drink)selectedDrink.Tag);
 
                 MessageBox.Show("Drink deleted!");
             }
@@ -323,21 +331,33 @@ namespace SomerenUI
 
         private void DisplayStudentsForOrder(List<Student> students)
         {
-            listBoxStudentsNames.Items.Clear();
+            listViewOrderStudent.Items.Clear();
 
             foreach (Student student in students)
             {
-                listBoxStudentsNames.Items.Add(student);
+                ListViewItem item = new();
+                item.SubItems.Add(student.PersonNumber.ToString());
+                item.SubItems.Add(student.FullName);
+                item.Tag = student;
+
+                listViewOrderStudent.Items.Add(item);
             }
         }
 
         private void DisplayDrinksForOrder(List<Drink> drinks)
         {
-            listBoxDrinks.Items.Clear();
+            listViewOrderDrink.Items.Clear();
 
             foreach (Drink drink in drinks)
             {
-                listBoxDrinks.Items.Add(drink);
+                ListViewItem item = new();
+                item.SubItems.Add(drink.Name);
+                item.SubItems.Add(drink.Price.ToString());
+                item.SubItems.Add(drink.Alcohol);
+                item.SubItems.Add(drink.Stock.ToString());
+                item.Tag = drink;
+
+                listViewOrderDrink.Items.Add(item);
             }
         }
 
@@ -350,9 +370,8 @@ namespace SomerenUI
         {
             try
             {
-                OrderService orderService = new();
-
-                orderService.FillOrder(listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, (Student)listBoxStudentsNames.SelectedItem, (Drink)listBoxDrinks.SelectedItem, (int)quantityOfDrinks.Value);
+                ChooseStudentDrinkError();
+                FillOrder();
                 MessageBox.Show("Order is successfully placed!");
             }
             catch (Exception ex)
@@ -361,28 +380,51 @@ namespace SomerenUI
             }
         }
 
-        private void listBoxStudentsNames_SelectedIndexChanged(object sender, EventArgs e)
+        private void ChooseStudentDrinkError()
         {
-            OrderService orderService = new();
-
-            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
-            PriceOutputLabel.Text = totalPrice;
+            if (listViewOrderStudent.SelectedItems.Count == 0)
+            {
+                throw new Exception("Select a student!");
+            }
+            else if (listViewOrderDrink.SelectedItems.Count == 0)
+            {
+                throw new Exception("Select a drink!");
+            }
         }
 
-        private void listBoxDrinks_SelectedIndexChanged(object sender, EventArgs e)
+        private void FillOrder()
         {
             OrderService orderService = new();
+            ListViewItem selectedDrink = listViewOrderDrink.SelectedItems[0];
+            ListViewItem selectedStudent = listViewOrderStudent.SelectedItems[0];
 
-            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
-            PriceOutputLabel.Text = totalPrice;
+            orderService.FillOrder((Student)selectedStudent.Tag, (Drink)selectedDrink.Tag, (int)quantityOfDrinks.Value);
+        }
+
+        private void listViewOrderStudent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayOrderPrice();
+        }
+
+        private void listViewOrderDrink_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayOrderPrice();
         }
 
         private void quantityOfDrinks_ValueChanged(object sender, EventArgs e)
         {
-            OrderService orderService = new();
+            DisplayOrderPrice();
+        }
 
-            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
-            PriceOutputLabel.Text = totalPrice;
+        private void DisplayOrderPrice()
+        {
+            if (listViewOrderDrink.SelectedItems.Count > 0 && listViewOrderStudent.SelectedItems.Count > 0)
+            {
+                OrderService orderService = new();
+                ListViewItem selectedDrink = listViewOrderDrink.SelectedItems[0];
+                orderService.DisplayPrice((Drink)selectedDrink.Tag, quantityOfDrinks.Value, out string totalPrice);
+                PriceOutputLabel.Text = totalPrice;
+            }
         }
 
         /*Revenue panel*/
@@ -474,6 +516,7 @@ namespace SomerenUI
                     item.SubItems.Add(order.Drink.Name);
                     item.SubItems.Add(order.Drink.Price.ToString());
                     item.SubItems.Add(order.Quantity.ToString());
+                    item.Tag = order;
 
                     listViewDrinksSold.Items.Add(item);
                 }

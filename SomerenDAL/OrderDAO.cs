@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace SomerenDAL
 {
-    public class OrderDAO : BaseDao<Order>
+    public class OrderDao : BaseDao<Order>
     {
         private protected override string GetAllQuery()
         {

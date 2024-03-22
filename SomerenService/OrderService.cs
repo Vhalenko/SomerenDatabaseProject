@@ -2,13 +2,12 @@
 using SomerenModel;
 using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace SomerenService
 {
     public class OrderService
     {
-        OrderDAO orderDAO;
+        OrderDao orderDAO;
         private const decimal VAT_9percentCalculation = 0.09m;
         private const decimal VAT_21percentCalculation = 0.21m;
         private const int Vat9Percent = 9;
@@ -16,7 +15,7 @@ namespace SomerenService
         
         public OrderService()
         {
-            orderDAO = new OrderDAO();
+            orderDAO = new();
         }
 
         /*Order*/

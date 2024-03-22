@@ -50,7 +50,7 @@ namespace SomerenDAL
         }
         public void UpdateDrink(int id, string name, decimal price, int stock, int vat)
         {
-            string query = "UPDATE drink SET name = '@name', price = @price, stock = @stock, vat = @vat WHERE drink_id = @id";
+            string query = "UPDATE drink SET name = @name, price = @price, stock = @stock, vat = @vat WHERE drink_id = @id";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@id", SqlDbType.Int) {Value = id},

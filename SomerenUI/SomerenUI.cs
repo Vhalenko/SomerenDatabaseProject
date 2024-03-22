@@ -268,13 +268,10 @@ namespace SomerenUI
 
         private void btnDrinkDelete_Click(object sender, EventArgs e)
         {
-
             if (listViewDrinks.SelectedItems.Count != 0)
             {
-                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
-
                 DrinkService drinkService = new();
-                drinkService.RemoveDrink(drinkId);
+                drinkService.DeleteDrink(listViewDrinks.SelectedItems[0].SubItems[1].Text);
 
                 MessageBox.Show("Drink deleted!");
             }

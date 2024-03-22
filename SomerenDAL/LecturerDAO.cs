@@ -4,7 +4,7 @@ using System.Data;
 
 namespace SomerenDAL
 {
-    public class LecturerDAO : BaseDao<Lecturer>
+    public class LecturerDao : BaseDao<Lecturer>
     {
         private protected override Lecturer Convert(DataRow reader)
         {

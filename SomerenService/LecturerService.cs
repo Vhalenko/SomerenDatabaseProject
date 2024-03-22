@@ -6,11 +6,11 @@ namespace SomerenService
 {
     public class LecturerService
     {
-        private LecturerDAO lecturerDAO;
+        private LecturerDao lecturerDAO;
 
         public LecturerService()
         {
-            lecturerDAO = new LecturerDAO();
+            lecturerDAO = new();
         }
 
         public List<Lecturer> GetLecturers()

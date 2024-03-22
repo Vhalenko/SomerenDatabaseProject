@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace SomerenDAL
 {
-    public class OrderDAO : BaseDao<Order>
+    public class OrderDao : BaseDao<Order>
     {
         private protected override string GetAllQuery()
         {
@@ -97,8 +97,8 @@ namespace SomerenDAL
         {
             SqlParameter[] SqlParameters = new SqlParameter[]
             {
-                new("@startDateQuarter", SqlDbType.Date) {Value = endQuarterDate},
-                new("@endDateQuarter", SqlDbType.Date) {Value = startQuarterDate},
+                new("@startDateQuarter", SqlDbType.Date) {Value = startQuarterDate},
+                new("@endDateQuarter", SqlDbType.Date) {Value = endQuarterDate},
                 new("@vat", SqlDbType.Int) {Value = percentageVat}
             };
 

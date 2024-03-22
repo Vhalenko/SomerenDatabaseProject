@@ -8,9 +8,6 @@ namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
-        const double VAT_9percent = 0.09;
-        const double VAT_21percent = 0.21;
-
         public SomerenUI()
         {
             InitializeComponent();
@@ -271,13 +268,10 @@ namespace SomerenUI
 
         private void btnDrinkDelete_Click(object sender, EventArgs e)
         {
-
             if (listViewDrinks.SelectedItems.Count != 0)
             {
-                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
-
                 DrinkService drinkService = new();
-                drinkService.RemoveDrink(drinkId);
+                drinkService.DeleteDrink(listViewDrinks.SelectedItems[0].SubItems[1].Text);
 
                 MessageBox.Show("Drink deleted!");
             }
@@ -356,7 +350,9 @@ namespace SomerenUI
         {
             try
             {
-                FillOrder();
+                OrderService orderService = new();
+
+                orderService.FillOrder(listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, (Student)listBoxStudentsNames.SelectedItem, (Drink)listBoxDrinks.SelectedItem, (int)quantityOfDrinks.Value);
                 MessageBox.Show("Order is successfully placed!");
             }
             catch (Exception ex)
@@ -365,55 +361,28 @@ namespace SomerenUI
             }
         }
 
-        private void FillOrder()
-        {
-            if (listBoxStudentsNames.SelectedIndex == -1)
-            {
-                throw new Exception("Select a student.");
-            }
-            else if (listBoxDrinks.SelectedIndex == -1)
-            {
-                throw new Exception("Select a drink.");
-            }
-            else
-            {
-                Student choosedStudent = (Student)listBoxStudentsNames.SelectedItem;
-                Drink choosedDrink = (Drink)listBoxDrinks.SelectedItem;
-                int quantity = (int)quantityOfDrinks.Value;
-                DateTime dateOfOrder = DateTime.Now;
-
-                if (choosedDrink.Stock < quantity)
-                {
-                    throw new Exception($"Only {choosedDrink.Stock} is in stock.");
-                }
-
-                OrderService orderService = new();
-                orderService.CreateOrder(choosedStudent, choosedDrink, quantity, dateOfOrder);
-            }
-        }
-
         private void listBoxStudentsNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
+            OrderService orderService = new();
+
+            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
+            PriceOutputLabel.Text = totalPrice;
         }
 
         private void listBoxDrinks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
+            OrderService orderService = new();
+
+            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
+            PriceOutputLabel.Text = totalPrice;
         }
 
         private void quantityOfDrinks_ValueChanged(object sender, EventArgs e)
         {
-            DisplayPrice((Drink)listBoxDrinks.SelectedItem);
-        }
+            OrderService orderService = new();
 
-        private void DisplayPrice(Drink drink)
-        {
-            if (listBoxStudentsNames.SelectedIndex != -1 && listBoxDrinks.SelectedIndex != -1)
-            {
-                decimal price = drink.Price * quantityOfDrinks.Value;
-                PriceOutputLabel.Text = $"{price}";
-            }
+            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
+            PriceOutputLabel.Text = totalPrice;
         }
 
         /*Revenue panel*/
@@ -449,9 +418,11 @@ namespace SomerenUI
         {
             ClearAllLitsts();
 
+            OrderService orderService = new();
+
             try
             {
-                if (RightDates())
+                if (orderService.RightDates(dateTimePickerStart.Value, dateTimePickerEnd.Value))
                 {
                     List<Order> orders = GetOrders();
                     DisplayAllFields(orders);
@@ -471,9 +442,11 @@ namespace SomerenUI
         {
             ClearAllLitsts();
 
+            OrderService orderService = new();
+
             try
             {
-                if (RightDates())
+                if (orderService.RightDates(dateTimePickerStart.Value, dateTimePickerEnd.Value))
                 {
                     List<Order> orders = GetOrders();
                     DisplayAllFields(orders);
@@ -487,16 +460,6 @@ namespace SomerenUI
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private bool RightDates()
-        {
-            if (dateTimePickerEnd.Value < dateTimePickerStart.Value)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         private void DisplaySeparateSales(List<Order> orders)
@@ -525,46 +488,18 @@ namespace SomerenUI
             NumOfCustomersLabel.Text = string.Empty;
         }
 
-        private void DisplayTotalSales(List<Order> orders)
-        {
-            int totalSoldDrinks = 0;
-
-            foreach (var order in orders)
-            {
-                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
-                    totalSoldDrinks += order.Quantity;
-            }
-
-            TotalSalesLabel.Text = $"{totalSoldDrinks} Drinks sold";
-        }
-
-        private void DisplayTurnover(List<Order> orders)
-        {
-            decimal totalRevenue = 0m;
-
-            foreach (var order in orders)
-            {
-                if (order.OrderDate >= dateTimePickerStart.Value && order.OrderDate <= dateTimePickerEnd.Value)
-                    totalRevenue += order.Drink.Price * order.Quantity;
-            }
-
-            Turnoverlabel.Text = $"{totalRevenue}€ Earned";
-        }
-
-        private void DisplayNumberOfCustomers()
-        {
-            OrderService orderService = new();
-            int studentCount = orderService.CountAmountOfClients(dateTimePickerStart.Value, dateTimePickerEnd.Value);
-
-            NumOfCustomersLabel.Text = $"{studentCount} Customers";
-        }
-
         private void DisplayAllFields(List<Order> orders)
         {
+            OrderService orderService = new();
+
             DisplaySeparateSales(orders);
-            DisplayTotalSales(orders);
-            DisplayTurnover(orders);
-            DisplayNumberOfCustomers();
+            orderService.DisplayTotalSales(orders, dateTimePickerStart.Value, dateTimePickerEnd.Value, out string totalSales);
+            orderService.DisplayTurnover(orders, dateTimePickerStart.Value, dateTimePickerEnd.Value, out string turnover);
+            orderService.DisplayNumberOfCustomers(dateTimePickerStart.Value, dateTimePickerEnd.Value, out string numberOfCustomers);
+
+            NumOfCustomersLabel.Text = numberOfCustomers;
+            Turnoverlabel.Text = turnover;
+            TotalSalesLabel.Text = totalSales;
         }
 
         /*VAT panel*/
@@ -580,92 +515,37 @@ namespace SomerenUI
             ShowVATPanel();
         }
 
-        public void ShowVAT(DateTime startDateTime, DateTime endDateTime)
-        {
-            Vat9Label.Text = Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00");
-            Vat21Label.Text = Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00");
-
-            decimal totalVAT = CountTotalPrice(startDateTime, endDateTime);
-            VatTotalLabel.Text = totalVAT.ToString("0.00");
-        }
-
-        public void ShowChoosedQuarter(DateTime startDateTime, DateTime endDateTime)
-        {
-            label10.Text = startDateTime.ToString("yyyy-MM-dd");
-            label12.Text = endDateTime.ToString("yyyy-MM-dd");
-        }
-
         private void radioQ1B_CheckedChanged_1(object sender, EventArgs e)
         {
-            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: false);
-            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 1, isStart: true);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
+            ShowVatInformation(1);
         }
 
         private void radioQ2B_CheckedChanged(object sender, EventArgs e)
         {
-            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: false);
-            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 2, isStart: true);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
+            ShowVatInformation(2);
         }
 
         private void radioQ3B_CheckedChanged(object sender, EventArgs e)
         {
-            DateTime startDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: false);
-            DateTime endDateTime = CreateDateTime(int.Parse(textBox1.Text), 3, isStart: true);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
+            ShowVatInformation(3);
         }
 
         private void radioQ4B_CheckedChanged(object sender, EventArgs e)
         {
-            DateTime startDateTime = new DateTime(int.Parse(textBox1.Text), 10, 1);
-            DateTime endDateTime = new DateTime(int.Parse(textBox1.Text), 12, 31);
-            ShowChoosedQuarter(startDateTime, endDateTime);
-            ShowVAT(startDateTime, endDateTime);
+            ShowVatInformation(4);
         }
 
-        public DateTime CreateDateTime(int year, int quarterNr, bool isStart)
-        {
-            DateTime startDateTime = new DateTime(year, ((quarterNr - 1) * 3) + 1, 1);
-            DateTime endDateTime = new DateTime(startDateTime.Year, startDateTime.Month + 3, 1);
-            endDateTime = endDateTime.AddDays(-1);
-            return isStart ? startDateTime : endDateTime;
-        }
-
-        public decimal Count9DrinkPrice(DateTime startDateTime, DateTime endDateTime)
+        private void ShowVatInformation(int quarterNumber)
         {
             OrderService orderService = new();
-            List<Order> orders9VAT = orderService.Drinks9Percent(startDateTime, endDateTime, 9);
-            decimal totalPrice9Percent = 0;
 
-            foreach (var order in orders9VAT)
-            {
-                totalPrice9Percent += order.Quantity * order.Drink.Price * (decimal)VAT_9percent;
-            }
+            orderService.VatInformation(int.Parse(textBox1.Text), quarterNumber, out string startDate, out string endDate, out string vat9Percent, out string vat21Percent, out string vatTotal);
 
-            return totalPrice9Percent;
-        }
-
-        public decimal Count21DrinkPrice(DateTime startDateTime, DateTime endDateTime)
-        {
-            OrderService orderService = new();
-            List<Order> orders21VAT = orderService.Drinks9Percent(startDateTime, endDateTime, 21);
-            decimal totalPrice21Percent = 0;
-
-            foreach (var order in orders21VAT)
-            {
-                totalPrice21Percent += order.Quantity * order.Drink.Price * (decimal)VAT_21percent;
-            }
-
-            return totalPrice21Percent;
-        }
-
-        public decimal CountTotalPrice(DateTime startDateTime, DateTime endDateTime)
-        {
-            return Count21DrinkPrice(startDateTime, endDateTime) + Count9DrinkPrice(startDateTime, endDateTime);
+            label10.Text = startDate;
+            label12.Text = endDate;
+            Vat9Label.Text = vat9Percent;
+            Vat21Label.Text = vat21Percent;
+            VatTotalLabel.Text = vatTotal;
         }
 
         /*Else*/

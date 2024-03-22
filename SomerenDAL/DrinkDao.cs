@@ -37,13 +37,13 @@ namespace SomerenDAL
 
             ExecuteEditQuery(query, parameters);
         }
-        public void DeleteDrink(int id)
+        public void DeleteDrink(Drink drink)
         {
             string query = "DELETE FROM drink WHERE drink_id = @id";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@id", SqlDbType.Int) {Value = id}
+                new SqlParameter("@id", SqlDbType.Int) {Value = drink.Id}
             };
 
             ExecuteEditQuery(query, parameters);

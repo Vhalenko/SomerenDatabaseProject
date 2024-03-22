@@ -3,7 +3,6 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SomerenUI
 {
@@ -76,6 +75,8 @@ namespace SomerenUI
                 item.SubItems.Add(student.ClassName.ToString());
                 item.SubItems.Add(student.TelephoneNumber.ToString());
                 item.SubItems.Add(student.RoomNumber.ToString());
+                item.Tag = student;
+
                 listViewStudents.Items.Add(item);
             }
         }
@@ -121,6 +122,8 @@ namespace SomerenUI
                 item.SubItems.Add(lecturer.Age.ToString("dd-MM-yyyy"));
                 item.SubItems.Add(lecturer.TelephoneNumber.ToString());
                 item.SubItems.Add(lecturer.RoomNumber.ToString());
+                item.Tag = lecturer;
+
                 listViewLecturers.Items.Add(item);
             }
         }
@@ -160,12 +163,13 @@ namespace SomerenUI
 
             foreach (Room room in rooms)
             {
-                ListViewItem item = new ListViewItem();
+                ListViewItem item = new();
                 item.SubItems.Add(room.Number.ToString());
                 item.SubItems.Add(room.Building.ToString());
                 item.SubItems.Add(room.Type);
                 item.SubItems.Add(room.Capacity.ToString());
                 item.SubItems.Add(room.Floor.ToString());
+                item.Tag = room;
 
                 listViewRooms.Items.Add(item);
             }
@@ -206,11 +210,12 @@ namespace SomerenUI
 
             foreach (Activity activity in activities)
             {
-                ListViewItem li = new ListViewItem();
+                ListViewItem li = new();
                 li.SubItems.Add(activity.Id.ToString());
                 li.SubItems.Add(activity.Name);
                 li.SubItems.Add(activity.StartDayTime);
                 li.SubItems.Add(activity.EndDayTime);
+                li.Tag = activity;
 
                 listViewActivities.Items.Add(li);
             }
@@ -251,12 +256,13 @@ namespace SomerenUI
 
             foreach (Drink drink in drinks)
             {
-                ListViewItem li = new ListViewItem();
+                ListViewItem li = new();
                 li.SubItems.Add(drink.Id.ToString());
                 li.SubItems.Add(drink.Name);
                 li.SubItems.Add(drink.Price.ToString());
                 li.SubItems.Add(drink.StockToText);
                 li.SubItems.Add(drink.Vat.ToString());
+                li.Tag = drink;
 
                 listViewDrinks.Items.Add(li);
             }
@@ -271,8 +277,9 @@ namespace SomerenUI
         {
             if (listViewDrinks.SelectedItems.Count != 0)
             {
+                ListViewItem selectedDrink = listViewDrinks.SelectedItems[0];
                 DrinkService drinkService = new();
-                drinkService.DeleteDrink(listViewDrinks.SelectedItems[0].SubItems[1].Text);
+                drinkService.DeleteDrink((Drink)selectedDrink.Tag);
 
                 MessageBox.Show("Drink deleted!");
             }
@@ -509,6 +516,7 @@ namespace SomerenUI
                     item.SubItems.Add(order.Drink.Name);
                     item.SubItems.Add(order.Drink.Price.ToString());
                     item.SubItems.Add(order.Quantity.ToString());
+                    item.Tag = order;
 
                     listViewDrinksSold.Items.Add(item);
                 }

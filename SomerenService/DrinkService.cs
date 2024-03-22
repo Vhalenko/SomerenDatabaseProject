@@ -51,9 +51,9 @@ namespace SomerenService
 
         /*Remove Drinks*/
 
-        public void DeleteDrink(string id)
+        public void DeleteDrink(Drink drink)
         {
-            drinkdb.DeleteDrink(int.Parse(id));
+            drinkdb.DeleteDrink(drink);
         }
 
         /*Update Drinks*/

@@ -1,6 +1,7 @@
 ﻿using SomerenService;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace SomerenUI
 {
@@ -17,7 +18,7 @@ namespace SomerenUI
             {
                 DrinkService drinkService = new();
 
-                drinkService.AddDrink(txtId.Text, txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text);
+                drinkService.AddDrink(new List<string> { txtId.Text, txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text });
                 MessageBox.Show("Drink added!");
             }
             catch (Exception ex)

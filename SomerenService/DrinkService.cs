@@ -24,29 +24,29 @@ namespace SomerenService
 
         /*Add Drinks*/
 
-        public void AddDrink(string textId, string textName, string textPrice, string textStock, string textVat)
+        public void AddDrink(List<string> list)
         {
-            if (new List<string> { textId, textName, textPrice, textStock, textVat }.Any(x => x == ""))
+            if (list.Any(x => x == ""))
             {
                 throw new Exception("Enter all values!");
             }
             else
             {
-                FillDrinkToAdd(textId, textName, textPrice, textStock, textVat);
+                FillDrinkToAdd(list);
             }
         }
 
-        private void FillDrinkToAdd(string textId, string textName, string textPrice, string textStock, string textVat)
+        private void FillDrinkToAdd(List<string> list)
         {
-            int id = int.Parse(textId);
-            string name = textName;
-            decimal price = decimal.Parse(textPrice);
-            int stock = int.Parse(textStock);
-            int vat = int.Parse(textVat);
+            int id = int.Parse(list[0]);
+            string name = list[1];
+            decimal price = decimal.Parse(list[2]);
+            int stock = int.Parse(list[3]);
+            int vat = int.Parse(list[4]);
 
             Drink drink = new(id, name, price, stock, vat);
 
-            drinkdb.AddDrink(id, name, price, stock, vat);
+            drinkdb.AddDrink(drink);
         }
 
         /*Remove Drinks*/
@@ -58,33 +58,22 @@ namespace SomerenService
 
         /*Update Drinks*/
 
-        public void UpdateDrink(int id, string name, decimal price, int stock, int vat)
+        public void UpdateDrink(List<string> list)
         {
-            drinkdb.UpdateDrink(id, name, price, stock, vat);
+            FillDrinkToUpdate(list);
         }
 
-        public void UpdateDrink(int id, string textName, string textPrice, string textStock, string textVat)
+        private void FillDrinkToUpdate(List<string> list)
         {
-            if (new List<string> { textName, textPrice, textStock, textVat }.Any(x => x == ""))
-            {
-                throw new Exception("Enter all values!");
-            }
-            else
-            {
-                FillDrinkToUpdate(id, textName, textPrice, textStock, textVat);
-            }
-        }
-
-        private void FillDrinkToUpdate(int id, string textName, string textPrice, string textStock, string textVat)
-        {
-            string name = textName;
-            decimal price = decimal.Parse(textPrice);
-            int stock = int.Parse(textStock);
-            int vat = int.Parse(textVat);
+            int id = int.Parse(list[0]);
+            string name = list[1];
+            decimal price = decimal.Parse(list[2]);
+            int stock = int.Parse(list[3]);
+            int vat = int.Parse(list[4]);
 
             Drink drink = new(id, name, price, stock, vat);
 
-            drinkdb.UpdateDrink(id, name, price, stock, vat);
+            drinkdb.UpdateDrink(drink);
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using SomerenService;
 using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Web;
 using SomerenModel;
 
 namespace SomerenUI
@@ -29,13 +27,8 @@ namespace SomerenUI
         {
             try
             {
-                string name = string.IsNullOrWhiteSpace(txtName.Text) ? OldName : txtName.Text;
-                string price = string.IsNullOrWhiteSpace(txtPrice.Text) ? OldPrice : txtPrice.Text;
-                string stock = string.IsNullOrWhiteSpace(txtStock.Text) ? OldStock : txtStock.Text;
-                string vat = string.IsNullOrWhiteSpace(txtVat.Text) ? OldVat : txtVat.Text;
                 DrinkService drinkService = new();
-
-                drinkService.UpdateDrink(new List<string> { Id, name, price, stock, vat });
+                drinkService.CheckForUpdates(txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text, Id, OldName, OldPrice, OldStock, OldVat);
 
                 MessageBox.Show("Drink updated!");
             }

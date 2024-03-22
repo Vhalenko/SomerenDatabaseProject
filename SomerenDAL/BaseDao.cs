@@ -51,7 +51,7 @@ namespace SomerenDAL
             }
             catch (Exception e)
             {
-                throw;
+                throw new Exception("You are not connected to the database!");
             }
             return dbConnection;
         }

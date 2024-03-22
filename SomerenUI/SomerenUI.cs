@@ -3,6 +3,7 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SomerenUI
 {
@@ -323,21 +324,33 @@ namespace SomerenUI
 
         private void DisplayStudentsForOrder(List<Student> students)
         {
-            listBoxStudentsNames.Items.Clear();
+            listViewOrderStudent.Items.Clear();
 
             foreach (Student student in students)
             {
-                listBoxStudentsNames.Items.Add(student);
+                ListViewItem item = new();
+                item.SubItems.Add(student.PersonNumber.ToString());
+                item.SubItems.Add(student.FullName);
+                item.Tag = student;
+
+                listViewOrderStudent.Items.Add(item);
             }
         }
 
         private void DisplayDrinksForOrder(List<Drink> drinks)
         {
-            listBoxDrinks.Items.Clear();
+            listViewOrderDrink.Items.Clear();
 
             foreach (Drink drink in drinks)
             {
-                listBoxDrinks.Items.Add(drink);
+                ListViewItem item = new();
+                item.SubItems.Add(drink.Name);
+                item.SubItems.Add(drink.Price.ToString());
+                item.SubItems.Add(drink.Alcohol);
+                item.SubItems.Add(drink.Stock.ToString());
+                item.Tag = drink;
+
+                listViewOrderDrink.Items.Add(item);
             }
         }
 
@@ -350,9 +363,8 @@ namespace SomerenUI
         {
             try
             {
-                OrderService orderService = new();
-
-                orderService.FillOrder(listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, (Student)listBoxStudentsNames.SelectedItem, (Drink)listBoxDrinks.SelectedItem, (int)quantityOfDrinks.Value);
+                ChooseStudentDrinkError();
+                FillOrder();
                 MessageBox.Show("Order is successfully placed!");
             }
             catch (Exception ex)
@@ -361,28 +373,51 @@ namespace SomerenUI
             }
         }
 
-        private void listBoxStudentsNames_SelectedIndexChanged(object sender, EventArgs e)
+        private void ChooseStudentDrinkError()
         {
-            OrderService orderService = new();
-
-            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
-            PriceOutputLabel.Text = totalPrice;
+            if (listViewOrderStudent.SelectedItems.Count == 0)
+            {
+                throw new Exception("Select a student!");
+            }
+            else if (listViewOrderDrink.SelectedItems.Count == 0)
+            {
+                throw new Exception("Select a drink!");
+            }
         }
 
-        private void listBoxDrinks_SelectedIndexChanged(object sender, EventArgs e)
+        private void FillOrder()
         {
             OrderService orderService = new();
+            ListViewItem selectedDrink = listViewOrderDrink.SelectedItems[0];
+            ListViewItem selectedStudent = listViewOrderStudent.SelectedItems[0];
 
-            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
-            PriceOutputLabel.Text = totalPrice;
+            orderService.FillOrder((Student)selectedStudent.Tag, (Drink)selectedDrink.Tag, (int)quantityOfDrinks.Value);
+        }
+
+        private void listViewOrderStudent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayOrderPrice();
+        }
+
+        private void listViewOrderDrink_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayOrderPrice();
         }
 
         private void quantityOfDrinks_ValueChanged(object sender, EventArgs e)
         {
-            OrderService orderService = new();
+            DisplayOrderPrice();
+        }
 
-            orderService.DisplayPrice((Drink)listBoxDrinks.SelectedItem, listBoxStudentsNames.SelectedIndex, listBoxDrinks.SelectedIndex, quantityOfDrinks.Value, out string totalPrice);
-            PriceOutputLabel.Text = totalPrice;
+        private void DisplayOrderPrice()
+        {
+            if (listViewOrderDrink.SelectedItems.Count > 0 && listViewOrderStudent.SelectedItems.Count > 0)
+            {
+                OrderService orderService = new();
+                ListViewItem selectedDrink = listViewOrderDrink.SelectedItems[0];
+                orderService.DisplayPrice((Drink)selectedDrink.Tag, quantityOfDrinks.Value, out string totalPrice);
+                PriceOutputLabel.Text = totalPrice;
+            }
         }
 
         /*Revenue panel*/

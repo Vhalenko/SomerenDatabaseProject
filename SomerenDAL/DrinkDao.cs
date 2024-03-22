@@ -22,17 +22,17 @@ namespace SomerenDAL
             return "SELECT drink_id, name, price, stock, vat FROM drink";
         }
 
-        public void AddDrink(int id, string name, decimal price, int stock, int vat)
+        public void AddDrink(Drink drink)
         {
             string query = "INSERT drink(drink_id, name, price, stock, vat) VALUES (@drink_id, @name, @price, @stock, @vat)";
             
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@drink_id", SqlDbType.Int) {Value = id},
-                new SqlParameter("@name", SqlDbType.VarChar) {Value = name},
-                new SqlParameter("@price", SqlDbType.Decimal) {Value = price},
-                new SqlParameter("@stock", SqlDbType.Int) {Value = stock},
-                new SqlParameter("@vat", SqlDbType.Int) {Value = vat}
+                new SqlParameter("@drink_id", SqlDbType.Int) {Value = drink.Id},
+                new SqlParameter("@name", SqlDbType.VarChar) {Value = drink.Name},
+                new SqlParameter("@price", SqlDbType.Decimal) {Value = drink.Price},
+                new SqlParameter("@stock", SqlDbType.Int) {Value = drink.Stock},
+                new SqlParameter("@vat", SqlDbType.Int) {Value = drink.Vat}
             };
 
             ExecuteEditQuery(query, parameters);
@@ -48,16 +48,16 @@ namespace SomerenDAL
 
             ExecuteEditQuery(query, parameters);
         }
-        public void UpdateDrink(int id, string name, decimal price, int stock, int vat)
+        public void UpdateDrink(Drink drink)
         {
             string query = "UPDATE drink SET name = @name, price = @price, stock = @stock, vat = @vat WHERE drink_id = @id";
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@id", SqlDbType.Int) {Value = id},
-                new SqlParameter("@name", SqlDbType.VarChar) {Value = name},
-                new SqlParameter("@price", SqlDbType.Decimal) {Value = price},
-                new SqlParameter("@stock", SqlDbType.Int) {Value = stock},
-                new SqlParameter("@vat", SqlDbType.Int) {Value = vat}
+                new SqlParameter("@id", SqlDbType.Int) {Value = drink.Id},
+                new SqlParameter("@name", SqlDbType.VarChar) {Value = drink.Name},
+                new SqlParameter("@price", SqlDbType.Decimal) {Value = drink.Price},
+                new SqlParameter("@stock", SqlDbType.Int) {Value = drink.Stock},
+                new SqlParameter("@vat", SqlDbType.Int) {Value = drink.Vat}
             };
 
             ExecuteEditQuery(query, parameters);

@@ -299,8 +299,14 @@ namespace SomerenUI
         {
             if (listViewDrinks.SelectedItems.Count != 0)
             {
-                int drinkId = int.Parse(listViewDrinks.SelectedItems[0].SubItems[1].Text);
-                DrinkUpdateForm drinkUpdateForm = new DrinkUpdateForm(drinkId);
+                ListViewItem selectedDrink = listViewDrinks.SelectedItems[0];
+                /*string id = listViewDrinks.SelectedItems[0].SubItems[1].Text;
+                string name = listViewDrinks.SelectedItems[0].SubItems[2].Text;
+                string price = listViewDrinks.SelectedItems[0].SubItems[3].Text;
+                string stock = listViewDrinks.SelectedItems[0].SubItems[4].Text;
+                string vat = listViewDrinks.SelectedItems[0].SubItems[5].Text;*/
+
+                DrinkUpdateForm drinkUpdateForm = new((Drink)selectedDrink.Tag);
                 drinkUpdateForm.Show();
             }
             else

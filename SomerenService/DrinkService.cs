@@ -58,11 +58,6 @@ namespace SomerenService
 
         /*Update Drinks*/
 
-        public void UpdateDrink(List<string> list)
-        {
-            FillDrinkToUpdate(list);
-        }
-
         private void FillDrinkToUpdate(List<string> list)
         {
             int id = int.Parse(list[0]);
@@ -74,6 +69,17 @@ namespace SomerenService
             Drink drink = new(id, name, price, stock, vat);
 
             drinkdb.UpdateDrink(drink);
+        }
+
+        public void CheckForUpdates(string filledName, string filledPrice, string filledStock, string filledVat, string id, string oldName, string oldPrice, string oldStock, string oldVat)
+        {
+            string name = string.IsNullOrWhiteSpace(filledName) ? oldName : filledName;
+            string price = string.IsNullOrWhiteSpace(filledPrice) ? oldPrice : filledPrice;
+            string stock = string.IsNullOrWhiteSpace(filledStock) ? oldStock : filledStock;
+            string vat = string.IsNullOrWhiteSpace(filledVat) ? oldVat : filledVat;
+            DrinkService drinkService = new();
+
+            drinkService.FillDrinkToUpdate(new List<string> { id, name, price, stock, vat });
         }
     }
 }

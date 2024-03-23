@@ -8,6 +8,7 @@ namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
+        public const string PercentSign = "%";
         public SomerenUI()
         {
             InitializeComponent();
@@ -261,7 +262,7 @@ namespace SomerenUI
                 li.SubItems.Add(drink.Name);
                 li.SubItems.Add(drink.Price.ToString());
                 li.SubItems.Add(drink.StockToText);
-                li.SubItems.Add(drink.Vat.ToString());
+                li.SubItems.Add(drink.Vat.ToString() + PercentSign);
                 li.Tag = drink;
 
                 listViewDrinks.Items.Add(li);
@@ -300,11 +301,6 @@ namespace SomerenUI
             if (listViewDrinks.SelectedItems.Count != 0)
             {
                 ListViewItem selectedDrink = listViewDrinks.SelectedItems[0];
-                /*string id = listViewDrinks.SelectedItems[0].SubItems[1].Text;
-                string name = listViewDrinks.SelectedItems[0].SubItems[2].Text;
-                string price = listViewDrinks.SelectedItems[0].SubItems[3].Text;
-                string stock = listViewDrinks.SelectedItems[0].SubItems[4].Text;
-                string vat = listViewDrinks.SelectedItems[0].SubItems[5].Text;*/
 
                 DrinkUpdateForm drinkUpdateForm = new((Drink)selectedDrink.Tag);
                 drinkUpdateForm.Show();

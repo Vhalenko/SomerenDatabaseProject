@@ -1,4 +1,5 @@
 ﻿using SomerenModel;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -24,11 +25,10 @@ namespace SomerenDAL
 
         public void AddDrink(Drink drink)
         {
-            string query = "INSERT drink(drink_id, name, price, stock, vat) VALUES (@drink_id, @name, @price, @stock, @vat)";
+            string query = "INSERT drink(name, price, stock, vat) VALUES (@name, @price, @stock, @vat)";
             
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@drink_id", SqlDbType.Int) {Value = drink.Id},
                 new SqlParameter("@name", SqlDbType.VarChar) {Value = drink.Name},
                 new SqlParameter("@price", SqlDbType.Decimal) {Value = drink.Price},
                 new SqlParameter("@stock", SqlDbType.Int) {Value = drink.Stock},

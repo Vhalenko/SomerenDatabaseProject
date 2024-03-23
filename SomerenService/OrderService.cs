@@ -100,19 +100,14 @@ namespace SomerenService
 
         /*VAT*/
 
-        private List<Order> Drinks21Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
-        {
-            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
-        }
-
-        private List<Order> Drinks9Percent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
+        private List<Order> GetAllDrinksByPercent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         {
             return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
         }
 
         private decimal Count9DrinkPrice(DateTime startDateTime, DateTime endDateTime)
         {
-            List<Order> orders9VAT = Drinks9Percent(startDateTime, endDateTime, Vat9Percent);
+            List<Order> orders9VAT = GetAllDrinksByPercent(startDateTime, endDateTime, Vat9Percent);
             decimal totalPrice9Percent = 0m;
 
             foreach (var order in orders9VAT)
@@ -125,7 +120,7 @@ namespace SomerenService
 
         private decimal Count21DrinkPrice(DateTime startDateTime, DateTime endDateTime)
         {
-            List<Order> orders21VAT = Drinks9Percent(startDateTime, endDateTime, Vat21Percent);
+            List<Order> orders21VAT = GetAllDrinksByPercent(startDateTime, endDateTime, Vat21Percent);
             decimal totalPrice21Percent = 0m;
 
             foreach (var order in orders21VAT)

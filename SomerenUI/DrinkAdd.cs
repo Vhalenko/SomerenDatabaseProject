@@ -12,13 +12,13 @@ namespace SomerenUI
             InitializeComponent();
         }
 
-        private void btnAdd_Click(object sender, System.EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
                 DrinkService drinkService = new();
 
-                drinkService.AddDrink(new List<string> { null, txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text });
+                drinkService.AddDrink(new List<string> { txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text });
                 MessageBox.Show("Drink added!");
             }
             catch (Exception ex)

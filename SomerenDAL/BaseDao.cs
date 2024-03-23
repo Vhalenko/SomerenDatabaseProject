@@ -40,94 +40,42 @@ namespace SomerenDAL
 
         private protected abstract string GetAllQuery();
 
-        protected SqlConnection OpenConnection()
-        {
-            try
-            {
-                if (dbConnection.State == ConnectionState.Closed || dbConnection.State == ConnectionState.Broken)
-                {
-                    dbConnection.Open();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("You are not connected to the database!");
-            }
-            return dbConnection;
-        }
-
-        protected void CloseConnection()
-        {
-            dbConnection.Close();
-        }
-
-        protected void ExecuteEditTranQuery(string query, SqlParameter[] sqlParameters, SqlTransaction sqlTransaction)
-        {
-            SqlCommand command = new SqlCommand(query, dbConnection, sqlTransaction);
-
-            try
-            {
-                command.Parameters.AddRange(sqlParameters);
-                adapter.InsertCommand = command;
-                command.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-            finally
-            {
-                CloseConnection();
-            }
-        }
-
         protected void ExecuteEditQuery(string query, SqlParameter[] sqlParameters)
         {
-            SqlCommand command = new SqlCommand();
-
             try
             {
-                command.Connection = OpenConnection();
-                command.CommandText = query;
+                dbConnection.Open();
+                using SqlCommand command = new(query, dbConnection);
                 command.Parameters.AddRange(sqlParameters);
                 adapter.InsertCommand = command;
                 command.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
-                throw;
+                throw new Exception("Check your internet connection!");
             }
             finally
             {
-                CloseConnection();
+                dbConnection.Close();
             }
         }
 
         protected DataTable ExecuteSelectQuery(string query, params SqlParameter[] sqlParameters)
         {
-            SqlCommand command = new SqlCommand();
-            DataTable dataTable;
-            DataSet dataSet = new DataSet();
+            DataTable dataTable = new();
 
             try
             {
-                command.Connection = OpenConnection();
-                command.CommandText = query;
+                using SqlCommand command = new(query, dbConnection);
                 command.Parameters.AddRange(sqlParameters);
-                command.ExecuteNonQuery();
-                adapter.SelectCommand = command;
-                adapter.Fill(dataSet);
-                dataTable = dataSet.Tables[0];
-            }
-            catch (SqlException e)
-            {
-                throw;
-            }
-            finally
-            {
-                CloseConnection();
-            }
 
+                using SqlDataAdapter adapter = new(command);
+                adapter.Fill(dataTable);
+            }
+            catch (SqlException)
+            {
+                throw new Exception("Check your internet connection!");
+            }
             return dataTable;
         }
     }

@@ -10,15 +10,16 @@ namespace SomerenDAL
     {
         private protected override string GetAllQuery()
         {
-            return "SELECT purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
+            return "SELECT purchase.purchase_id, purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
         }
 
         private protected override Order Convert(DataRow reader)
         {
+            int id = (int)reader["purchase_id"];
             int quantity = (int)reader["quantity"];
             DateTime orderDate = (DateTime)reader["order_date"];
 
-            return new Order(ConvertStudent(reader), ConvertDrink(reader), quantity, orderDate);
+            return new Order(id, ConvertStudent(reader), ConvertDrink(reader), quantity, orderDate);
         }
 
         private Student ConvertStudent(DataRow reader)
@@ -85,7 +86,7 @@ namespace SomerenDAL
 
         private string QueryForVat()
         {
-            return "SELECT purchase.quantity, purchase.order_date, drink.*, student.*" +
+            return "SELECT purchase.purchase_id, purchase.quantity, purchase.order_date, drink.*, student.*" +
                     " FROM purchase" +
                     " JOIN student ON purchase.student_number = student.student_number" +
                     " JOIN drink ON purchase.drink_id = drink.drink_id" +

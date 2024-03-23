@@ -38,11 +38,11 @@ namespace SomerenService
 
         private void FillDrinkToAdd(List<string> list)
         {
-            int id = int.Parse(list[0]);
-            string name = list[1];
-            decimal price = decimal.Parse(list[2]);
-            int stock = int.Parse(list[3]);
-            int vat = int.Parse(list[4]);
+            int id = 0;
+            string name = list[0];
+            decimal price = decimal.Parse(list[1]);
+            int stock = int.Parse(list[2]);
+            int vat = int.Parse(list[3]);
 
             Drink drink = new(id, name, price, stock, vat);
 

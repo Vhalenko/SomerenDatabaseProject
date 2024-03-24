@@ -9,6 +9,7 @@ namespace SomerenService
     public class DrinkService
     {
         private DrinkDao drinkdb;
+        private const int ObjectIdBeforeDb = 0;
 
         public DrinkService()
         {
@@ -38,7 +39,7 @@ namespace SomerenService
 
         private void FillDrinkToAdd(List<string> list)
         {
-            int id = 0;
+            int id = ObjectIdBeforeDb;
             string name = list[0];
             decimal price = decimal.Parse(list[1]);
             int stock = int.Parse(list[2]);

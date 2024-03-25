@@ -136,13 +136,15 @@
             radioQ3B = new System.Windows.Forms.RadioButton();
             radioQ2B = new System.Windows.Forms.RadioButton();
             radioQ1B = new System.Windows.Forms.RadioButton();
-            textBox1 = new System.Windows.Forms.TextBox();
+            YearTextBoxVAT = new System.Windows.Forms.TextBox();
             VatTotalLabel = new System.Windows.Forms.Label();
             Vat21Label = new System.Windows.Forms.Label();
             Vat9Label = new System.Windows.Forms.Label();
             label15 = new System.Windows.Forms.Label();
             pictureBox8 = new System.Windows.Forms.PictureBox();
             label16 = new System.Windows.Forms.Label();
+            StartQuarterLabel = new System.Windows.Forms.Label();
+            EndQuarterLabel = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -241,21 +243,21 @@
             // orderToolStripMenuItem
             // 
             orderToolStripMenuItem.Name = "orderToolStripMenuItem";
-            orderToolStripMenuItem.Size = new System.Drawing.Size(319, 44);
+            orderToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             orderToolStripMenuItem.Text = "Order";
             orderToolStripMenuItem.Click += orderToolStripMenuItem_Click;
             // 
             // VATInformationToolStripMenuItem
             // 
             VATInformationToolStripMenuItem.Name = "VATInformationToolStripMenuItem";
-            VATInformationToolStripMenuItem.Size = new System.Drawing.Size(319, 44);
+            VATInformationToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             VATInformationToolStripMenuItem.Text = "VAT Information";
             VATInformationToolStripMenuItem.Click += VATInformationToolStripMenuItem_Click_1;
             // 
             // revenueReportToolStripMenuItem
             // 
             revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
-            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(319, 44);
+            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             revenueReportToolStripMenuItem.Text = "Revenue Report";
             revenueReportToolStripMenuItem.Click += revenueReportToolStripMenuItem_Click;
             // 
@@ -600,7 +602,7 @@
             // btnUpdateDrink
             // 
             btnUpdateDrink.Location = new System.Drawing.Point(1495, 701);
-            btnUpdateDrink.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            btnUpdateDrink.Margin = new System.Windows.Forms.Padding(5);
             btnUpdateDrink.Name = "btnUpdateDrink";
             btnUpdateDrink.Size = new System.Drawing.Size(218, 83);
             btnUpdateDrink.TabIndex = 5;
@@ -611,7 +613,7 @@
             // btnDrinkAdd
             // 
             btnDrinkAdd.Location = new System.Drawing.Point(1495, 550);
-            btnDrinkAdd.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            btnDrinkAdd.Margin = new System.Windows.Forms.Padding(5);
             btnDrinkAdd.Name = "btnDrinkAdd";
             btnDrinkAdd.Size = new System.Drawing.Size(218, 83);
             btnDrinkAdd.TabIndex = 4;
@@ -622,7 +624,7 @@
             // btnDrinkDelete
             // 
             btnDrinkDelete.Location = new System.Drawing.Point(1495, 394);
-            btnDrinkDelete.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            btnDrinkDelete.Margin = new System.Windows.Forms.Padding(5);
             btnDrinkDelete.Name = "btnDrinkDelete";
             btnDrinkDelete.Size = new System.Drawing.Size(218, 83);
             btnDrinkDelete.TabIndex = 3;
@@ -720,7 +722,7 @@
             listViewOrderStudent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader6, columnOrderStudentNumber, columnOrderStudentName });
             listViewOrderStudent.FullRowSelect = true;
             listViewOrderStudent.Location = new System.Drawing.Point(29, 118);
-            listViewOrderStudent.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            listViewOrderStudent.Margin = new System.Windows.Forms.Padding(5);
             listViewOrderStudent.MultiSelect = false;
             listViewOrderStudent.Name = "listViewOrderStudent";
             listViewOrderStudent.Size = new System.Drawing.Size(456, 676);
@@ -750,7 +752,7 @@
             listViewOrderDrink.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader5, columnOrderDrinkName, columnOrderDrinkPrice, columnOrderDrinkType, columnOrderDrinkStock });
             listViewOrderDrink.FullRowSelect = true;
             listViewOrderDrink.Location = new System.Drawing.Point(609, 118);
-            listViewOrderDrink.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            listViewOrderDrink.Margin = new System.Windows.Forms.Padding(5);
             listViewOrderDrink.MultiSelect = false;
             listViewOrderDrink.Name = "listViewOrderDrink";
             listViewOrderDrink.Size = new System.Drawing.Size(722, 676);
@@ -819,7 +821,7 @@
             // quantityOfDrinks
             // 
             quantityOfDrinks.Location = new System.Drawing.Point(1152, 870);
-            quantityOfDrinks.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            quantityOfDrinks.Margin = new System.Windows.Forms.Padding(5);
             quantityOfDrinks.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             quantityOfDrinks.Name = "quantityOfDrinks";
             quantityOfDrinks.Size = new System.Drawing.Size(182, 39);
@@ -830,7 +832,7 @@
             // buttonOrder
             // 
             buttonOrder.Location = new System.Drawing.Point(1407, 822);
-            buttonOrder.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            buttonOrder.Margin = new System.Windows.Forms.Padding(5);
             buttonOrder.Name = "buttonOrder";
             buttonOrder.Size = new System.Drawing.Size(271, 134);
             buttonOrder.TabIndex = 3;
@@ -881,7 +883,7 @@
             // 
             listViewDrinksSold.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader4, columnDrinkName, columnDrinkPrice, columnDrinkQuantity });
             listViewDrinksSold.Location = new System.Drawing.Point(32, 346);
-            listViewDrinksSold.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            listViewDrinksSold.Margin = new System.Windows.Forms.Padding(5);
             listViewDrinksSold.Name = "listViewDrinksSold";
             listViewDrinksSold.Size = new System.Drawing.Size(903, 538);
             listViewDrinksSold.TabIndex = 10;
@@ -963,7 +965,7 @@
             // dateTimePickerEnd
             // 
             dateTimePickerEnd.Location = new System.Drawing.Point(531, 176);
-            dateTimePickerEnd.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            dateTimePickerEnd.Margin = new System.Windows.Forms.Padding(5);
             dateTimePickerEnd.MaxDate = new System.DateTime(2024, 3, 18, 23, 22, 9, 0);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
             dateTimePickerEnd.Size = new System.Drawing.Size(404, 39);
@@ -974,7 +976,7 @@
             // dateTimePickerStart
             // 
             dateTimePickerStart.Location = new System.Drawing.Point(32, 176);
-            dateTimePickerStart.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            dateTimePickerStart.Margin = new System.Windows.Forms.Padding(5);
             dateTimePickerStart.MaxDate = new System.DateTime(2024, 3, 18, 23, 21, 43, 0);
             dateTimePickerStart.Name = "dateTimePickerStart";
             dateTimePickerStart.Size = new System.Drawing.Size(404, 39);
@@ -1005,13 +1007,15 @@
             // 
             // pnlVAT
             // 
+            pnlVAT.Controls.Add(EndQuarterLabel);
+            pnlVAT.Controls.Add(StartQuarterLabel);
             pnlVAT.Controls.Add(label12);
             pnlVAT.Controls.Add(label10);
             pnlVAT.Controls.Add(radioQ4B);
             pnlVAT.Controls.Add(radioQ3B);
             pnlVAT.Controls.Add(radioQ2B);
             pnlVAT.Controls.Add(radioQ1B);
-            pnlVAT.Controls.Add(textBox1);
+            pnlVAT.Controls.Add(YearTextBoxVAT);
             pnlVAT.Controls.Add(VatTotalLabel);
             pnlVAT.Controls.Add(Vat21Label);
             pnlVAT.Controls.Add(Vat9Label);
@@ -1044,7 +1048,7 @@
             // 
             radioQ4B.AutoSize = true;
             radioQ4B.Location = new System.Drawing.Point(304, 718);
-            radioQ4B.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            radioQ4B.Margin = new System.Windows.Forms.Padding(5);
             radioQ4B.Name = "radioQ4B";
             radioQ4B.Size = new System.Drawing.Size(76, 36);
             radioQ4B.TabIndex = 14;
@@ -1057,7 +1061,7 @@
             // 
             radioQ3B.AutoSize = true;
             radioQ3B.Location = new System.Drawing.Point(84, 718);
-            radioQ3B.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            radioQ3B.Margin = new System.Windows.Forms.Padding(5);
             radioQ3B.Name = "radioQ3B";
             radioQ3B.Size = new System.Drawing.Size(76, 36);
             radioQ3B.TabIndex = 13;
@@ -1069,8 +1073,8 @@
             // radioQ2B
             // 
             radioQ2B.AutoSize = true;
-            radioQ2B.Location = new System.Drawing.Point(304, 573);
-            radioQ2B.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            radioQ2B.Location = new System.Drawing.Point(304, 586);
+            radioQ2B.Margin = new System.Windows.Forms.Padding(5);
             radioQ2B.Name = "radioQ2B";
             radioQ2B.Size = new System.Drawing.Size(76, 36);
             radioQ2B.TabIndex = 12;
@@ -1082,8 +1086,8 @@
             // radioQ1B
             // 
             radioQ1B.AutoSize = true;
-            radioQ1B.Location = new System.Drawing.Point(84, 573);
-            radioQ1B.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            radioQ1B.Location = new System.Drawing.Point(84, 586);
+            radioQ1B.Margin = new System.Windows.Forms.Padding(5);
             radioQ1B.Name = "radioQ1B";
             radioQ1B.Size = new System.Drawing.Size(76, 36);
             radioQ1B.TabIndex = 11;
@@ -1092,20 +1096,20 @@
             radioQ1B.UseVisualStyleBackColor = true;
             radioQ1B.CheckedChanged += radioQ1B_CheckedChanged_1;
             // 
-            // textBox1
+            // YearTextBoxVAT
             // 
-            textBox1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBox1.Location = new System.Drawing.Point(84, 458);
-            textBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(296, 57);
-            textBox1.TabIndex = 10;
+            YearTextBoxVAT.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            YearTextBoxVAT.Location = new System.Drawing.Point(84, 458);
+            YearTextBoxVAT.Margin = new System.Windows.Forms.Padding(5);
+            YearTextBoxVAT.Name = "YearTextBoxVAT";
+            YearTextBoxVAT.Size = new System.Drawing.Size(296, 57);
+            YearTextBoxVAT.TabIndex = 10;
             // 
             // VatTotalLabel
             // 
             VatTotalLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             VatTotalLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            VatTotalLabel.Location = new System.Drawing.Point(905, 806);
+            VatTotalLabel.Location = new System.Drawing.Point(793, 670);
             VatTotalLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             VatTotalLabel.Name = "VatTotalLabel";
             VatTotalLabel.Size = new System.Drawing.Size(548, 84);
@@ -1115,7 +1119,7 @@
             // 
             Vat21Label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             Vat21Label.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Vat21Label.Location = new System.Drawing.Point(905, 573);
+            Vat21Label.Location = new System.Drawing.Point(793, 458);
             Vat21Label.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             Vat21Label.Name = "Vat21Label";
             Vat21Label.Size = new System.Drawing.Size(548, 84);
@@ -1125,7 +1129,7 @@
             // 
             Vat9Label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             Vat9Label.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Vat9Label.Location = new System.Drawing.Point(905, 338);
+            Vat9Label.Location = new System.Drawing.Point(793, 257);
             Vat9Label.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             Vat9Label.Name = "Vat9Label";
             Vat9Label.Size = new System.Drawing.Size(548, 84);
@@ -1135,7 +1139,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label15.Location = new System.Drawing.Point(70, 338);
+            label15.Location = new System.Drawing.Point(84, 290);
             label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(92, 51);
@@ -1163,11 +1167,30 @@
             label16.TabIndex = 0;
             label16.Text = "VAT";
             // 
+            // StartQuarterLabel
+            // 
+            StartQuarterLabel.AutoSize = true;
+            StartQuarterLabel.Location = new System.Drawing.Point(531, 392);
+            StartQuarterLabel.Name = "StartQuarterLabel";
+            StartQuarterLabel.Size = new System.Drawing.Size(29, 32);
+            StartQuarterLabel.TabIndex = 18;
+            StartQuarterLabel.Text = "...";
+            // 
+            // EndQuarterLabel
+            // 
+            EndQuarterLabel.AutoSize = true;
+            EndQuarterLabel.Location = new System.Drawing.Point(531, 573);
+            EndQuarterLabel.Name = "EndQuarterLabel";
+            EndQuarterLabel.Size = new System.Drawing.Size(29, 32);
+            EndQuarterLabel.TabIndex = 19;
+            EndQuarterLabel.Text = "...";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1786, 1054);
+            Controls.Add(pnlVAT);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlOrder);
             Controls.Add(pnlDashboard);
@@ -1175,7 +1198,6 @@
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);
-            Controls.Add(pnlVAT);
             Controls.Add(pnlRevenue);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -1319,7 +1341,7 @@
         private System.Windows.Forms.RadioButton radioQ3B;
         private System.Windows.Forms.RadioButton radioQ2B;
         private System.Windows.Forms.RadioButton radioQ1B;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox YearTextBoxVAT;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ListView listViewOrderDrink;
@@ -1332,5 +1354,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnOrderStudentNumber;
         private System.Windows.Forms.ColumnHeader columnOrderStudentName;
+        private System.Windows.Forms.Label StartQuarterLabel;
+        private System.Windows.Forms.Label EndQuarterLabel;
     }
 }

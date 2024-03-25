@@ -8,7 +8,6 @@ namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
-        public const string PercentSign = "%";
         public SomerenUI()
         {
             InitializeComponent();
@@ -262,7 +261,7 @@ namespace SomerenUI
                 li.SubItems.Add(drink.Name);
                 li.SubItems.Add(drink.Price.ToString());
                 li.SubItems.Add(drink.StockToText);
-                li.SubItems.Add(drink.Vat.ToString() + PercentSign);
+                li.SubItems.Add(drink.Vat.ToString() + "%");
                 li.Tag = drink;
 
                 listViewDrinks.Items.Add(li);

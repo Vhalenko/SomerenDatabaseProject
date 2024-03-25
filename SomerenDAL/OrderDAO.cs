@@ -10,7 +10,7 @@ namespace SomerenDAL
     {
         /*Convert*/
 
-        internal override Order Convert(DataRow reader)
+        internal protected override Order Convert(DataRow reader)
         {
             StudentDao studentDao = new();
             DrinkDao drinkDao = new();

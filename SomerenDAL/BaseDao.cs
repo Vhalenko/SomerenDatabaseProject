@@ -38,7 +38,7 @@ namespace SomerenDAL
             return items;
         }
 
-        internal abstract T Convert(DataRow reader);
+        internal protected abstract T Convert(DataRow reader);
 
         private protected abstract string GetAllQuery();
 

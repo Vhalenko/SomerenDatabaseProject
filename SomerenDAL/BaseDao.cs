@@ -17,6 +17,8 @@ namespace SomerenDAL
             adapter = new SqlDataAdapter();
         }
 
+        /*Get All*/
+
         public List<T> GetAll()
         {
             SqlParameter[] sqlParameters = Array.Empty<SqlParameter>();
@@ -36,9 +38,11 @@ namespace SomerenDAL
             return items;
         }
 
-        private protected abstract T Convert(DataRow reader);
+        internal abstract T Convert(DataRow reader);
 
         private protected abstract string GetAllQuery();
+
+        /*Getting data*/
 
         protected void ExecuteEditQuery(string query, SqlParameter[] sqlParameters)
         {

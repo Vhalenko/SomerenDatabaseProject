@@ -7,22 +7,22 @@ namespace SomerenService
 {
     public class OrderService
     {
-        OrderDao orderDAO;
+        OrderDao orderDao;
         private const decimal VAT_9percentCalculation = 0.09m;
         private const decimal VAT_21percentCalculation = 0.21m;
         private const int Vat9Percent = 9;
         private const int Vat21Percent = 21;
-        
+
         public OrderService()
         {
-            orderDAO = new();
+            orderDao = new();
         }
 
         /*Order*/
 
         public void CreateOrder(Student student, Drink drink, int quantity, DateTime dateOfOrder)
         {
-            orderDAO.CreateOrder(student, drink, quantity, dateOfOrder);
+            orderDao.CreateOrder(student, drink, quantity, dateOfOrder);
         }
 
         public void FillOrder(Student student, Drink drink, int quantity)
@@ -34,7 +34,7 @@ namespace SomerenService
                 throw new Exception($"Only {drink.Stock} is in stock!");
             }
 
-            orderDAO.CreateOrder(student, drink, quantity, dateOfOrder);
+            orderDao.CreateOrder(student, drink, quantity, dateOfOrder);
         }
 
         public void DisplayPrice(Drink drink, decimal quantityOfDrinks, out string totalPrice)
@@ -47,12 +47,12 @@ namespace SomerenService
 
         public List<Order> GetOrders()
         {
-            return orderDAO.GetAll();
+            return orderDao.GetAll();
         }
 
         public int CountAmountOfClients(DateTime startDate, DateTime endDate)
         {
-            return orderDAO.CountAmountOfClients(startDate, endDate);
+            return orderDao.CountAmountOfClients(startDate, endDate);
         }
 
         public bool RightDates(DateTime startDate, DateTime endDate)
@@ -102,7 +102,7 @@ namespace SomerenService
 
         private List<Order> GetAllDrinksByPercent(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         {
-            return orderDAO.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
+            return orderDao.GetAllDrinksByPercentage(startQuarterDate, endQuarterDate, percentageVat);
         }
 
         private decimal Count9DrinkPrice(DateTime startDateTime, DateTime endDateTime)
@@ -157,7 +157,7 @@ namespace SomerenService
         {
             OrderService orderService = new();
 
-            vat9Percent = orderService.Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00"+ "€");
+            vat9Percent = orderService.Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00" + "€");
             vat21Percent = orderService.Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00" + "€");
 
             decimal totalVAT = orderService.CountTotalPrice(startDateTime, endDateTime);

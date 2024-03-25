@@ -5,7 +5,7 @@ namespace SomerenDAL
 {
     public class ActivityDao : BaseDao<Activity>
     {
-        private protected override Activity Convert(DataRow reader)
+        internal override Activity Convert(DataRow reader)
         {
             int id = (int)reader["activity_id"];
             string name = (string)reader["name"];

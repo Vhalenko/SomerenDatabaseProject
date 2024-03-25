@@ -8,41 +8,50 @@ namespace SomerenDAL
 {
     public class OrderDao : BaseDao<Order>
     {
+        /*Convert*/
+
+        internal override Order Convert(DataRow reader)
+        {
+            StudentDao studentDao = new();
+            DrinkDao drinkDao = new();
+
+            int id = (int)reader["purchase_id"];
+            int quantity = (int)reader["quantity"];
+            DateTime orderDate = (DateTime)reader["order_date"];
+
+            return new Order(id, studentDao.Convert(reader), drinkDao.Convert(reader), quantity, orderDate);
+        }
+
+        private int ReadCountOfCustomers(DataTable dataTable)
+        {
+            int StudentCount = 0;
+
+            foreach (DataRow dataReader in dataTable.Rows)
+            {
+                StudentCount = (int)dataReader["count"];
+            }
+
+            return StudentCount;
+        }
+
+        /*Query*/
+
         private protected override string GetAllQuery()
         {
             return "SELECT purchase.purchase_id, purchase.quantity, purchase.order_date, student.*, drink.* FROM purchase JOIN student ON purchase.student_number = student.student_number JOIN drink ON purchase.drink_id = drink.drink_id;";
         }
 
-        private protected override Order Convert(DataRow reader)
+        private string QueryForVat()
         {
-            int id = (int)reader["purchase_id"];
-            int quantity = (int)reader["quantity"];
-            DateTime orderDate = (DateTime)reader["order_date"];
-
-            return new Order(id, ConvertStudent(reader), ConvertDrink(reader), quantity, orderDate);
+            return "SELECT purchase.purchase_id, purchase.quantity, purchase.order_date, drink.*, student.*" +
+                    " FROM purchase" +
+                    " JOIN student ON purchase.student_number = student.student_number" +
+                    " JOIN drink ON purchase.drink_id = drink.drink_id" +
+                    " WHERE purchase.order_date BETWEEN @startdatequarter AND @enddatequarter" +
+                    " AND drink.vat = @vat";
         }
 
-        private Student ConvertStudent(DataRow reader)
-        {
-            int studentNumber = (int)reader["student_number"];
-            string firstName = (string)reader["first_name"];
-            string lastName = (string)reader["last_name"];
-            string className = (string)reader["class"];
-            string telephoneNumber = (string)reader["telephone_number"];
-            int roomNumber = (int)reader["room_number"];
-            return new Student(studentNumber, firstName, lastName, className, telephoneNumber, roomNumber);
-        }
-
-        private Drink ConvertDrink(DataRow reader)
-        {
-            int drinkId = (int)reader["drink_id"];
-            string drinkName = (string)reader["name"];
-            decimal price = (decimal)reader["price"];
-            int stock = (int)reader["stock"];
-            int vat = (int)reader["vat"];
-
-            return new Drink(drinkId, drinkName, price, stock, vat);
-        }
+        /*CRUD*/
 
         public void CreateOrder(Student student, Drink drink, int quantity, DateTime dateOfOrder)
         {
@@ -79,22 +88,14 @@ namespace SomerenDAL
             ExecuteEditQuery(query, parameters);
         }
 
+        /*Get from database*/
+
         public List<Order> GetAllDrinksByPercentage(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         {
-            return ReadTables(ExecuteSelectQuery(QueryForVat(), GetSqlParameters(startQuarterDate, endQuarterDate, percentageVat)));
+            return ReadTables(ExecuteSelectQuery(QueryForVat(), GetBySqlParameters(startQuarterDate, endQuarterDate, percentageVat)));
         }
 
-        private string QueryForVat()
-        {
-            return "SELECT purchase.purchase_id, purchase.quantity, purchase.order_date, drink.*, student.*" +
-                    " FROM purchase" +
-                    " JOIN student ON purchase.student_number = student.student_number" +
-                    " JOIN drink ON purchase.drink_id = drink.drink_id" +
-                    " WHERE purchase.order_date BETWEEN @startdatequarter AND @enddatequarter" +
-                    " AND drink.vat = @vat";
-        }
-
-        private SqlParameter[] GetSqlParameters(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
+        private SqlParameter[] GetBySqlParameters(DateTime startQuarterDate, DateTime endQuarterDate, int percentageVat)
         {
             SqlParameter[] SqlParameters = new SqlParameter[]
             {
@@ -117,18 +118,6 @@ namespace SomerenDAL
             };
 
             return ReadCountOfCustomers(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        private int ReadCountOfCustomers(DataTable dataTable)
-        {
-            int StudentCount = 0;
-
-            foreach (DataRow dataReader in dataTable.Rows)
-            {
-                StudentCount = (int)dataReader["count"];
-            }
-
-            return StudentCount;
         }
     }
 }

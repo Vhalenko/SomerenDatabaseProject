@@ -4,9 +4,9 @@ using System.Data;
 
 namespace SomerenDAL
 {
-    public class LecturerDao : BaseDao<Lecturer>
+    public class LecturerDao : BaseDao<Lecturer> 
     {
-        private protected override Lecturer Convert(DataRow reader)
+        internal override Lecturer Convert(DataRow reader)
         {
             int lecturerNumber = (int)reader["lecturer_number"];
             string firstName = (string)reader["first_name"];

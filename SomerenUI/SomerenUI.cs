@@ -153,7 +153,7 @@ namespace SomerenUI
 
         private List<Room> GetRooms()
         {
-            RoomService roomService = new RoomService();
+            RoomService roomService = new();
             return roomService.GetRooms();
         }
 

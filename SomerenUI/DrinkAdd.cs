@@ -17,8 +17,8 @@ namespace SomerenUI
             try
             {
                 DrinkService drinkService = new();
-
                 drinkService.AddDrink(new List<string> { txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text });
+
                 MessageBox.Show("Drink added!");
             }
             catch (Exception ex)

@@ -8,19 +8,19 @@ namespace SomerenService
 {
     public class DrinkService
     {
-        private DrinkDao drinkdb;
+        private DrinkDao drinkDao;
         private const int ObjectIdBeforeDb = 0;
 
         public DrinkService()
         {
-            drinkdb = new();
+            drinkDao = new();
         }
 
         /*Get Drinks*/
 
         public List<Drink> GetDrinks()
         {
-            return drinkdb.GetAll();
+            return drinkDao.GetAll();
         }
 
         /*Add Drinks*/
@@ -47,14 +47,14 @@ namespace SomerenService
 
             Drink drink = new(id, name, price, stock, vat);
 
-            drinkdb.AddDrink(drink);
+            drinkDao.AddDrink(drink);
         }
 
         /*Remove Drinks*/
 
         public void DeleteDrink(Drink drink)
         {
-            drinkdb.DeleteDrink(drink);
+            drinkDao.DeleteDrink(drink);
         }
 
         /*Update Drinks*/
@@ -69,7 +69,7 @@ namespace SomerenService
 
             Drink drink = new(id, name, price, stock, vat);
 
-            drinkdb.UpdateDrink(drink);
+            drinkDao.UpdateDrink(drink);
         }
 
         public void CheckForUpdates(string filledName, string filledPrice, string filledStock, string filledVat, string id, string oldName, string oldPrice, string oldStock, string oldVat)

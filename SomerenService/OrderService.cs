@@ -157,11 +157,11 @@ namespace SomerenService
         {
             OrderService orderService = new();
 
-            vat9Percent = orderService.Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00");
-            vat21Percent = orderService.Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00");
+            vat9Percent = orderService.Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00"+ "€");
+            vat21Percent = orderService.Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00" + "€");
 
             decimal totalVAT = orderService.CountTotalPrice(startDateTime, endDateTime);
-            vatTotal = totalVAT.ToString("0.00");
+            vatTotal = totalVAT.ToString("0.00" + "€");
         }
     }
 }

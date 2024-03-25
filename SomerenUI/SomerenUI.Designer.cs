@@ -130,6 +130,10 @@
             pictureBox7 = new System.Windows.Forms.PictureBox();
             label11 = new System.Windows.Forms.Label();
             pnlVAT = new System.Windows.Forms.Panel();
+            label14 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
+            EndQuarterLabel = new System.Windows.Forms.Label();
+            StartQuarterLabel = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
             radioQ4B = new System.Windows.Forms.RadioButton();
@@ -143,8 +147,9 @@
             label15 = new System.Windows.Forms.Label();
             pictureBox8 = new System.Windows.Forms.PictureBox();
             label16 = new System.Windows.Forms.Label();
-            StartQuarterLabel = new System.Windows.Forms.Label();
-            EndQuarterLabel = new System.Windows.Forms.Label();
+            label17 = new System.Windows.Forms.Label();
+            label18 = new System.Windows.Forms.Label();
+            label19 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -243,21 +248,21 @@
             // orderToolStripMenuItem
             // 
             orderToolStripMenuItem.Name = "orderToolStripMenuItem";
-            orderToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            orderToolStripMenuItem.Size = new System.Drawing.Size(319, 44);
             orderToolStripMenuItem.Text = "Order";
             orderToolStripMenuItem.Click += orderToolStripMenuItem_Click;
             // 
             // VATInformationToolStripMenuItem
             // 
             VATInformationToolStripMenuItem.Name = "VATInformationToolStripMenuItem";
-            VATInformationToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            VATInformationToolStripMenuItem.Size = new System.Drawing.Size(319, 44);
             VATInformationToolStripMenuItem.Text = "VAT Information";
             VATInformationToolStripMenuItem.Click += VATInformationToolStripMenuItem_Click_1;
             // 
             // revenueReportToolStripMenuItem
             // 
             revenueReportToolStripMenuItem.Name = "revenueReportToolStripMenuItem";
-            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            revenueReportToolStripMenuItem.Size = new System.Drawing.Size(319, 44);
             revenueReportToolStripMenuItem.Text = "Revenue Report";
             revenueReportToolStripMenuItem.Click += revenueReportToolStripMenuItem_Click;
             // 
@@ -1007,6 +1012,11 @@
             // 
             // pnlVAT
             // 
+            pnlVAT.Controls.Add(label19);
+            pnlVAT.Controls.Add(label18);
+            pnlVAT.Controls.Add(label17);
+            pnlVAT.Controls.Add(label14);
+            pnlVAT.Controls.Add(label13);
             pnlVAT.Controls.Add(EndQuarterLabel);
             pnlVAT.Controls.Add(StartQuarterLabel);
             pnlVAT.Controls.Add(label12);
@@ -1027,6 +1037,42 @@
             pnlVAT.Name = "pnlVAT";
             pnlVAT.Size = new System.Drawing.Size(1742, 994);
             pnlVAT.TabIndex = 18;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(503, 510);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(214, 32);
+            label14.TabIndex = 21;
+            label14.Text = "End of the quarter:";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(503, 325);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(222, 32);
+            label13.TabIndex = 20;
+            label13.Text = "Start of the quarter:";
+            // 
+            // EndQuarterLabel
+            // 
+            EndQuarterLabel.AutoSize = true;
+            EndQuarterLabel.Location = new System.Drawing.Point(531, 573);
+            EndQuarterLabel.Name = "EndQuarterLabel";
+            EndQuarterLabel.Size = new System.Drawing.Size(29, 32);
+            EndQuarterLabel.TabIndex = 19;
+            EndQuarterLabel.Text = "...";
+            // 
+            // StartQuarterLabel
+            // 
+            StartQuarterLabel.AutoSize = true;
+            StartQuarterLabel.Location = new System.Drawing.Point(531, 392);
+            StartQuarterLabel.Name = "StartQuarterLabel";
+            StartQuarterLabel.Size = new System.Drawing.Size(29, 32);
+            StartQuarterLabel.TabIndex = 18;
+            StartQuarterLabel.Text = "...";
             // 
             // label12
             // 
@@ -1167,23 +1213,32 @@
             label16.TabIndex = 0;
             label16.Text = "VAT";
             // 
-            // StartQuarterLabel
+            // label17
             // 
-            StartQuarterLabel.AutoSize = true;
-            StartQuarterLabel.Location = new System.Drawing.Point(531, 392);
-            StartQuarterLabel.Name = "StartQuarterLabel";
-            StartQuarterLabel.Size = new System.Drawing.Size(29, 32);
-            StartQuarterLabel.TabIndex = 18;
-            StartQuarterLabel.Text = "...";
+            label17.AutoSize = true;
+            label17.Location = new System.Drawing.Point(793, 181);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(186, 32);
+            label17.TabIndex = 22;
+            label17.Text = "Total of 9% VAT:";
             // 
-            // EndQuarterLabel
+            // label18
             // 
-            EndQuarterLabel.AutoSize = true;
-            EndQuarterLabel.Location = new System.Drawing.Point(531, 573);
-            EndQuarterLabel.Name = "EndQuarterLabel";
-            EndQuarterLabel.Size = new System.Drawing.Size(29, 32);
-            EndQuarterLabel.TabIndex = 19;
-            EndQuarterLabel.Text = "...";
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(793, 392);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(199, 32);
+            label18.TabIndex = 23;
+            label18.Text = "Total of 21% VAT:";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new System.Drawing.Point(793, 599);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(70, 32);
+            label19.TabIndex = 24;
+            label19.Text = "Total:";
             // 
             // SomerenUI
             // 
@@ -1356,5 +1411,10 @@
         private System.Windows.Forms.ColumnHeader columnOrderStudentName;
         private System.Windows.Forms.Label StartQuarterLabel;
         private System.Windows.Forms.Label EndQuarterLabel;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
     }
 }

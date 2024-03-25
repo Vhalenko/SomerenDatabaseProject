@@ -588,13 +588,13 @@ namespace SomerenUI
                 orderService.VatInformation(int.Parse(YearTextBoxVAT.Text), quarterNumber, out string startDate, out string endDate, out string vat9Percent, out string vat21Percent, out string vatTotal);
                 ShowTextToElements(startDate, endDate, vat9Percent, vat21Percent, vatTotal);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Entered year is not in the right format", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }         
+            }
         }
 
-        private void ShowTextToElements(string startDate,string endDate, string vat9Percent, string vat21Percent, string vatTotal)
+        private void ShowTextToElements(string startDate, string endDate, string vat9Percent, string vat21Percent, string vatTotal)
         {
             StartQuarterLabel.Text = startDate;
             EndQuarterLabel.Text = endDate;
@@ -602,7 +602,6 @@ namespace SomerenUI
             Vat21Label.Text = vat21Percent;
             VatTotalLabel.Text = vatTotal;
         }
-
         /*Else*/
 
         private void HideAll()

@@ -29,7 +29,7 @@ namespace SomerenUI
             {
                 DrinkService drinkService = new();
                 drinkService.CheckForUpdates(txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text, Id, OldName, OldPrice, OldStock, OldVat);
-
+                Close();
                 MessageBox.Show("Drink updated!");
             }
             catch (Exception ex)

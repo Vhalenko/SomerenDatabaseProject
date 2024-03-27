@@ -280,6 +280,7 @@ namespace SomerenUI
                 ListViewItem selectedDrink = listViewDrinks.SelectedItems[0];
                 DrinkService drinkService = new();
                 drinkService.DeleteDrink((Drink)selectedDrink.Tag);
+                ShowDrinksPanel();
 
                 MessageBox.Show("Drink deleted!");
             }
@@ -291,8 +292,9 @@ namespace SomerenUI
 
         private void btnDrinkAdd_Click(object sender, EventArgs e)
         {
-            DrinkAddForm drinkAddForm = new DrinkAddForm();
-            drinkAddForm.Show();
+            DrinkAddForm drinkAddForm = new();
+            drinkAddForm.ShowDialog();
+            ShowDrinksPanel();
         }
 
         private void btnUpdateDrink_Click(object sender, EventArgs e)
@@ -302,7 +304,9 @@ namespace SomerenUI
                 ListViewItem selectedDrink = listViewDrinks.SelectedItems[0];
 
                 DrinkUpdateForm drinkUpdateForm = new((Drink)selectedDrink.Tag);
-                drinkUpdateForm.Show();
+
+                drinkUpdateForm.ShowDialog();
+                ShowDrinksPanel();
             }
             else
             {
@@ -373,6 +377,7 @@ namespace SomerenUI
             {
                 ChooseStudentDrinkError();
                 FillOrder();
+                ShowOrderPanel();
                 MessageBox.Show("Order is successfully placed!");
             }
             catch (Exception ex)
@@ -601,6 +606,7 @@ namespace SomerenUI
             Vat21Label.Text = vat21Percent;
             VatTotalLabel.Text = vatTotal;
         }
+
         /*Else*/
 
         private void HideAll()
@@ -612,6 +618,11 @@ namespace SomerenUI
                     control.Hide();
                 }
             }
+        }
+
+        private void toolStripParticipants_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

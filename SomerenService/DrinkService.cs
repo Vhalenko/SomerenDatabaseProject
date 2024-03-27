@@ -9,7 +9,7 @@ namespace SomerenService
     public class DrinkService
     {
         private DrinkDao drinkDao;
-        private const int ObjectIdBeforeDb = 0;
+        protected const int ObjectIdBeforeDb = 0;
 
         public DrinkService()
         {

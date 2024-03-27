@@ -50,7 +50,7 @@ namespace SomerenService
             drinkDao.AddDrink(drink);
         }
 
-        /*Remove Drinks*/
+        /*Delete Drinks*/
 
         public void DeleteDrink(Drink drink)
         {
@@ -72,7 +72,7 @@ namespace SomerenService
             drinkDao.UpdateDrink(drink);
         }
 
-        public void CheckForUpdates(string filledName, string filledPrice, string filledStock, string filledVat, string id, string oldName, string oldPrice, string oldStock, string oldVat)
+        public void CheckForUpdates(string filledName, string filledPrice, string filledStock, string filledVat, Drink oldDrink)
         {
             string name = string.IsNullOrWhiteSpace(filledName) ? oldName : filledName;
             string price = string.IsNullOrWhiteSpace(filledPrice) ? oldPrice : filledPrice;

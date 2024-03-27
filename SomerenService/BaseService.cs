@@ -3,27 +3,29 @@ using SomerenModel;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace SomerenService
 {
     public abstract class BaseService<T>
     {
-        protected const int ObjectIdBeforeDb = 0;
+        /*Update student*/
 
-        /*Add item*/
-
-        public void AddDrink(List<string> list)
+        protected T CheckForUpdates<T>(T newItem, T item)
         {
-            if (list.Any(x => x == ""))
-            {
-                throw new Exception("Enter all values!");
-            }
-            else
-            {
-                FillItemToAdd(list);
-            }
-        }
+            PropertyInfo[] objectProperties = typeof(T).GetProperties();
 
-        protected abstract void FillItemToAdd(List<string> list);
+            foreach (PropertyInfo property in objectProperties)
+            {
+                object newValue = property.GetValue(newItem);
+
+                if (newValue != null)
+                {
+                    property.SetValue(item, newValue);
+                }
+            }
+
+            return item;
+        }
     }
 }

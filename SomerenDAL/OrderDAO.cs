@@ -119,5 +119,35 @@ namespace SomerenDAL
 
             return ReadCountOfCustomers(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        protected override string QueryToAddItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string QueryToUpdateItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string QueryToDeleteItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override SqlParameter[] GetParametersToAddItem(Order item)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override SqlParameter[] GetParametersToDeleteItem(Order item)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override SqlParameter[] GetParametersToUpdateItem(Order item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

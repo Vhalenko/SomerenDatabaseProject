@@ -49,7 +49,7 @@ namespace SomerenDAL
                 new("@first_name", SqlDbType.VarChar) {Value = student.FirstName},
                 new("@last_name", SqlDbType.VarChar) {Value = student.LastName},
                 new("@class", SqlDbType.VarChar) {Value = student.ClassName},
-                new("@telephone_number", SqlDbType.Int) {Value = student.TelephoneNumber},
+                new("@telephone_number", SqlDbType.VarChar) {Value = student.TelephoneNumber},
                 new("@room_number", SqlDbType.Int) {Value = student.RoomNumber}
             };
 

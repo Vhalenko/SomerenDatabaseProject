@@ -21,25 +21,13 @@ namespace SomerenDAL
         {
             return "SELECT drink_id, name, price, stock, vat FROM drink";
         }
-        protected override string QueryToAddItem()
-        {
-            return "INSERT drink(drink_id, name, price, stock, vat) VALUES(@drink_id, @name, @price, @stock, @vat)";
-        }
-
-        protected override string QueryToDeleteItem()
-        {
-            return "DELETE FROM drink WHERE drinl_id = @drink_id";
-        }
-
-        protected override string QueryToUpdateItem()
-        {
-            return "UPDATE drink SET name = @name, price = @price, stock = @stock, vat = @vat WHERE drink_id = @drink_id";
-        }
 
         /*CRUD*/
 
-        protected override SqlParameter[] GetParametersToAddItem(Drink drink)
+        public void AddDrink(Drink drink)
         {
+            string query = "INSERT drink(name, price, stock, vat) VALUES (@name, @price, @stock, @vat)";
+
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new("@name", SqlDbType.VarChar) {Value = drink.Name},
@@ -48,30 +36,35 @@ namespace SomerenDAL
                 new("@vat", SqlDbType.Int) {Value = drink.Vat}
             };
 
-            return parameters;
+            ExecuteEditQuery(query, parameters);
         }
 
-        protected override SqlParameter[] GetParametersToDeleteItem(Drink drink)
+        public void DeleteDrink(Drink drink)
         {
+            string query = "DELETE FROM drink WHERE drink_id = @id";
+
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new("@drink_id", SqlDbType.Int) {Value = drink.Id}
+                new("@id", SqlDbType.Int) {Value = drink.Id}
             };
 
-            return parameters;
+            ExecuteEditQuery(query, parameters);
         }
 
-        protected override SqlParameter[] GetParametersToUpdateItem(Drink drink)
+        public void UpdateDrink(Drink drink)
         {
+            string query = "UPDATE drink SET name = @name, price = @price, stock = @stock, vat = @vat WHERE drink_id = @id";
+
             SqlParameter[] parameters = new SqlParameter[]
             {
+                new("@id", SqlDbType.Int) {Value = drink.Id},
                 new("@name", SqlDbType.VarChar) {Value = drink.Name},
                 new("@price", SqlDbType.Decimal) {Value = drink.Price},
                 new("@stock", SqlDbType.Int) {Value = drink.Stock},
                 new("@vat", SqlDbType.Int) {Value = drink.Vat}
             };
 
-            return parameters;
+            ExecuteEditQuery(query, parameters);
         }
     }
 }

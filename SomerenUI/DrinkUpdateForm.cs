@@ -7,12 +7,20 @@ namespace SomerenUI
 {
     public partial class DrinkUpdateForm : Form
     {
-        private Drink oldDrink;
+        private int Id { get; set; }
+        private string DrinkName { get; set; }
+        private int Stock {  get; set; }
+        private decimal Price { get; set; }
+        private int Vat {  get; set; }
 
         public DrinkUpdateForm(Drink drink)
         {
             InitializeComponent();
-            oldDrink = drink;
+            Id = drink.Id;
+            DrinkName = drink.Name;
+            Stock = drink.Stock;
+            Price = drink.Price;
+            Vat = drink.Vat;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -20,7 +28,7 @@ namespace SomerenUI
             try
             {
                 DrinkService drinkService = new();
-                drinkService.CheckForUpdates(txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text, oldDrink);
+                drinkService.CheckForUpdates(txtName.Text, txtPrice.Text, txtStock.Text, txtVat.Text, DrinkName, Price.ToString(), Stock.ToString(), Vat.ToString(), Id.ToString());
                 Close();
                 MessageBox.Show("Drink updated!");
             }

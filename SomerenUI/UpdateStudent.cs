@@ -17,8 +17,6 @@ namespace SomerenUI
 
         private void updateStudentButton_Click(object sender, EventArgs e)
         {
-            StudentService studentService = new();
-            studentService.UpdateStudent(CreateUpdatedStudent(), oldStudent);
         }
 
         private Student CreateUpdatedStudent()

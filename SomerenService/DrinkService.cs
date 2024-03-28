@@ -72,7 +72,7 @@ namespace SomerenService
             drinkDao.UpdateDrink(drink);
         }
 
-        public void CheckForUpdates(string filledName, string filledPrice, string filledStock, string filledVat, Drink oldDrink)
+        public void CheckForUpdates(string filledName, string filledPrice, string filledStock, string filledVat, string oldName, string oldPrice, string oldStock, string oldVat, string id)
         {
             string name = string.IsNullOrWhiteSpace(filledName) ? oldName : filledName;
             string price = string.IsNullOrWhiteSpace(filledPrice) ? oldPrice : filledPrice;

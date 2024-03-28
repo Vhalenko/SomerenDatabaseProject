@@ -76,6 +76,8 @@
             floor = new System.Windows.Forms.ColumnHeader();
             lblRooms = new System.Windows.Forms.Label();
             pnlStudents = new System.Windows.Forms.Panel();
+            OpenStudentAddForm = new System.Windows.Forms.Button();
+            deleteStudentButton = new System.Windows.Forms.Button();
             openStudentUpdateButton = new System.Windows.Forms.Button();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             listViewStudents = new System.Windows.Forms.ListView();
@@ -167,8 +169,6 @@
             columnHeader12 = new System.Windows.Forms.ColumnHeader();
             columnHeader13 = new System.Windows.Forms.ColumnHeader();
             label20 = new System.Windows.Forms.Label();
-            deleteStudentButton = new System.Windows.Forms.Button();
-            OpenStudentAddForm = new System.Windows.Forms.Button();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -555,6 +555,26 @@
             pnlStudents.Name = "pnlStudents";
             pnlStudents.Size = new System.Drawing.Size(1072, 621);
             pnlStudents.TabIndex = 11;
+            // 
+            // OpenStudentAddForm
+            // 
+            OpenStudentAddForm.Location = new System.Drawing.Point(920, 343);
+            OpenStudentAddForm.Name = "OpenStudentAddForm";
+            OpenStudentAddForm.Size = new System.Drawing.Size(134, 52);
+            OpenStudentAddForm.TabIndex = 5;
+            OpenStudentAddForm.Text = "Add a student";
+            OpenStudentAddForm.UseVisualStyleBackColor = true;
+            OpenStudentAddForm.Click += OpenStudentAddForm_Click;
+            // 
+            // deleteStudentButton
+            // 
+            deleteStudentButton.Location = new System.Drawing.Point(917, 247);
+            deleteStudentButton.Name = "deleteStudentButton";
+            deleteStudentButton.Size = new System.Drawing.Size(134, 52);
+            deleteStudentButton.TabIndex = 4;
+            deleteStudentButton.Text = "Delete a student";
+            deleteStudentButton.UseVisualStyleBackColor = true;
+            deleteStudentButton.Click += deleteStudentButton_Click;
             // 
             // openStudentUpdateButton
             // 
@@ -1379,33 +1399,13 @@
             label20.TabIndex = 0;
             label20.Text = "Drinks";
             // 
-            // deleteStudentButton
-            // 
-            deleteStudentButton.Location = new System.Drawing.Point(917, 247);
-            deleteStudentButton.Name = "deleteStudentButton";
-            deleteStudentButton.Size = new System.Drawing.Size(134, 52);
-            deleteStudentButton.TabIndex = 4;
-            deleteStudentButton.Text = "Delete a student";
-            deleteStudentButton.UseVisualStyleBackColor = true;
-            deleteStudentButton.Click += deleteStudentButton_Click;
-            // 
-            // OpenStudentAddForm
-            // 
-            OpenStudentAddForm.Location = new System.Drawing.Point(920, 343);
-            OpenStudentAddForm.Name = "OpenStudentAddForm";
-            OpenStudentAddForm.Size = new System.Drawing.Size(134, 52);
-            OpenStudentAddForm.TabIndex = 5;
-            OpenStudentAddForm.Text = "Add a student";
-            OpenStudentAddForm.UseVisualStyleBackColor = true;
-            OpenStudentAddForm.Click += OpenStudentAddForm_Click;
-            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 659);
-            Controls.Add(pnlStudents);
             Controls.Add(pnlDashboard);
+            Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(panelRooms);

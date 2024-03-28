@@ -47,14 +47,14 @@ namespace SomerenService
 
             Drink drink = new(id, name, price, stock, vat);
 
-            drinkDao.AddItem(drink);
+            drinkDao.AddDrink(drink);
         }
 
         /*Delete Drinks*/
 
         public void DeleteDrink(Drink drink)
         {
-            drinkDao.DeleteItem(drink);
+            drinkDao.DeleteDrink(drink);
         }
 
         /*Update Drinks*/
@@ -69,18 +69,18 @@ namespace SomerenService
 
             Drink drink = new(id, name, price, stock, vat);
 
-            drinkDao.UpdateItem(drink);
+            drinkDao.UpdateDrink(drink);
         }
 
         public void CheckForUpdates(string filledName, string filledPrice, string filledStock, string filledVat, Drink oldDrink)
         {
-            string name = string.IsNullOrWhiteSpace(filledName) ? oldDrink.Name : filledName;
-            string price = string.IsNullOrWhiteSpace(filledPrice) ? oldDrink.Price.ToString() : filledPrice;
-            string stock = string.IsNullOrWhiteSpace(filledStock) ? oldDrink.Stock.ToString() : filledStock;
-            string vat = string.IsNullOrWhiteSpace(filledVat) ? oldDrink.Vat.ToString() : filledVat;
+            string name = string.IsNullOrWhiteSpace(filledName) ? oldName : filledName;
+            string price = string.IsNullOrWhiteSpace(filledPrice) ? oldPrice : filledPrice;
+            string stock = string.IsNullOrWhiteSpace(filledStock) ? oldStock : filledStock;
+            string vat = string.IsNullOrWhiteSpace(filledVat) ? oldVat : filledVat;
             DrinkService drinkService = new();
 
-            drinkService.FillDrinkToUpdate(new List<string> { null, name, price, stock, vat });
+            drinkService.FillDrinkToUpdate(new List<string> { id, name, price, stock, vat });
         }
     }
 }

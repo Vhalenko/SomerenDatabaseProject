@@ -624,5 +624,42 @@ namespace SomerenUI
         {
 
         }
+
+        private void openStudentUpdateButton_Click(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count != 0)
+            {
+                ListViewItem selectedStudent = listViewStudents.SelectedItems[0];
+
+                StudentUpdate studentUpdateForm = new((Student)selectedStudent.Tag);
+                studentUpdateForm.ShowDialog();
+                ShowStudentsPanel();
+            }
+            else
+            {
+                MessageBox.Show("Select a student!");
+            }
+        }
+
+        private void deleteStudentButton_Click(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count != 0)
+            {
+                ListViewItem selectedStudent = listViewStudents.SelectedItems[0];
+
+                StudentService studentService = new();
+                studentService.DeleteStudent((Student)selectedStudent.Tag);
+                MessageBox.Show("Student deleted!");
+            }
+            else
+            {
+                MessageBox.Show("Select a student!");
+            }
+        }
+
+        private void OpenStudentAddForm_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

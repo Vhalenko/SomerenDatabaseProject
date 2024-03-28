@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace SomerenDAL
 {
@@ -41,6 +42,35 @@ namespace SomerenDAL
         internal protected abstract T Convert(DataRow reader);
 
         private protected abstract string GetAllQuery();
+
+        /*CRUD*/
+
+        public void AddItem(T item)
+        {
+            ExecuteEditQuery(QueryToAddItem(), GetParametersToAddItem(item));
+        }
+
+        protected abstract string QueryToAddItem();
+
+        protected abstract SqlParameter[] GetParametersToAddItem(T item);
+
+        public void DeleteItem(T item)
+        {
+            ExecuteEditQuery(QueryToDeleteItem(), GetParametersToDeleteItem(item));
+        }
+
+        protected abstract string QueryToDeleteItem();
+
+        protected abstract SqlParameter[] GetParametersToDeleteItem(T item);
+
+        public void UpdateItem(T item)
+        {
+            ExecuteEditQuery(QueryToUpdateItem(), GetParametersToUpdateItem(item));
+        }
+
+        protected abstract string QueryToUpdateItem();
+
+        protected abstract SqlParameter[] GetParametersToUpdateItem(T item);
 
         /*Getting data*/
 

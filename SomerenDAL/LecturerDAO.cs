@@ -8,6 +8,11 @@ namespace SomerenDAL
 {
     public class LecturerDao : BaseDao<Lecturer>
     {
+        private const string LecturersRoomType = "single room";
+        private const string LecturersTable = "lecturer";
+        private const string LecturerNumberColumn  = "lecturer_number";
+        private const int PeoplePerSingleRoom = 1;
+
         internal protected override Lecturer ConvertItem(DataRow reader)
         {
             int lecturerNumber = (int)reader["lecturer_number"];
@@ -111,20 +116,28 @@ namespace SomerenDAL
                 throw new Exception("This id already exists!");
             }
 
-            CheckExistanceOfRoom(lecturer.RoomNumber);
+            CheckRoom(lecturer);
         }
 
-        private void CheckExistanceOfRoom(int roomNumber)
+        private void CheckRoom(Lecturer lecturer)
         {
-            if (!RoomExists(roomNumber))
+            if (!RoomExists(lecturer.RoomNumber))
             {
                 throw new Exception("This room does not exist!");
+            }
+            else if (RoomType(lecturer.RoomNumber) != LecturersRoomType)
+            {
+                throw new Exception($"The room is not a {LecturersRoomType}!");
+            }
+            else if (PeopleInRoom(lecturer.RoomNumber, LecturersTable) == PeoplePerSingleRoom && lecturer.PersonNumber != PersonIdInRoom(lecturer.RoomNumber, LecturersTable, LecturerNumberColumn))
+            {
+                throw new Exception($"The room {lecturer.RoomNumber} has to many people!");
             }
         }
 
         public void UpdateLecturer(Lecturer lecturer)
         {
-            CheckExistanceOfRoom(lecturer.RoomNumber);
+            CheckRoom(lecturer);
 
             string query = "UPDATE lecturer SET first_name = @first_name, last_name = @last_name, age = @age, telephone_number = @telephone_number, room_number = @room_number WHERE lecturer_number = @lecturer_number";
             ExecuteEditQuery(query, LecturerParameters(lecturer));

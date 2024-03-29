@@ -109,5 +109,44 @@ namespace SomerenDAL
             dbConnection.Close();
             return count > 0;
         }
+
+        protected string RoomType(int roomNumber)
+        {
+            dbConnection.Open();
+
+            string query = $"SELECT room_type FROM room WHERE room_number = @room_number";
+            SqlCommand command = new(query, dbConnection);
+            command.Parameters.Add(new SqlParameter("room_number", roomNumber));
+            string roomType = (string)command.ExecuteScalar();
+
+            dbConnection.Close();
+            return roomType;
+        }
+
+        protected int PeopleInRoom(int roomNumber, string table)
+        {
+            dbConnection.Open();
+
+            string query = $"SELECT COUNT(*) FROM {table} WHERE room_number = @room_number";
+            SqlCommand command = new(query, dbConnection);
+            command.Parameters.Add(new SqlParameter("@room_number", roomNumber));
+            int countOfPeople = (int)command.ExecuteScalar();
+
+            dbConnection.Close();
+            return countOfPeople;
+        }
+
+        protected int PersonIdInRoom(int roomNumber, string tableName, string columnName)
+        {
+            dbConnection.Open();
+
+            string query = $"SELECT {columnName} FROM {tableName} WHERE room_number = @room_number";
+            SqlCommand command = new(query, dbConnection);
+            command.Parameters.Add(new SqlParameter("@room_number", roomNumber));
+            int personNumber = (int)command.ExecuteScalar();
+
+            dbConnection.Close();
+            return personNumber;
+        }
     }
 }

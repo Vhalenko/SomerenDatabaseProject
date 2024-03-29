@@ -19,8 +19,6 @@ namespace SomerenDAL
             return new Student(studentNumber, firstName, lastName, className, telephoneNumber, roomNumber);
         }
 
-        /*Query*/
-
         private protected override string GetAllQuery()
         {
             return "SELECT student_number, first_name, last_name, class, telephone_number, room_number FROM student";

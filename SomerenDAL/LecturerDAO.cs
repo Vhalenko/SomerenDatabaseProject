@@ -71,7 +71,7 @@ namespace SomerenDAL
 
                 SqlParameter[] parameters = new SqlParameter[]
                 {
-            new SqlParameter("@activity_id", SqlDbType.Int) { Value = activity.Id }
+                    new SqlParameter("@activity_id", SqlDbType.Int) { Value = activity.Id }
                 };
 
                 DataTable table = ExecuteSelectQuery(query, parameters);
@@ -81,6 +81,68 @@ namespace SomerenDAL
             {
                 throw new Exception("An error occurred while retrieving data from the database. Details: " + ex.Message);
             }
+        }
+
+        public void DeleteLecturer(Lecturer lecturer)
+        {
+            string query = "DELETE FROM lecturer WHERE lecturer_number = @lecturer_number";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new("@lecturer_number", SqlDbType.Int) {Value = lecturer.PersonNumber}
+            };
+
+            ExecuteEditQuery(query, parameters);
+        }
+
+        public void AddLecturer(Lecturer lecturer)
+        {
+            CheckLecturerValues(lecturer);
+
+            string query = "INSERT lecturer(lecturer_number, first_name, last_name, age, telephone_number, room_number) VALUES (@lecturer_number, @first_name, @last_name, @age, @telephone_number, @room_number)";
+
+            ExecuteEditQuery(query, LecturerParameters(lecturer));
+        }
+
+        private void CheckLecturerValues(Lecturer lecturer)
+        {
+            if (IdExists(lecturer.PersonNumber, "lecturer", "lecturer_number"))
+            {
+                throw new Exception("This id already exists!");
+            }
+
+            CheckExistanceOfRoom(lecturer.RoomNumber);
+        }
+
+        private void CheckExistanceOfRoom(int roomNumber)
+        {
+            if (!RoomExists(roomNumber))
+            {
+                throw new Exception("This room does not exist!");
+            }
+        }
+
+        public void UpdateLecturer(Lecturer lecturer)
+        {
+            CheckExistanceOfRoom(lecturer.RoomNumber);
+
+            string query = "UPDATE lecturer SET first_name = @first_name, last_name = @last_name, age = @age, telephone_number = @telephone_number, room_number = @room_number WHERE lecturer_number = @lecturer_number";
+            ExecuteEditQuery(query, LecturerParameters(lecturer));
+        }
+
+        private SqlParameter[] LecturerParameters(Lecturer lecturer)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new("@lecturer_number", SqlDbType.Int) {Value = lecturer.PersonNumber},
+                new("@first_name", SqlDbType.VarChar) {Value = lecturer.FirstName},
+                new("@last_name", SqlDbType.VarChar) {Value = lecturer.LastName},
+                new("@age", SqlDbType.Date) {Value = lecturer.Age},
+                new("@telephone_number", SqlDbType.VarChar) {Value = lecturer.TelephoneNumber},
+                new("@room_number", SqlDbType.Int) {Value = lecturer.RoomNumber}
+            };
+
+            return parameters;
         }
     }
 }

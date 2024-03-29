@@ -129,7 +129,7 @@ namespace SomerenUI
             {
                 ListViewItem selectedStudent = listViewStudents.SelectedItems[0];
 
-                StudentUpdate studentUpdateForm = new((Student)selectedStudent.Tag);
+                UpdateStudent studentUpdateForm = new((Student)selectedStudent.Tag);
                 studentUpdateForm.ShowDialog();
                 ShowStudentsPanel();
             }
@@ -185,6 +185,59 @@ namespace SomerenUI
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowLecturersPanel();
+        }
+
+        private void deleteLecturerButton_Click(object sender, EventArgs e)
+        {
+            if (listViewLecturers.SelectedItems.Count != 0)
+            {
+                DeleteLecturer();
+            }
+            else
+            {
+                MessageBox.Show("Select a lecturer!");
+            }
+        }
+
+        private void DeleteLecturer()
+        {
+            ListViewItem selectedLecturer = listViewLecturers.SelectedItems[0];
+
+            if (CreateDeleteCheckForm("Are you sure you wish to remove this lecturer?").DeleteMessage())
+            {
+                LecturerService lecturerService = new();
+                lecturerService.DeleteLecturer((Lecturer)selectedLecturer.Tag);
+
+                ShowLecturersPanel();
+                MessageBox.Show("Lecturer deleted!");
+            }
+            else
+            {
+                MessageBox.Show("Aaction canceled!");
+            }
+        }
+
+        private void openAddLecturerPanel_Click(object sender, EventArgs e)
+        {
+            AddLecturerForm addLecturerForm = new();
+            addLecturerForm.ShowDialog();
+            ShowLecturersPanel();
+        }
+
+        private void openUpdateLecturerpanel_Click(object sender, EventArgs e)
+        {
+            if (listViewLecturers.SelectedItems.Count != 0)
+            {
+                ListViewItem selectedLecturer = listViewLecturers.SelectedItems[0];
+
+                UpdateLecturer LecturerUpdateForm = new((Lecturer)selectedLecturer.Tag);
+                LecturerUpdateForm.ShowDialog();
+                ShowLecturersPanel();
+            }
+            else
+            {
+                MessageBox.Show("Select a lecturer!");
+            }
         }
 
         /*Rooms panel*/

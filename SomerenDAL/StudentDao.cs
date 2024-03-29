@@ -7,6 +7,11 @@ namespace SomerenDAL
 {
     public class StudentDao : BaseDao<Student>
     {
+        private const string StudentsRoomType = "dormitory";
+        private const string StudentsTable = "student";
+        private const string StudentNumberColumn = "student_number";
+        private const int PeoplePerDormitory = 5;
+
         internal protected override Student ConvertItem(DataRow reader)
         {
             int studentNumber = (int)reader["student_number"];
@@ -18,8 +23,6 @@ namespace SomerenDAL
 
             return new Student(studentNumber, firstName, lastName, className, telephoneNumber, roomNumber);
         }
-
-        /*Query*/
 
         private protected override string GetAllQuery()
         {
@@ -54,20 +57,28 @@ namespace SomerenDAL
                 throw new Exception("This id already exists!");
             }
             
-            CheckExistanceOfRoom(student.RoomNumber);
+            CheckRoom(student);
         }
 
-        private void CheckExistanceOfRoom(int roomNumber)
+        private void CheckRoom(Student student)
         {
-            if (!RoomExists(roomNumber))
+            if (!RoomExists(student.RoomNumber))
             {
                 throw new Exception("This room does not exist!");
+            }
+            else if (RoomType(student.RoomNumber) != StudentsRoomType)
+            {
+                throw new Exception($"The room is not a {StudentsRoomType}!");
+            }
+            else if (PeopleInRoom(student.RoomNumber, StudentsTable) == PeoplePerDormitory && student.PersonNumber != PersonIdInRoom(student.RoomNumber, StudentsTable, StudentNumberColumn))
+            {
+                throw new Exception($"The room {student.RoomNumber} has to many people!");
             }
         }
 
         public void UpdateStudent(Student student)
         {
-            CheckExistanceOfRoom(student.RoomNumber);
+            CheckRoom(student);
 
             string query = "UPDATE student SET first_name = @first_name, last_name = @last_name, class = @class, telephone_number = @telephone_number, room_number = @room_number WHERE student_number = @student_number";
             ExecuteEditQuery(query, StudentParameters(student));

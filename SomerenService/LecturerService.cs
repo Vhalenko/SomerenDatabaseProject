@@ -37,5 +37,20 @@ namespace SomerenService
         {
             lecturerDao.UpdateSupervisor(lecturer_number, activity_id);
         }
+
+        public void DeleteLecturer(Lecturer lecturer)
+        {
+            lecturerDao.DeleteLecturer(lecturer);
+        }
+
+        public void AddLecturer(Lecturer lecturer)
+        {
+            lecturerDao.AddLecturer(lecturer);
+        }
+
+        public void UpdateLecturer(Lecturer lecturer)
+        {
+            lecturerDao.UpdateLecturer(lecturer);
+        }
     }
 }

@@ -36,11 +36,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(123, 158);
+            label1.Location = new System.Drawing.Point(106, 159);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(489, 32);
+            label1.Size = new System.Drawing.Size(539, 32);
             label1.TabIndex = 0;
-            label1.Text = "Do you really want to delete this supervisor?";
+            label1.Text = "Are you sure you wish to remove this supervisor?";
             // 
             // YesButton
             // 

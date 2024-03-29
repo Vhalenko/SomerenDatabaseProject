@@ -23,19 +23,19 @@ namespace SomerenService
             return lecturerDao.ActivityInSupervisors(activity);
         }
 
-        public void AddLecturer(int lecturer_number, int activity_id)
+        public void AddSupervisor(int lecturer_number, int activity_id)
         {
-            lecturerDao.AddLecturer(lecturer_number, activity_id);
+            lecturerDao.AddSupervisor(lecturer_number, activity_id);
         }
 
-        public void DeleteLecturer(Lecturer lecturer)
+        public void DeleteSupervisor(Lecturer lecturer)
         {
-            lecturerDao.DeleteLecturer(lecturer);
+            lecturerDao.DeleteSupervisor(lecturer);
         }
 
-        public void UpdateLecturer(int lecturer_number, int activity_id)
+        public void UpdateSupervisor(int lecturer_number, int activity_id)
         {
-            lecturerDao.UpdateLecturer(lecturer_number, activity_id);
+            lecturerDao.UpdateSupervisor(lecturer_number, activity_id);
         }
     }
 }

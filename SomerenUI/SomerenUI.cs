@@ -703,7 +703,7 @@ namespace SomerenUI
             {
                 ListViewItem selectedSupervisor = listViewSupervisor.SelectedItems[0];
                 LecturerService lecturerService = new();
-                lecturerService.DeleteLecturer((Lecturer)selectedSupervisor.Tag);
+                lecturerService.DeleteSupervisor((Lecturer)selectedSupervisor.Tag);
                 SecondCheck(selectedSupervisor);
                 ShowSupervisorsPanel();
             }

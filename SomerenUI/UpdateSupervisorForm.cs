@@ -28,7 +28,7 @@ namespace SomerenUI
             try
             {
                 LecturerService lecturerService = new();
-                lecturerService.UpdateLecturer(int.Parse(SupervisorsNumtxtBox.Text), int.Parse(NewActivitytxtBox.Text));
+                lecturerService.UpdateSupervisor(int.Parse(SupervisorsNumtxtBox.Text), int.Parse(NewActivitytxtBox.Text));
                 Close();
                 MessageBox.Show("Supervisor updated!");
             }

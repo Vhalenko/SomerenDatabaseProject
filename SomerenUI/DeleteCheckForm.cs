@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SomerenUI
 {
-    public partial class DeleteCheckSupervisor : Form
+    public partial class DeleteCheckForm : Form
     {
-        private ListViewItem SelectedItem;
-
-        public DeleteCheckSupervisor(ListViewItem selectedItem)
+        public DeleteCheckForm(string message)
         {
             InitializeComponent();
-            SelectedItem = selectedItem;
+            DeleteItemMessageLabel.Text = message;
         }
 
         public bool DeleteMessage()

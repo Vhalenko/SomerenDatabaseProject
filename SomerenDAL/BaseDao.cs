@@ -32,14 +32,14 @@ namespace SomerenDAL
 
             foreach (DataRow reader in dataTable.Rows)
             {
-                T item = Convert(reader);
+                T item = ConvertItem(reader);
                 items.Add(item);
             }
 
             return items;
         }
 
-        internal protected abstract T Convert(DataRow reader);
+        internal protected abstract T ConvertItem(DataRow reader);
 
         private protected abstract string GetAllQuery();
 
@@ -57,7 +57,7 @@ namespace SomerenDAL
             }
             catch (SqlException e)
             {
-                throw new Exception("Check your internet connection!");
+                throw new Exception(e.Message);
             }
             finally
             {
@@ -82,6 +82,32 @@ namespace SomerenDAL
                 throw new Exception("Check your internet connection!");
             }
             return dataTable;
+        }
+
+        protected bool IdExists(int id, string tableName, string columnName)
+        {
+            dbConnection.Open();
+
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @id";
+            SqlCommand command = new(query, dbConnection);
+            command.Parameters.Add(new SqlParameter("@id", id));
+            int count = Convert.ToInt32(command.ExecuteScalar());
+
+            dbConnection.Close();
+            return count > 0;
+        }
+
+        protected bool RoomExists(int roomNumber)
+        {
+            dbConnection.Open();
+
+            string query = $"SELECT COUNT(*) FROM room WHERE room_number = @room_number";
+            SqlCommand command = new(query, dbConnection);
+            command.Parameters.Add(new SqlParameter("@room_number", roomNumber));
+            int count = Convert.ToInt32(command.ExecuteScalar());
+
+            dbConnection.Close();
+            return count > 0;
         }
     }
 }

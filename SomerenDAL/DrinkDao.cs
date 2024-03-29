@@ -6,7 +6,7 @@ namespace SomerenDAL
 {
     public class DrinkDao : BaseDao<Drink>
     {
-        internal protected override Drink Convert(DataRow reader)
+        internal protected override Drink ConvertItem(DataRow reader)
         {
             int id = (int)reader["drink_id"];
             string name = (string)reader["name"];

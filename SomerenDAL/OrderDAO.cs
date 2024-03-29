@@ -10,7 +10,7 @@ namespace SomerenDAL
     {
         /*Convert*/
 
-        internal protected override Order Convert(DataRow reader)
+        internal protected override Order ConvertItem(DataRow reader)
         {
             StudentDao studentDao = new();
             DrinkDao drinkDao = new();
@@ -19,7 +19,7 @@ namespace SomerenDAL
             int quantity = (int)reader["quantity"];
             DateTime orderDate = (DateTime)reader["order_date"];
 
-            return new Order(id, studentDao.Convert(reader), drinkDao.Convert(reader), quantity, orderDate);
+            return new Order(id, studentDao.ConvertItem(reader), drinkDao.ConvertItem(reader), quantity, orderDate);
         }
 
         private int ReadCountOfCustomers(DataTable dataTable)

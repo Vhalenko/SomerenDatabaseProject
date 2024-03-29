@@ -1,6 +1,6 @@
 ﻿namespace SomerenUI
 {
-    partial class DeleteCheckSupervisor
+    partial class DeleteCheckForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new System.Windows.Forms.Label();
+            DeleteItemMessageLabel = new System.Windows.Forms.Label();
             YesButton = new System.Windows.Forms.Button();
             NoButton = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
-            // label1
+            // DeleteItemMessageLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(106, 159);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(539, 32);
-            label1.TabIndex = 0;
-            label1.Text = "Are you sure you wish to remove this supervisor?";
+            DeleteItemMessageLabel.AutoSize = true;
+            DeleteItemMessageLabel.Location = new System.Drawing.Point(11, 22);
+            DeleteItemMessageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            DeleteItemMessageLabel.Name = "DeleteItemMessageLabel";
+            DeleteItemMessageLabel.Size = new System.Drawing.Size(0, 20);
+            DeleteItemMessageLabel.TabIndex = 0;
             // 
             // YesButton
             // 
-            YesButton.Location = new System.Drawing.Point(123, 289);
+            YesButton.Location = new System.Drawing.Point(11, 98);
+            YesButton.Margin = new System.Windows.Forms.Padding(2);
             YesButton.Name = "YesButton";
-            YesButton.Size = new System.Drawing.Size(150, 46);
+            YesButton.Size = new System.Drawing.Size(120, 40);
             YesButton.TabIndex = 1;
             YesButton.Text = "Yes";
             YesButton.UseVisualStyleBackColor = true;
@@ -54,31 +55,33 @@
             // 
             // NoButton
             // 
-            NoButton.Location = new System.Drawing.Point(459, 289);
+            NoButton.Location = new System.Drawing.Point(276, 98);
+            NoButton.Margin = new System.Windows.Forms.Padding(2);
             NoButton.Name = "NoButton";
-            NoButton.Size = new System.Drawing.Size(150, 46);
+            NoButton.Size = new System.Drawing.Size(120, 40);
             NoButton.TabIndex = 2;
             NoButton.Text = "No";
             NoButton.UseVisualStyleBackColor = true;
             NoButton.Click += NoButton_Click;
             // 
-            // DeleteCheckSupervisor
+            // DeleteCheckForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 450);
+            ClientSize = new System.Drawing.Size(407, 149);
             Controls.Add(NoButton);
             Controls.Add(YesButton);
-            Controls.Add(label1);
-            Name = "DeleteCheckSupervisor";
-            Text = "DeleteCheckSupervisor";
+            Controls.Add(DeleteItemMessageLabel);
+            Margin = new System.Windows.Forms.Padding(2);
+            Name = "DeleteCheckForm";
+            Text = "Delete?";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label DeleteItemMessageLabel;
         private System.Windows.Forms.Button YesButton;
         private System.Windows.Forms.Button NoButton;
     }

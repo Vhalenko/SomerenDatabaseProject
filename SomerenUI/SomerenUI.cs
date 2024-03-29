@@ -86,6 +86,59 @@ namespace SomerenUI
             ShowStudentsPanel();
         }
 
+        private void deleteStudentButton_Click(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count != 0)
+            {
+                DeleteStudent();
+            }
+            else
+            {
+                MessageBox.Show("Select a student!");
+            }
+        }
+
+        private void DeleteStudent()
+        {
+            ListViewItem selectedStudent = listViewStudents.SelectedItems[0];
+
+            if (CreateDeleteCheckForm("Are you sure you wish to remove this student?").DeleteMessage())
+            {
+                StudentService studentService = new();
+                studentService.DeleteStudent((Student)selectedStudent.Tag);
+
+                ShowStudentsPanel();
+                MessageBox.Show("Student deleted!");
+            }
+            else
+            {
+                MessageBox.Show("Aaction canceled!");
+            }
+        }
+
+        private void OpenStudentAddForm_Click(object sender, EventArgs e)
+        {
+            AddStudentForm studentAddForm = new();
+            studentAddForm.ShowDialog();
+            ShowStudentsPanel();
+        }
+
+        private void openStudentUpdateButton_Click(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count != 0)
+            {
+                ListViewItem selectedStudent = listViewStudents.SelectedItems[0];
+
+                StudentUpdate studentUpdateForm = new((Student)selectedStudent.Tag);
+                studentUpdateForm.ShowDialog();
+                ShowStudentsPanel();
+            }
+            else
+            {
+                MessageBox.Show("Select a student!");
+            }
+        }
+
         /*Lecturers panel*/
 
         private void ShowLecturersPanel()
@@ -624,37 +677,15 @@ namespace SomerenUI
             }
         }
 
+        private DeleteCheckForm CreateDeleteCheckForm(string message)
+        {
+            DeleteCheckForm deleteCheckForm = new(message);
+            deleteCheckForm.ShowDialog();
+
+            return deleteCheckForm;
+        }
+
         private void toolStripParticipants_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void openStudentUpdateButton_Click(object sender, EventArgs e)
-        {
-            if (listViewStudents.SelectedItems.Count != 0)
-            {
-                ListViewItem selectedStudent = listViewStudents.SelectedItems[0];
-
-                StudentUpdate studentUpdateForm = new((Student)selectedStudent.Tag);
-                studentUpdateForm.ShowDialog();
-                ShowStudentsPanel();
-            }
-            else
-            {
-                MessageBox.Show("Select a student!");
-            }
-        }
-
-        private void deleteStudentButton_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void OpenStudentAddForm_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listViewDrinks_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -715,7 +746,7 @@ namespace SomerenUI
 
         private void SecondCheck(ListViewItem selectedSupervisor)
         {
-            DeleteCheckSupervisor deleteCheckSupervisorForm = new DeleteCheckSupervisor(selectedSupervisor);
+            DeleteCheckForm deleteCheckSupervisorForm = new("Are you sure you wish to remove this supervisor?");
             if (deleteCheckSupervisorForm.ShowDialog() == DialogResult.OK)
             {
                 bool deleteMessage = deleteCheckSupervisorForm.DeleteMessage();

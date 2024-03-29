@@ -5,7 +5,7 @@ namespace SomerenDAL
 {
     public class RoomDao : BaseDao<Room>
     {
-        internal protected override Room Convert(DataRow reader)
+        internal protected override Room ConvertItem(DataRow reader)
         {
             int roomNumber = (int)reader["room_number"];
             string building = (string)reader["building"];

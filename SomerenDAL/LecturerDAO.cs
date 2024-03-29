@@ -8,7 +8,7 @@ namespace SomerenDAL
 {
     public class LecturerDao : BaseDao<Lecturer>
     {
-        internal protected override Lecturer Convert(DataRow reader)
+        internal protected override Lecturer ConvertItem(DataRow reader)
         {
             int lecturerNumber = (int)reader["lecturer_number"];
             string firstName = (string)reader["first_name"];

@@ -187,6 +187,21 @@ namespace SomerenUI
             ShowLecturersPanel();
         }
 
+        private void deleteLecturerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openAddLecturerPanel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openUpdateLecturerpanel_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /*Rooms panel*/
 
         private void ShowRoomsPanel()

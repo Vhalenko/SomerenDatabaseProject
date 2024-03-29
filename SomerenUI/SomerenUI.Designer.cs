@@ -45,6 +45,9 @@
             toolStripParticipants = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSupervisors = new System.Windows.Forms.ToolStripMenuItem();
             pnlLecturers = new System.Windows.Forms.Panel();
+            openAddLecturerPanel = new System.Windows.Forms.Button();
+            deleteLecturerButton = new System.Windows.Forms.Button();
+            openUpdateLecturerpanel = new System.Windows.Forms.Button();
             pictureBox3 = new System.Windows.Forms.PictureBox();
             listViewLecturers = new System.Windows.Forms.ListView();
             columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -174,9 +177,6 @@
             BDeleteSupervisors = new System.Windows.Forms.Button();
             pictureBox10 = new System.Windows.Forms.PictureBox();
             label22 = new System.Windows.Forms.Label();
-            openAddLecturerPanel = new System.Windows.Forms.Button();
-            deleteLecturerButton = new System.Windows.Forms.Button();
-            openUpdateLecturerpanel = new System.Windows.Forms.Button();
             menuStrip1.SuspendLayout();
             pnlLecturers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -323,6 +323,36 @@
             pnlLecturers.Size = new System.Drawing.Size(1072, 621);
             pnlLecturers.TabIndex = 4;
             // 
+            // openAddLecturerPanel
+            // 
+            openAddLecturerPanel.Location = new System.Drawing.Point(923, 338);
+            openAddLecturerPanel.Name = "openAddLecturerPanel";
+            openAddLecturerPanel.Size = new System.Drawing.Size(134, 52);
+            openAddLecturerPanel.TabIndex = 8;
+            openAddLecturerPanel.Text = "Add a lecturer";
+            openAddLecturerPanel.UseVisualStyleBackColor = true;
+            openAddLecturerPanel.Click += openAddLecturerPanel_Click;
+            // 
+            // deleteLecturerButton
+            // 
+            deleteLecturerButton.Location = new System.Drawing.Point(920, 242);
+            deleteLecturerButton.Name = "deleteLecturerButton";
+            deleteLecturerButton.Size = new System.Drawing.Size(134, 52);
+            deleteLecturerButton.TabIndex = 7;
+            deleteLecturerButton.Text = "Delete a lecturer";
+            deleteLecturerButton.UseVisualStyleBackColor = true;
+            deleteLecturerButton.Click += deleteLecturerButton_Click;
+            // 
+            // openUpdateLecturerpanel
+            // 
+            openUpdateLecturerpanel.Location = new System.Drawing.Point(923, 431);
+            openUpdateLecturerpanel.Name = "openUpdateLecturerpanel";
+            openUpdateLecturerpanel.Size = new System.Drawing.Size(134, 52);
+            openUpdateLecturerpanel.TabIndex = 6;
+            openUpdateLecturerpanel.Text = "Update a lecturer";
+            openUpdateLecturerpanel.UseVisualStyleBackColor = true;
+            openUpdateLecturerpanel.Click += openUpdateLecturerpanel_Click;
+            // 
             // pictureBox3
             // 
             pictureBox3.Image = (System.Drawing.Image)resources.GetObject("pictureBox3.Image");
@@ -336,8 +366,10 @@
             // listViewLecturers
             // 
             listViewLecturers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader2, columnLecturerNumber, columnName, columnAge, columTelephoneNumber, columnRoomNumber });
+            listViewLecturers.FullRowSelect = true;
             listViewLecturers.Location = new System.Drawing.Point(18, 56);
             listViewLecturers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewLecturers.MultiSelect = false;
             listViewLecturers.Name = "listViewLecturers";
             listViewLecturers.Size = new System.Drawing.Size(875, 408);
             listViewLecturers.TabIndex = 1;
@@ -1460,36 +1492,6 @@
             label22.Size = new System.Drawing.Size(135, 41);
             label22.TabIndex = 0;
             label22.Text = "Activities";
-            // 
-            // openAddLecturerPanel
-            // 
-            openAddLecturerPanel.Location = new System.Drawing.Point(923, 338);
-            openAddLecturerPanel.Name = "openAddLecturerPanel";
-            openAddLecturerPanel.Size = new System.Drawing.Size(134, 52);
-            openAddLecturerPanel.TabIndex = 8;
-            openAddLecturerPanel.Text = "Add a lecturer";
-            openAddLecturerPanel.UseVisualStyleBackColor = true;
-            openAddLecturerPanel.Click += openAddLecturerPanel_Click;
-            // 
-            // deleteLecturerButton
-            // 
-            deleteLecturerButton.Location = new System.Drawing.Point(920, 242);
-            deleteLecturerButton.Name = "deleteLecturerButton";
-            deleteLecturerButton.Size = new System.Drawing.Size(134, 52);
-            deleteLecturerButton.TabIndex = 7;
-            deleteLecturerButton.Text = "Delete a lecturer";
-            deleteLecturerButton.UseVisualStyleBackColor = true;
-            deleteLecturerButton.Click += deleteLecturerButton_Click;
-            // 
-            // openUpdateLecturerpanel
-            // 
-            openUpdateLecturerpanel.Location = new System.Drawing.Point(923, 431);
-            openUpdateLecturerpanel.Name = "openUpdateLecturerpanel";
-            openUpdateLecturerpanel.Size = new System.Drawing.Size(134, 52);
-            openUpdateLecturerpanel.TabIndex = 6;
-            openUpdateLecturerpanel.Text = "Update a lecturer";
-            openUpdateLecturerpanel.UseVisualStyleBackColor = true;
-            openUpdateLecturerpanel.Click += openUpdateLecturerpanel_Click;
             // 
             // SomerenUI
             // 

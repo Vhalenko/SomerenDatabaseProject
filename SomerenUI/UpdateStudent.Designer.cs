@@ -1,6 +1,6 @@
 ﻿namespace SomerenUI
 {
-    partial class StudentUpdate
+    partial class UpdateStudent
     {
         /// <summary>
         /// Required designer variable.
@@ -131,7 +131,7 @@
             updateStudentButton.UseVisualStyleBackColor = true;
             updateStudentButton.Click += updateStudentButton_Click;
             // 
-            // StudentUpdate
+            // UpdateStudent
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -147,7 +147,7 @@
             Controls.Add(studentClasstextbox);
             Controls.Add(studentLastNameTextbox);
             Controls.Add(studentFirstNameTextbox);
-            Name = "StudentUpdate";
+            Name = "UpdateStudent";
             Text = "Update Student";
             ResumeLayout(false);
             PerformLayout();

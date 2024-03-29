@@ -30,7 +30,6 @@
         {
             lecturerRoomNumberTextbox = new System.Windows.Forms.TextBox();
             lecturerTelephoneNumberTextbox = new System.Windows.Forms.TextBox();
-            lecturerAgeTextbox = new System.Windows.Forms.TextBox();
             lecturerLastNameTextbox = new System.Windows.Forms.TextBox();
             lecturerFirstNameTextbox = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
@@ -39,6 +38,7 @@
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             updateLecturerButton = new System.Windows.Forms.Button();
+            lecturerUpdateAgeDateTime = new System.Windows.Forms.DateTimePicker();
             SuspendLayout();
             // 
             // lecturerRoomNumberTextbox
@@ -54,13 +54,6 @@
             lecturerTelephoneNumberTextbox.Name = "lecturerTelephoneNumberTextbox";
             lecturerTelephoneNumberTextbox.Size = new System.Drawing.Size(125, 27);
             lecturerTelephoneNumberTextbox.TabIndex = 8;
-            // 
-            // lecturerAgeTextbox
-            // 
-            lecturerAgeTextbox.Location = new System.Drawing.Point(280, 151);
-            lecturerAgeTextbox.Name = "lecturerAgeTextbox";
-            lecturerAgeTextbox.Size = new System.Drawing.Size(125, 27);
-            lecturerAgeTextbox.TabIndex = 7;
             // 
             // lecturerLastNameTextbox
             // 
@@ -129,12 +122,22 @@
             updateLecturerButton.TabIndex = 15;
             updateLecturerButton.Text = "Update";
             updateLecturerButton.UseVisualStyleBackColor = true;
+            updateLecturerButton.Click += updateLecturerButton_Click;
+            // 
+            // lecturerUpdateAgeDateTime
+            // 
+            lecturerUpdateAgeDateTime.Location = new System.Drawing.Point(280, 149);
+            lecturerUpdateAgeDateTime.Name = "lecturerUpdateAgeDateTime";
+            lecturerUpdateAgeDateTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            lecturerUpdateAgeDateTime.Size = new System.Drawing.Size(125, 27);
+            lecturerUpdateAgeDateTime.TabIndex = 27;
             // 
             // UpdateLecturer
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(445, 409);
+            Controls.Add(lecturerUpdateAgeDateTime);
             Controls.Add(updateLecturerButton);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -143,7 +146,6 @@
             Controls.Add(label1);
             Controls.Add(lecturerRoomNumberTextbox);
             Controls.Add(lecturerTelephoneNumberTextbox);
-            Controls.Add(lecturerAgeTextbox);
             Controls.Add(lecturerLastNameTextbox);
             Controls.Add(lecturerFirstNameTextbox);
             Name = "UpdateLecturer";
@@ -156,7 +158,6 @@
 
         private System.Windows.Forms.TextBox lecturerRoomNumberTextbox;
         private System.Windows.Forms.TextBox lecturerTelephoneNumberTextbox;
-        private System.Windows.Forms.TextBox lecturerAgeTextbox;
         private System.Windows.Forms.TextBox lecturerLastNameTextbox;
         private System.Windows.Forms.TextBox lecturerFirstNameTextbox;
         private System.Windows.Forms.Label label5;
@@ -165,5 +166,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button updateLecturerButton;
+        private System.Windows.Forms.DateTimePicker lecturerUpdateAgeDateTime;
     }
 }

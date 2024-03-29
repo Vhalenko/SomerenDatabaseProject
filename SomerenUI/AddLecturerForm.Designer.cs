@@ -1,6 +1,6 @@
 ﻿namespace SomerenUI
 {
-    partial class AddLecturer
+    partial class AddLecturerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,6 @@
         {
             lecturerAddRoomTextbox = new System.Windows.Forms.TextBox();
             lecturerAddTelephoneNumberTextbox = new System.Windows.Forms.TextBox();
-            lecturerAddAgeTextbox = new System.Windows.Forms.TextBox();
             lecturerAddLastNameTextbox = new System.Windows.Forms.TextBox();
             lecturerAddFirstNameTextbox = new System.Windows.Forms.TextBox();
             lecturerAddNumberTextbox = new System.Windows.Forms.TextBox();
@@ -41,6 +40,7 @@
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             addLecturerButton = new System.Windows.Forms.Button();
+            lecturerAddAgeDateTime = new System.Windows.Forms.DateTimePicker();
             SuspendLayout();
             // 
             // lecturerAddRoomTextbox
@@ -56,13 +56,6 @@
             lecturerAddTelephoneNumberTextbox.Name = "lecturerAddTelephoneNumberTextbox";
             lecturerAddTelephoneNumberTextbox.Size = new System.Drawing.Size(125, 27);
             lecturerAddTelephoneNumberTextbox.TabIndex = 17;
-            // 
-            // lecturerAddAgeTextbox
-            // 
-            lecturerAddAgeTextbox.Location = new System.Drawing.Point(308, 166);
-            lecturerAddAgeTextbox.Name = "lecturerAddAgeTextbox";
-            lecturerAddAgeTextbox.Size = new System.Drawing.Size(125, 27);
-            lecturerAddAgeTextbox.TabIndex = 16;
             // 
             // lecturerAddLastNameTextbox
             // 
@@ -149,11 +142,20 @@
             addLecturerButton.UseVisualStyleBackColor = true;
             addLecturerButton.Click += addLecturerButton_Click;
             // 
-            // AddLecturer
+            // lecturerAddAgeDateTime
+            // 
+            lecturerAddAgeDateTime.Location = new System.Drawing.Point(308, 166);
+            lecturerAddAgeDateTime.Name = "lecturerAddAgeDateTime";
+            lecturerAddAgeDateTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            lecturerAddAgeDateTime.Size = new System.Drawing.Size(125, 27);
+            lecturerAddAgeDateTime.TabIndex = 26;
+            // 
+            // AddLecturerForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(462, 382);
+            Controls.Add(lecturerAddAgeDateTime);
             Controls.Add(addLecturerButton);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -163,11 +165,10 @@
             Controls.Add(label1);
             Controls.Add(lecturerAddRoomTextbox);
             Controls.Add(lecturerAddTelephoneNumberTextbox);
-            Controls.Add(lecturerAddAgeTextbox);
             Controls.Add(lecturerAddLastNameTextbox);
             Controls.Add(lecturerAddFirstNameTextbox);
             Controls.Add(lecturerAddNumberTextbox);
-            Name = "AddLecturer";
+            Name = "AddLecturerForm";
             Text = "Add Lecturer";
             ResumeLayout(false);
             PerformLayout();
@@ -177,7 +178,6 @@
 
         private System.Windows.Forms.TextBox lecturerAddRoomTextbox;
         private System.Windows.Forms.TextBox lecturerAddTelephoneNumberTextbox;
-        private System.Windows.Forms.TextBox lecturerAddAgeTextbox;
         private System.Windows.Forms.TextBox lecturerAddLastNameTextbox;
         private System.Windows.Forms.TextBox lecturerAddFirstNameTextbox;
         private System.Windows.Forms.TextBox lecturerAddNumberTextbox;
@@ -188,5 +188,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button addLecturerButton;
+        private System.Windows.Forms.DateTimePicker lecturerAddAgeDateTime;
     }
 }

@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace SomerenUI
 {
-    public partial class StudentUpdate : Form
+    public partial class UpdateStudent : Form
     {
         private Student oldStudent;
 
-        public StudentUpdate(Student student)
+        public UpdateStudent(Student student)
         {
             InitializeComponent();
             oldStudent = student;

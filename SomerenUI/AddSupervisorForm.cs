@@ -1,14 +1,6 @@
 ﻿using SomerenService;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace SomerenUI
 {
@@ -24,7 +16,7 @@ namespace SomerenUI
             try
             {
                 LecturerService lecturerService = new();
-                lecturerService.AddLecturer(int.Parse(AddLecNumtxtBox.Text), int.Parse(AddIdtxtBox.Text));
+                lecturerService.AddSupervisor(int.Parse(AddLecNumtxtBox.Text), int.Parse(AddIdtxtBox.Text));
                 Close();
                 MessageBox.Show("Lecturer added!");
             }

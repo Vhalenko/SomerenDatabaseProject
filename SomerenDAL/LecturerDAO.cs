@@ -25,7 +25,7 @@ namespace SomerenDAL
             return "SELECT lecturer_number, first_name, last_name, age, telephone_number, room_number FROM lecturer";
         }
 
-        public void AddLecturer(int lecturerNumber, int activityId)
+        public void AddSupervisor(int lecturerNumber, int activityId)
         {
             string query = "INSERT activity_supervice (lecturer_number, activity_id) VALUES (@lecturer_number, @activity_id)";
 
@@ -38,7 +38,7 @@ namespace SomerenDAL
             ExecuteEditQuery(query, parameters);
         }
 
-        public void DeleteLecturer(Lecturer lecturer)
+        public void DeleteSupervisor(Lecturer lecturer)
         {
             string query = "DELETE FROM activity_supervice WHERE lecturer_number = @lecturer_number";
 
@@ -50,7 +50,7 @@ namespace SomerenDAL
             ExecuteEditQuery(query, parameters);
         }
 
-        public void UpdateLecturer(int lecturerNumber, int activityId)
+        public void UpdateSupervisor(int lecturerNumber, int activityId)
         {
             string query = "UPDATE activity_supervice SET activity_id = @activity_id WHERE lecturer_number = @lecturer_number";
 

@@ -9,9 +9,9 @@ namespace SomerenUI
     {
         private int Id { get; set; }
         private string DrinkName { get; set; }
-        private int Stock {  get; set; }
+        private int Stock { get; set; }
         private decimal Price { get; set; }
-        private int Vat {  get; set; }
+        private int Vat { get; set; }
 
         public DrinkUpdateForm(Drink drink)
         {

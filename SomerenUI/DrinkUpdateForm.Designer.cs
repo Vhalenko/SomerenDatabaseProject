@@ -113,7 +113,7 @@
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
-            // UpdateDrink
+            // DrinkUpdateForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -127,7 +127,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(btnUpdate);
-            Name = "UpdateDrink";
+            Name = "DrinkUpdateForm";
             Text = "UpdateDrink";
             ResumeLayout(false);
             PerformLayout();

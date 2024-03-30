@@ -714,6 +714,11 @@ namespace SomerenUI
 
         /*SupervisorPanel*/
 
+        private void toolStripSupervisors_Click(object sender, EventArgs e)
+        {
+            ShowSupervisorsPanel();
+        }
+
         private void ShowSupervisorsPanel()
         {
             HideAll();
@@ -833,11 +838,6 @@ namespace SomerenUI
         private void toolStripParticipants_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void toolStripSupervisors_Click(object sender, EventArgs e)
-        {
-            ShowSupervisorsPanel();
         }
     }
 }

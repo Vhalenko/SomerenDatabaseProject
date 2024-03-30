@@ -129,7 +129,7 @@ namespace SomerenDAL
             {
                 throw new Exception($"The room is not a {LecturersRoomType}!");
             }
-            else if (PeopleInRoom(lecturer.RoomNumber, LecturersTable) == PeoplePerSingleRoom && lecturer.PersonNumber != PersonIdInRoom(lecturer.RoomNumber, LecturersTable, LecturerNumberColumn))
+            else if (PeopleInRoom(lecturer.RoomNumber, LecturersTable) == PeoplePerSingleRoom && lecturer.PersonNumber != PersonIdInRoom(lecturer.RoomNumber, lecturer.PersonNumber, LecturersTable, LecturerNumberColumn, LecturerNumberColumn))
             {
                 throw new Exception($"The room {lecturer.RoomNumber} has to many people!");
             }

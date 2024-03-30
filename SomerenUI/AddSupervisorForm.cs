@@ -22,7 +22,8 @@ namespace SomerenUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong while adding the drink: " + ex.Message);
+                MessageBox.Show(ex.Message);
+                Close();
             }
         }
     }

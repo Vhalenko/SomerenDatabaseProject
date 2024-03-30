@@ -112,7 +112,7 @@ namespace SomerenUI
             }
             else
             {
-                MessageBox.Show("Aaction canceled!");
+                MessageBox.Show("Action canceled!");
             }
         }
 
@@ -166,7 +166,7 @@ namespace SomerenUI
         private void DisplayLecturers(List<Lecturer> lecturers, string checkpanel)
         {
             listViewLecturers.Items.Clear();
-            Action<ListViewItem> addItem = checkpanel == "lecturer" ? new Action<ListViewItem>(item => listViewLecturers.Items.Add(item)) : new Action<ListViewItem>(item => listViewSupervisor.Items.Add(item));
+            Action<ListViewItem> addItem = checkpanel == "lecturer" ? new Action<ListViewItem>(item => listViewLecturers.Items.Add(item)) : checkpanel == "notsupervisoractivity" ? new Action<ListViewItem>(item => listNotActivitySupervisor.Items.Add(item)) : new Action<ListViewItem>(item => listViewSupervisor.Items.Add(item));
 
             foreach (var lecturer in lecturers)
             {
@@ -314,20 +314,15 @@ namespace SomerenUI
         private void DisplayActivities(List<Activity> activities, string checkpanel)
         {
             listViewActivities.Items.Clear();
-
             Action<ListViewItem> addItem = checkpanel == "activity" ? new Action<ListViewItem>(li => listViewActivities.Items.Add(li)) : new Action<ListViewItem>(li => listActivitiesView.Items.Add(li));
-
             foreach (Activity activity in activities)
             {
-                ListViewItem li = new ListViewItem(new string[]
-                {
-                    activity.Id.ToString(),
-                    activity.Name,
-                    activity.StartDayTime,
-                    activity.EndDayTime
-                });
+                ListViewItem li = new ListViewItem();
+                li.SubItems.Add(activity.Id.ToString());
+                li.SubItems.Add(activity.Name);
+                li.SubItems.Add(activity.StartDayTime);
+                li.SubItems.Add(activity.EndDayTime);
                 li.Tag = activity;
-
                 addItem(li);
             }
         }
@@ -768,12 +763,15 @@ namespace SomerenUI
         private void BShowSupervisors_Click(object sender, EventArgs e)
         {
             listViewSupervisor.Items.Clear();
+            listNotActivitySupervisor.Items.Clear();
             if (listActivitiesView.SelectedItems.Count != 0)
             {
                 ListViewItem selectedActivity = listActivitiesView.SelectedItems[0];
                 LecturerService lecturerservice = new();
-                List<Lecturer> lecturers = lecturerservice.ShowActivitySupervisors((Activity)selectedActivity.Tag);
-                DisplayLecturers(lecturers, "supervisor");
+                List<Lecturer> activityLecturers = lecturerservice.ShowActivitySupervisors((Activity)selectedActivity.Tag, true);
+                DisplayLecturers(activityLecturers, "supervisor");
+                List<Lecturer> notactivityLecturers = lecturerservice.ShowActivitySupervisors((Activity)selectedActivity.Tag, false);
+                DisplayLecturers(notactivityLecturers, "notsupervisoractivity");
             }
             else
             {
@@ -783,35 +781,19 @@ namespace SomerenUI
 
         private void BDeleteSupervisors_Click(object sender, EventArgs e)
         {
-            if (listViewSupervisor.SelectedItems.Count != 0)
+            if (listViewSupervisor.SelectedItems.Count == 0)
             {
-                ListViewItem selectedSupervisor = listViewSupervisor.SelectedItems[0];
-                LecturerService lecturerService = new();
-                lecturerService.DeleteSupervisor((Lecturer)selectedSupervisor.Tag);
-                SecondCheck(selectedSupervisor);
-                ShowSupervisorsPanel();
+                MessageBox.Show("Supervisor wasn't chosen!");
+                return;
             }
-            else
+            ListViewItem selectedSupervisor = listViewSupervisor.SelectedItems[0];
+            if (CreateDeleteCheckForm("Are you sure you wish to remove this supervisor?").DeleteMessage())
             {
-                MessageBox.Show("Select a drink!");
-            }
-        }
+                LecturerService supervisorService = new();
+                supervisorService.DeleteLecturer((Lecturer)selectedSupervisor.Tag);
 
-        private void SecondCheck(ListViewItem selectedSupervisor)
-        {
-            DeleteCheckForm deleteCheckSupervisorForm = new("Are you sure you wish to remove this supervisor?");
-            if (deleteCheckSupervisorForm.ShowDialog() == DialogResult.OK)
-            {
-                bool deleteMessage = deleteCheckSupervisorForm.DeleteMessage();
-                if (deleteMessage)
-                {
-                    listViewSupervisor.Items.Remove(selectedSupervisor);
-                    MessageBox.Show("Supervisor deleted!");
-                }
-                else
-                {
-                    MessageBox.Show("Supervisor not deleted!");
-                }
+                ShowSupervisorsPanel();
+                MessageBox.Show("Supervisor deleted!");
             }
             else
             {

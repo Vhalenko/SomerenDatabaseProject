@@ -32,12 +32,17 @@ namespace SomerenDAL
 
         public void AddSupervisor(int lecturerNumber, int activityId)
         {
-            string query = "INSERT activity_supervice (lecturer_number, activity_id) VALUES (@lecturer_number, @activity_id)";
+            if (IdExists(lecturerNumber, "activity_supervice", "lecturer_number"))
+            {
+                throw new Exception("Lecturer is already a supervisor for this activity.");
+            }
+
+            string query = "INSERT INTO activity_supervice (lecturer_number, activity_id) VALUES (@lecturer_number, @activity_id)";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@lecturer_number", SqlDbType.Int){Value = lecturerNumber},
-                new SqlParameter("@activity_id", SqlDbType.Int){Value = activityId}
+            new SqlParameter("@lecturer_number", SqlDbType.Int) { Value = lecturerNumber },
+            new SqlParameter("@activity_id", SqlDbType.Int) { Value = activityId }
             };
 
             ExecuteEditQuery(query, parameters);
@@ -68,15 +73,20 @@ namespace SomerenDAL
             ExecuteEditQuery(query, parameters);
         }
 
-        public List<Lecturer> ActivityInSupervisors(Activity activity)
+        public List<Lecturer> ActivityInSupervisors(Activity activity, bool differentmethod)
         {
+            string difference = differentmethod ? "IN" : "NOT IN";
+            string query = $@"SELECT l.lecturer_number, l.first_name, l.last_name, l.age, l.telephone_number, l.room_number 
+                     FROM lecturer l 
+                     WHERE l.lecturer_number {difference} (SELECT asv.lecturer_number 
+                                                 FROM activity_supervice asv 
+                                                 WHERE asv.activity_id = @activity_id)";
+
             try
             {
-                string query = @"SELECT l.lecturer_number, l.first_name, l.last_name, l.age, l.telephone_number, l.room_number FROM lecturer l WHERE l.lecturer_number IN (SELECT asv.lecturer_number FROM activity_supervice asv WHERE asv.activity_id = @activity_id)";
-
                 SqlParameter[] parameters = new SqlParameter[]
                 {
-                    new SqlParameter("@activity_id", SqlDbType.Int) { Value = activity.Id }
+            new SqlParameter("@activity_id", SqlDbType.Int) { Value = activity.Id }
                 };
 
                 DataTable table = ExecuteSelectQuery(query, parameters);

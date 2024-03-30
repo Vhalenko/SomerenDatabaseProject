@@ -3,7 +3,6 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SomerenUI
 {
@@ -713,37 +712,6 @@ namespace SomerenUI
             VatTotalLabel.Text = vatTotal;
         }
 
-        /*Else*/
-
-        private void HideAll()
-        {
-            foreach (Control control in Controls)
-            {
-                if (control is Panel)
-                {
-                    control.Hide();
-                }
-            }
-        }
-
-        private DeleteCheckForm CreateDeleteCheckForm(string message)
-        {
-            DeleteCheckForm deleteCheckForm = new(message);
-            deleteCheckForm.ShowDialog();
-
-            return deleteCheckForm;
-        }
-
-        private void toolStripParticipants_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripSupervisors_Click(object sender, EventArgs e)
-        {
-            ShowSupervisorsPanel();
-        }
-
         /*SupervisorPanel*/
 
         private void ShowSupervisorsPanel()
@@ -838,6 +806,37 @@ namespace SomerenUI
         {
             AddSupervisorForm supervisorForm = new();
             supervisorForm.ShowDialog();
+            ShowSupervisorsPanel();
+        }
+
+        /*Else*/
+
+        private void HideAll()
+        {
+            foreach (Control control in Controls)
+            {
+                if (control is Panel)
+                {
+                    control.Hide();
+                }
+            }
+        }
+
+        private DeleteCheckForm CreateDeleteCheckForm(string message)
+        {
+            DeleteCheckForm deleteCheckForm = new(message);
+            deleteCheckForm.ShowDialog();
+
+            return deleteCheckForm;
+        }
+
+        private void toolStripParticipants_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripSupervisors_Click(object sender, EventArgs e)
+        {
             ShowSupervisorsPanel();
         }
     }

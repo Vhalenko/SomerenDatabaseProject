@@ -10,7 +10,10 @@ namespace SomerenDAL
     {
         private const string LecturersRoomType = "single room";
         private const string LecturersTable = "lecturer";
+        private const string ActivityTable = "activity";
+        private const string ActivitySuperviceTable = "activity_supervice";
         private const string LecturerNumberColumn  = "lecturer_number";
+        private const string ActivityIdColumn = "activity_id";
         private const int PeoplePerSingleRoom = 1;
 
         internal protected override Lecturer ConvertItem(DataRow reader)
@@ -32,24 +35,29 @@ namespace SomerenDAL
 
         public void AddSupervisor(int lecturerNumber, int activityId)
         {
-            AddSupervisorException(lecturerNumber);
+            string query = "INSERT INTO activity_supervice (lecturer_number, activity_id) VALUES (@lecturer_number, @activity_id)";
+            AddSupervisorException(lecturerNumber, activityId);
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-            new SqlParameter("@lecturer_number", SqlDbType.Int) { Value = lecturerNumber },
-            new SqlParameter("@activity_id", SqlDbType.Int) { Value = activityId }
+            new SqlParameter(LecturerNumberColumn, SqlDbType.Int) { Value = lecturerNumber },
+            new SqlParameter(ActivityIdColumn, SqlDbType.Int) { Value = activityId }
             };
 
-            ExecuteEditQuery("INSERT INTO activity_supervice (lecturer_number, activity_id) VALUES (@lecturer_number, @activity_id)", parameters);
+            ExecuteEditQuery(query, parameters);
         }
 
-        private void AddSupervisorException(int lecturerNumber)
+        private void AddSupervisorException(int lecturerNumber, int activityId)
         {
-            if (!IdExists(lecturerNumber, "lecturer", "lecturer_number"))
+            if (!IdExists(activityId, ActivityTable, ActivityIdColumn))
             {
                 throw new Exception("Invalid input");
             }
-            if (IdExists(lecturerNumber, "activity_supervice", "lecturer_number"))
+            if (!IdExists(lecturerNumber, LecturersTable, LecturerNumberColumn))
+            {
+                throw new Exception("Invalid input");
+            }
+            if (IdExists(lecturerNumber, ActivitySuperviceTable, LecturerNumberColumn))
             {
                 throw new Exception("Lecturer is already a supervisor for this activity.");
             }
@@ -61,7 +69,7 @@ namespace SomerenDAL
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-        new SqlParameter("@lecturer_number", SqlDbType.Int) { Value = lecturer.PersonNumber }
+        new SqlParameter(LecturerNumberColumn, SqlDbType.Int) { Value = lecturer.PersonNumber }
             };
                 ExecuteEditQuery(query, parameters);
         }
@@ -73,7 +81,7 @@ namespace SomerenDAL
 
                 SqlParameter[] parameters = new SqlParameter[]
                 {
-                    new SqlParameter("@activity_id", SqlDbType.Int) { Value = activity.Id }
+                    new SqlParameter(ActivityIdColumn, SqlDbType.Int) { Value = activity.Id }
                 };
 
                 DataTable table = ExecuteSelectQuery(query, parameters);

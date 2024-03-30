@@ -18,9 +18,9 @@ namespace SomerenService
             return lecturerDao.GetAll();
         }
 
-        public List<Lecturer> ShowActivitySupervisors(Activity activity)
+        public List<Lecturer> ShowActivitySupervisors(Activity activity, bool difference)
         {
-            return lecturerDao.ActivityInSupervisors(activity);
+            return lecturerDao.ActivityInSupervisors(activity, difference);
         }
 
         public void AddSupervisor(int lecturer_number, int activity_id)

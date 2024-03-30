@@ -10,7 +10,7 @@ namespace SomerenDAL
         private const string StudentsRoomType = "dormitory";
         private const string StudentsTable = "student";
         private const string StudentNumberColumn = "student_number";
-        private const int PeoplePerDormitory = 5;
+        private const int PeoplePerDormitory = 8;
 
         internal protected override Student ConvertItem(DataRow reader)
         {
@@ -70,7 +70,7 @@ namespace SomerenDAL
             {
                 throw new Exception($"The room is not a {StudentsRoomType}!");
             }
-            else if (PeopleInRoom(student.RoomNumber, StudentsTable) == PeoplePerDormitory && student.PersonNumber != PersonIdInRoom(student.RoomNumber, StudentsTable, StudentNumberColumn))
+            else if (PeopleInRoom(student.RoomNumber, StudentsTable) == PeoplePerDormitory && student.PersonNumber != PersonIdInRoom(student.RoomNumber, student.PersonNumber, StudentsTable, StudentNumberColumn, StudentNumberColumn))
             {
                 throw new Exception($"The room {student.RoomNumber} has to many people!");
             }

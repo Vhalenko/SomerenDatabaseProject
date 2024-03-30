@@ -38,9 +38,13 @@ namespace SomerenUI
 
         private Student FillStudent(List<string> list)
         {
-            int roomNumber = int.Parse(list[4]);
+            string firstName = string.IsNullOrEmpty(list[0]) ? oldStudent.FirstName : list[0];
+            string lastname = string.IsNullOrEmpty(list[1]) ? oldStudent.LastName : list[1];
+            string className = string.IsNullOrEmpty(list[2]) ? oldStudent.ClassName : list[2];
+            string telephoneNumber = string.IsNullOrEmpty(list[3]) ? oldStudent.TelephoneNumber : list[3];
+            int roomNumber = string.IsNullOrEmpty(list[4]) ? oldStudent.RoomNumber : int.Parse(list[4]);
 
-            return new Student(oldStudent.PersonNumber, list[0], list[1], list[2], list[3], roomNumber);
+            return new Student(oldStudent.PersonNumber, firstName, lastname, className, telephoneNumber, roomNumber);
         }
 
         private void FillBoxesWithOldValues()

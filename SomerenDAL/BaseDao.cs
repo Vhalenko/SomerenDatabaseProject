@@ -136,14 +136,15 @@ namespace SomerenDAL
             return countOfPeople;
         }
 
-        protected int PersonIdInRoom(int roomNumber, string tableName, string columnName)
+        protected int PersonIdInRoom(int roomNumber, int personId, string tableName, string numberColumn, string columnName)
         {
             dbConnection.Open();
 
-            string query = $"SELECT {columnName} FROM {tableName} WHERE room_number = @room_number";
+            string query = $"SELECT {columnName} FROM {tableName} WHERE room_number = @room_number AND {numberColumn} = @person_number";
             SqlCommand command = new(query, dbConnection);
             command.Parameters.Add(new SqlParameter("@room_number", roomNumber));
-            int personNumber = (int)command.ExecuteScalar();
+            command.Parameters.Add(new SqlParameter("@person_number", personId));
+            int personNumber = Convert.ToInt32(command.ExecuteScalar());
 
             dbConnection.Close();
             return personNumber;

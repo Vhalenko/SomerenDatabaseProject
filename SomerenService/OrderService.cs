@@ -40,7 +40,7 @@ namespace SomerenService
         public void DisplayPrice(Drink drink, decimal quantityOfDrinks, out string totalPrice)
         {
             decimal price = drink.Price * quantityOfDrinks;
-            totalPrice = $"{price}€";
+            totalPrice = $"€{price}";
         }
 
         /*Revenue*/
@@ -82,7 +82,7 @@ namespace SomerenService
                     totalRevenue += order.Drink.Price * order.Quantity;
             }
 
-            turnover = $"{totalRevenue}€ Earned";
+            turnover = $"€{totalRevenue} Earned";
         }
 
         public void DisplayTotalSales(List<Order> orders, DateTime startDate, DateTime endDate, out string totalSales)
@@ -157,11 +157,11 @@ namespace SomerenService
         {
             OrderService orderService = new();
 
-            vat9Percent = orderService.Count9DrinkPrice(startDateTime, endDateTime).ToString("0.00" + "€");
-            vat21Percent = orderService.Count21DrinkPrice(startDateTime, endDateTime).ToString("0.00" + "€");
+            vat9Percent = orderService.Count9DrinkPrice(startDateTime, endDateTime).ToString("€" + "0.00");
+            vat21Percent = orderService.Count21DrinkPrice(startDateTime, endDateTime).ToString("€" + "0.00");
 
             decimal totalVAT = orderService.CountTotalPrice(startDateTime, endDateTime);
-            vatTotal = totalVAT.ToString("0.00" + "€");
+            vatTotal = totalVAT.ToString("€" + "0.00");
         }
     }
 }

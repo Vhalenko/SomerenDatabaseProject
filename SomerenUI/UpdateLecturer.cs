@@ -40,10 +40,13 @@ namespace SomerenUI
 
         private Lecturer FillLecturer(List<string> list)
         {
-            int roomNumber = int.Parse(list[3]);
+            string firstName = string.IsNullOrEmpty(list[0]) ? oldLecturer.FirstName : list[0];
+            string lastName = string.IsNullOrEmpty(list[1]) ? oldLecturer.LastName : list[1];
+            string telephoneNumber = string.IsNullOrEmpty(list[2]) ? oldLecturer.TelephoneNumber : list[2];
+            int roomNumber = string.IsNullOrEmpty(list[3]) ? oldLecturer.RoomNumber : int.Parse(list[3]);
             DateTime age = lecturerUpdateAgeDateTime.Value;
 
-            return new Lecturer(oldLecturer.PersonNumber, list[0], list[1], age, list[2], roomNumber);
+            return new Lecturer(oldLecturer.PersonNumber, firstName, lastName, age, telephoneNumber, roomNumber);
         }
 
         private void FillBoxesWithOldValues()

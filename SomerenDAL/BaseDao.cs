@@ -55,9 +55,9 @@ namespace SomerenDAL
                 adapter.InsertCommand = command;
                 command.ExecuteNonQuery();
             }
-            catch (SqlException e)
+            catch (Exception)
             {
-                throw new Exception(e.Message);
+                throw new Exception("Check your internet connection!");
             }
             finally
             {

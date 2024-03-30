@@ -175,7 +175,6 @@
             columnHeader20 = new System.Windows.Forms.ColumnHeader();
             BShowSupervisors = new System.Windows.Forms.Button();
             label23 = new System.Windows.Forms.Label();
-            BUpdateSupervisors = new System.Windows.Forms.Button();
             BAddSupervisors = new System.Windows.Forms.Button();
             BDeleteSupervisors = new System.Windows.Forms.Button();
             pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -1381,7 +1380,6 @@
             pnlSupervisors.Controls.Add(listActivitiesView);
             pnlSupervisors.Controls.Add(BShowSupervisors);
             pnlSupervisors.Controls.Add(label23);
-            pnlSupervisors.Controls.Add(BUpdateSupervisors);
             pnlSupervisors.Controls.Add(BAddSupervisors);
             pnlSupervisors.Controls.Add(BDeleteSupervisors);
             pnlSupervisors.Controls.Add(pictureBox10);
@@ -1515,20 +1513,9 @@
             label23.TabIndex = 6;
             label23.Text = "Activity Supervisors";
             // 
-            // BUpdateSupervisors
-            // 
-            BUpdateSupervisors.Location = new System.Drawing.Point(665, 144);
-            BUpdateSupervisors.Margin = new System.Windows.Forms.Padding(5);
-            BUpdateSupervisors.Name = "BUpdateSupervisors";
-            BUpdateSupervisors.Size = new System.Drawing.Size(218, 83);
-            BUpdateSupervisors.TabIndex = 5;
-            BUpdateSupervisors.Text = "Update supervisor";
-            BUpdateSupervisors.UseVisualStyleBackColor = true;
-            BUpdateSupervisors.Click += BUpdateSupervisors_Click;
-            // 
             // BAddSupervisors
             // 
-            BAddSupervisors.Location = new System.Drawing.Point(665, 274);
+            BAddSupervisors.Location = new System.Drawing.Point(665, 223);
             BAddSupervisors.Margin = new System.Windows.Forms.Padding(5);
             BAddSupervisors.Name = "BAddSupervisors";
             BAddSupervisors.Size = new System.Drawing.Size(218, 83);
@@ -1539,7 +1526,7 @@
             // 
             // BDeleteSupervisors
             // 
-            BDeleteSupervisors.Location = new System.Drawing.Point(665, 397);
+            BDeleteSupervisors.Location = new System.Drawing.Point(665, 341);
             BDeleteSupervisors.Margin = new System.Windows.Forms.Padding(5);
             BDeleteSupervisors.Name = "BDeleteSupervisors";
             BDeleteSupervisors.Size = new System.Drawing.Size(218, 83);
@@ -1574,7 +1561,6 @@
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1786, 1054);
-            Controls.Add(pnlSupervisors);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
@@ -1582,8 +1568,9 @@
             Controls.Add(panelRooms);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlOrder);
-            Controls.Add(pnlVAT);
             Controls.Add(pnlRevenue);
+            Controls.Add(pnlVAT);
+            Controls.Add(pnlSupervisors);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -1761,7 +1748,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader24;
         private System.Windows.Forms.Button BShowSupervisors;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Button BUpdateSupervisors;
         private System.Windows.Forms.Button BAddSupervisors;
         private System.Windows.Forms.Button BDeleteSupervisors;
         private System.Windows.Forms.PictureBox pictureBox10;

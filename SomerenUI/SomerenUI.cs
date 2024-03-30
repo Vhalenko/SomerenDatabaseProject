@@ -3,6 +3,7 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SomerenUI
 {
@@ -743,6 +744,8 @@ namespace SomerenUI
             ShowSupervisorsPanel();
         }
 
+        /*SupervisorPanel*/
+
         private void ShowSupervisorsPanel()
         {
             HideAll();
@@ -764,14 +767,10 @@ namespace SomerenUI
         {
             listViewSupervisor.Items.Clear();
             listNotActivitySupervisor.Items.Clear();
-            if (listActivitiesView.SelectedItems.Count != 0)
+
+            if (IsActivitySelected())
             {
-                ListViewItem selectedActivity = listActivitiesView.SelectedItems[0];
-                LecturerService lecturerservice = new();
-                List<Lecturer> activityLecturers = lecturerservice.ShowActivitySupervisors((Activity)selectedActivity.Tag, true);
-                DisplayLecturers(activityLecturers, "supervisor");
-                List<Lecturer> notactivityLecturers = lecturerservice.ShowActivitySupervisors((Activity)selectedActivity.Tag, false);
-                DisplayLecturers(notactivityLecturers, "notsupervisoractivity");
+                DisplayActivitySupervisors();
             }
             else
             {
@@ -779,20 +778,34 @@ namespace SomerenUI
             }
         }
 
+        private bool IsActivitySelected()
+        {
+            return listActivitiesView.SelectedItems.Count != 0;
+        }
+
+        private void DisplayActivitySupervisors()
+        {
+            ListViewItem selectedActivity = listActivitiesView.SelectedItems[0];
+            LecturerService lecturerService = new();
+
+            List<Lecturer> activityLecturers = lecturerService.ShowActivitySupervisors((Activity)selectedActivity.Tag, true);
+            DisplayLecturers(activityLecturers, "supervisor");
+
+            List<Lecturer> notActivityLecturers = lecturerService.ShowActivitySupervisors((Activity)selectedActivity.Tag, false);
+            DisplayLecturers(notActivityLecturers, "notsupervisoractivity");
+        }
+
         private void BDeleteSupervisors_Click(object sender, EventArgs e)
         {
-            if (listViewSupervisor.SelectedItems.Count == 0)
+            if (!IsSupervisorSelected())
             {
                 MessageBox.Show("Supervisor wasn't chosen!");
                 return;
             }
-            ListViewItem selectedSupervisor = listViewSupervisor.SelectedItems[0];
-            if (CreateDeleteCheckForm("Are you sure you wish to remove this supervisor?").DeleteMessage())
-            {
-                LecturerService supervisorService = new();
-                supervisorService.DeleteLecturer((Lecturer)selectedSupervisor.Tag);
 
-                ShowSupervisorsPanel();
+            if (ConfirmDelete())
+            {
+                DeleteSelectedSupervisor();
                 MessageBox.Show("Supervisor deleted!");
             }
             else
@@ -801,29 +814,31 @@ namespace SomerenUI
             }
         }
 
+        private bool IsSupervisorSelected()
+        {
+            return listViewSupervisor.SelectedItems.Count > 0;
+        }
+
+        private bool ConfirmDelete()
+        {
+            return CreateDeleteCheckForm("Are you sure you wish to remove this supervisor?").DeleteMessage();
+        }
+
+        private void DeleteSelectedSupervisor()
+        {
+            ListViewItem selectedSupervisor = listViewSupervisor.SelectedItems[0];
+            LecturerService supervisorService = new();
+            supervisorService.DeleteSupervisor((Lecturer)selectedSupervisor.Tag);
+            listViewSupervisor.Items.Remove(selectedSupervisor);
+            listNotActivitySupervisor.Items.Add(selectedSupervisor);
+            ShowSupervisorsPanel();
+        }
+
         private void BAddSupervisors_Click(object sender, EventArgs e)
         {
             AddSupervisorForm supervisorForm = new();
             supervisorForm.ShowDialog();
             ShowSupervisorsPanel();
-        }
-
-        private void BUpdateSupervisors_Click(object sender, EventArgs e)
-        {
-            if (listViewSupervisor.SelectedItems.Count != 0)
-            {
-                ListViewItem selectedSupervisor = listViewSupervisor.SelectedItems[0];
-
-                UpdateSupervisorForm updateSupervisorForm = new((Lecturer)selectedSupervisor.Tag);
-
-                updateSupervisorForm.ShowDialog();
-                listViewSupervisor.Items.Remove(selectedSupervisor);
-                ShowSupervisorsPanel();
-            }
-            else
-            {
-                MessageBox.Show("Select supervisor!");
-            }
         }
     }
 }

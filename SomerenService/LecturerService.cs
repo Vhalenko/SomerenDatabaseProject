@@ -32,12 +32,6 @@ namespace SomerenService
         {
             lecturerDao.DeleteSupervisor(lecturer);
         }
-
-        public void UpdateSupervisor(int lecturer_number, int activity_id)
-        {
-            lecturerDao.UpdateSupervisor(lecturer_number, activity_id);
-        }
-
         public void DeleteLecturer(Lecturer lecturer)
         {
             lecturerDao.DeleteLecturer(lecturer);

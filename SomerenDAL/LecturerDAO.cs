@@ -12,7 +12,7 @@ namespace SomerenDAL
         private const string LecturersTable = "lecturer";
         private const string ActivityTable = "activity";
         private const string ActivitySuperviceTable = "activity_supervice";
-        private const string LecturerNumberColumn  = "lecturer_number";
+        private const string LecturerNumberColumn = "lecturer_number";
         private const string ActivityIdColumn = "activity_id";
         private const int PeoplePerSingleRoom = 1;
 
@@ -69,9 +69,9 @@ namespace SomerenDAL
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-        new SqlParameter(LecturerNumberColumn, SqlDbType.Int) { Value = lecturer.PersonNumber }
+                new SqlParameter(LecturerNumberColumn, SqlDbType.Int) { Value = lecturer.PersonNumber }
             };
-                ExecuteEditQuery(query, parameters);
+            ExecuteEditQuery(query, parameters);
         }
 
         public List<Lecturer> ActivityInSupervisors(Activity activity, bool differentmethod)
@@ -79,13 +79,13 @@ namespace SomerenDAL
             string difference = differentmethod ? "IN" : "NOT IN";
             string query = $@"SELECT l.lecturer_number, l.first_name, l.last_name, l.age, l.telephone_number, l.room_number FROM lecturer l WHERE l.lecturer_number {difference} (SELECT asv.lecturer_number FROM activity_supervice asv WHERE asv.activity_id = @activity_id)";
 
-                SqlParameter[] parameters = new SqlParameter[]
-                {
-                    new SqlParameter(ActivityIdColumn, SqlDbType.Int) { Value = activity.Id }
-                };
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter(ActivityIdColumn, SqlDbType.Int) { Value = activity.Id }
+            };
 
-                DataTable table = ExecuteSelectQuery(query, parameters);
-                return ReadTables(table);
+            DataTable table = ExecuteSelectQuery(query, parameters);
+            return ReadTables(table);
         }
 
         public void DeleteLecturer(Lecturer lecturer)

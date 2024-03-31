@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using SomerenModel;
@@ -11,6 +12,7 @@ namespace SomerenDAL
         private const string StudentsTable = "student";
         private const string StudentNumberColumn = "student_number";
         private const int PeoplePerDormitory = 8;
+        private const string ActivityIdColumn = "activity_id";
 
         internal protected override Student ConvertItem(DataRow reader)
         {
@@ -97,6 +99,45 @@ namespace SomerenDAL
             };
 
             return parameters;
+        }
+
+        public void AddParticipant(Student student, Activity activity)
+        {
+            string query = "INSERT activity_participate(student_number, activity_id) VALUES(@student_number, @activity_id)";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new("@student_number", SqlDbType.Int) {Value = student.PersonNumber},
+                new("@activity_id", SqlDbType.Int) {Value = activity.Id}
+            };
+
+            ExecuteEditQuery(query, parameters);
+        }
+
+        public void DeleteParticipant(Student student)
+        {
+            string query = "DELETE FROM activity_participate WHERE student_number = @student_number";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new("@student_number", SqlDbType.Int) {Value = student.PersonNumber}
+            };
+
+            ExecuteEditQuery(query, parameters);
+        }
+
+        public List<Student> ActivityInParticipants(Activity activity, bool differentmethod)
+        {
+            string difference = differentmethod ? "IN" : "NOT IN";
+            string query = $@"SELECT s.student_number, s.first_name, s.last_name, s.class, s.telephone_number, s.room_number FROM student s WHERE s.student_number {difference} (SELECT asv.student_number FROM activity_participate asv WHERE asv.activity_id = @activity_id)";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter(ActivityIdColumn, SqlDbType.Int) { Value = activity.Id }
+            };
+
+            DataTable table = ExecuteSelectQuery(query, parameters);
+            return ReadTables(table);
         }
     }
 }

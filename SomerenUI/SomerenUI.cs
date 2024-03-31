@@ -49,7 +49,7 @@ namespace SomerenUI
             try
             {
                 List<Student> students = GetStudents();
-                DisplayStudents(students);
+                DisplayStudents(students, "student");
             }
             catch (Exception e)
             {
@@ -63,9 +63,11 @@ namespace SomerenUI
             return studentService.GetStudents();
         }
 
-        private void DisplayStudents(List<Student> students)
+        private void DisplayStudents(List<Student> students, string checkpanel)
         {
             listViewStudents.Items.Clear();
+
+            Action<ListViewItem> addItem = checkpanel == "student" ? new Action<ListViewItem>(item => listViewStudents.Items.Add(item)) : checkpanel == "NotParticipant" ? new Action<ListViewItem>(item => listViewNotParticipants.Items.Add(item)) : new Action<ListViewItem>(item => listViewParticipants.Items.Add(item));
 
             foreach (Student student in students)
             {
@@ -77,7 +79,7 @@ namespace SomerenUI
                 item.SubItems.Add(student.RoomNumber.ToString());
                 item.Tag = student;
 
-                listViewStudents.Items.Add(item);
+                addItem(item);
             }
         }
 
@@ -314,7 +316,7 @@ namespace SomerenUI
         private void DisplayActivities(List<Activity> activities, string checkpanel)
         {
             listViewActivities.Items.Clear();
-            Action<ListViewItem> addItem = checkpanel == "activity" ? new Action<ListViewItem>(li => listViewActivities.Items.Add(li)) : new Action<ListViewItem>(li => listActivitiesView.Items.Add(li));
+            Action<ListViewItem> addItem = checkpanel == "activity" ? new Action<ListViewItem>(li => listViewActivities.Items.Add(li)) : checkpanel == "supervisor" ? new Action<ListViewItem>(li => listActivitiesView.Items.Add(li)) : new Action<ListViewItem>(li => listViewActivitiesForParticipants.Items.Add(li));
             foreach (Activity activity in activities)
             {
                 ListViewItem li = new ListViewItem();
@@ -814,6 +816,128 @@ namespace SomerenUI
             ShowSupervisorsPanel();
         }
 
+        //Participants panel
+
+        private void toolStripParticipants_Click(object sender, EventArgs e)
+        {
+            ShowParticipantsPanel();
+        }
+
+        private void ShowParticipantsPanel()
+        {
+            HideAll();
+            listViewActivitiesForParticipants.Items.Clear();
+            pnlParticipants.Show();
+
+            try
+            {
+                List<Activity> activities = GetActivities();
+                DisplayActivities(activities, "participant");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + e.Message);
+            }
+        }
+
+        private void btnShowParticipants_Click(object sender, EventArgs e)
+        {
+            listViewParticipants.Items.Clear();
+            listViewNotParticipants.Items.Clear();
+
+            if (listViewActivitiesForParticipants.SelectedItems.Count != 0)
+            {
+                DisplayActivityParticipants();
+            }
+            else
+            {
+                MessageBox.Show("Activity wasn't chosen!");
+            }
+        }
+
+        private void DisplayActivityParticipants()
+        {
+            ListViewItem selectedActivity = listViewActivitiesForParticipants.SelectedItems[0];
+            StudentService studentService = new();
+
+            List<Student> activityParticipants = studentService.ShowActivityParticipants((Activity)selectedActivity.Tag, true);
+            DisplayStudents(activityParticipants, "participant");
+
+            List<Student> notActivityParticipants = studentService.ShowActivityParticipants((Activity)selectedActivity.Tag, false);
+            DisplayStudents(notActivityParticipants, "NotParticipant");
+        }
+
+        private void btnAddParticipant_Click(object sender, EventArgs e)
+        {
+            if (listViewNotParticipants.SelectedItems.Count == 0 || listViewActivitiesForParticipants.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select activity and student that does not participate");
+            }
+            else
+            {
+                AddParticipant();
+            }
+        }
+
+        private void AddParticipant()
+        {
+            try
+            {
+                StudentService studentService = new();
+
+                ListViewItem selectedActivity = listViewActivitiesForParticipants.SelectedItems[0];
+                ListViewItem selectedStudent = listViewNotParticipants.SelectedItems[0];
+
+                studentService.AddParticipant((Student)selectedStudent.Tag, (Activity)selectedActivity.Tag);
+                MessageBox.Show("Participant added!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + ex.Message);
+            }
+        }
+
+        private void btnDeleteParticipant_Click(object sender, EventArgs e)
+        {
+            if (listViewParticipants.SelectedItems.Count == 0 || listViewActivitiesForParticipants.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select a student that participates");
+            }
+            else
+            {
+                DeleteParticipant();
+            }
+        }
+
+        private void DeleteParticipant()
+        {
+            try
+            {
+                ListViewItem selectedStudent = listViewParticipants.SelectedItems[0];
+                CheckDeleteParticipant(selectedStudent);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + ex.Message);
+            }
+        }
+
+        private void CheckDeleteParticipant(ListViewItem selectedStudent)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you wish to delete participant?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                StudentService studentService = new();
+                studentService.DeleteParticipant((Student)selectedStudent.Tag);
+                MessageBox.Show("Participant deleted!");
+            }
+            else
+            {
+                return;
+            }
+        }
+
         /*Else*/
 
         private void HideAll()
@@ -833,11 +957,6 @@ namespace SomerenUI
             deleteCheckForm.ShowDialog();
 
             return deleteCheckForm;
-        }
-
-        private void toolStripParticipants_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

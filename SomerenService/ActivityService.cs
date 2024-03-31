@@ -17,5 +17,24 @@ namespace SomerenService
         {
             return activityDao.GetAll();
         }
+
+        public List <Activity> GetActivitiesForParticipant(Student student)
+        {
+            return activityDao.GetActivitiesForParticipant(student);
+        }
+
+        public bool CheckStudentInActivity(Student student, Activity activity)
+        {
+            List<Activity> activityList = GetActivitiesForParticipant(student);
+
+            foreach (Activity act in activityList)
+            {
+                if (act.StartDayTime == activity.StartDayTime)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

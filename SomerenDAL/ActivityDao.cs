@@ -1,5 +1,7 @@
 ﻿using SomerenModel;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace SomerenDAL
 {
@@ -18,6 +20,20 @@ namespace SomerenDAL
         private protected override string GetAllQuery()
         {
             return "SELECT activity_id, name, start_day_time, end_day_time FROM activity";
+        }
+
+        public List<Activity> GetActivitiesForParticipant(Student student)
+        {
+            List<Activity> activities = new List<Activity>();
+            string query = "SELECT A.* FROM activity A JOIN activity_participate AP ON A.activity_id = AP.activity_id JOIN student S ON S.student_number = AP.student_number WHERE S.student_number = @student_number;";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@student_number", SqlDbType.Int) {Value = student.PersonNumber}
+            };
+
+            DataTable dataTable = ExecuteSelectQuery(query, parameters);
+            return ReadTables(dataTable);
         }
     }
 }

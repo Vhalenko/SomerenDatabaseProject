@@ -114,13 +114,15 @@ namespace SomerenDAL
             ExecuteEditQuery(query, parameters);
         }
 
-        public void DeleteParticipant(Student student)
+        public void DeleteParticipant(Student student, Activity activity)
         {
-            string query = "DELETE FROM activity_participate WHERE student_number = @student_number";
+            string query = "DELETE FROM activity_participate WHERE student_number = @student_number AND activity_id = @activity_id";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new("@student_number", SqlDbType.Int) {Value = student.PersonNumber}
+                new("@student_number", SqlDbType.Int) {Value = student.PersonNumber},
+                new("@activity_id", SqlDbType.Int) {Value = activity.Id},
+
             };
 
             ExecuteEditQuery(query, parameters);

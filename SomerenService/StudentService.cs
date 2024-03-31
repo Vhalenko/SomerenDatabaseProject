@@ -38,9 +38,9 @@ namespace SomerenService
             studentDao.AddParticipant(student, activity);
         }
 
-        public void DeleteParticipant(Student student)
+        public void DeleteParticipant(Student student, Activity activity)
         {
-            studentDao.DeleteParticipant(student);
+            studentDao.DeleteParticipant(student, activity);
         }
 
         public List<Student> ShowActivityParticipants(Activity activity, bool difference)

@@ -869,6 +869,8 @@ namespace SomerenUI
 
         private void btnAddParticipant_Click(object sender, EventArgs e)
         {
+            ActivityService activityService = new();
+
             if (listViewNotParticipants.SelectedItems.Count == 0 || listViewActivitiesForParticipants.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Select activity and student that does not participate");
@@ -883,17 +885,28 @@ namespace SomerenUI
         {
             try
             {
-                StudentService studentService = new();
-
                 ListViewItem selectedActivity = listViewActivitiesForParticipants.SelectedItems[0];
                 ListViewItem selectedStudent = listViewNotParticipants.SelectedItems[0];
-
-                studentService.AddParticipant((Student)selectedStudent.Tag, (Activity)selectedActivity.Tag);
-                MessageBox.Show("Participant added!");
+                CheckStudentInActivity((Student)selectedStudent.Tag, (Activity)selectedActivity.Tag);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while loading the activities: " + ex.Message);
+            }
+        }
+
+        private void CheckStudentInActivity(Student student, Activity activity)
+        {
+            ActivityService activityService = new();
+            StudentService studentService = new();
+            if (activityService.CheckStudentInActivity(student, activity))
+            {
+                studentService.AddParticipant(student, activity);
+                MessageBox.Show("Participant added!");
+            }
+            else
+            {
+                MessageBox.Show("Student cannot participate two activities at the same time!");
             }
         }
 
@@ -914,7 +927,8 @@ namespace SomerenUI
             try
             {
                 ListViewItem selectedStudent = listViewParticipants.SelectedItems[0];
-                CheckDeleteParticipant(selectedStudent);
+                ListViewItem selectedActivity = listViewActivitiesForParticipants.SelectedItems[0];
+                CheckDeleteParticipant(selectedStudent, selectedActivity);
             }
             catch (Exception ex)
             {
@@ -922,14 +936,14 @@ namespace SomerenUI
             }
         }
 
-        private void CheckDeleteParticipant(ListViewItem selectedStudent)
+        private void CheckDeleteParticipant(ListViewItem selectedStudent, ListViewItem selectedActivity)
         {
             DialogResult result = MessageBox.Show("Are you sure you wish to delete participant?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 StudentService studentService = new();
-                studentService.DeleteParticipant((Student)selectedStudent.Tag);
+                studentService.DeleteParticipant((Student)selectedStudent.Tag, (Activity)selectedActivity.Tag);
                 MessageBox.Show("Participant deleted!");
             }
             else
